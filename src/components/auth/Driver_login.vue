@@ -1,6 +1,6 @@
 <template>
   <div
-    class="h-screen bg-no-repeat bg-cover py-[168px]"
+    class="h-[950px] bg-no-repeat bg-cover py-[168px]"
     style="background-image: url('/register.png')"
   >
     <div class="container">
