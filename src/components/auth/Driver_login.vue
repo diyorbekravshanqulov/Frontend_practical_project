@@ -1,6 +1,6 @@
 <template>
   <div
-    class="h-[950px] bg-no-repeat bg-cover py-[168px]"
+    class="h-[920px] bg-no-repeat bg-cover py-[168px]"
     style="background-image: url('/register.png')"
   >
     <div class="container">
@@ -14,7 +14,7 @@
           action=""
         >
           <h2 class="text-white mb-10 text-2xl font-medium text-center">
-            Ro‘yxatdan o‘tish
+            Kirish
           </h2>
           <label class="my-5 text-white text-[17px] font-medium w-full block" v-for="(item, index) in data" :key="index" for="name"
             >{{ item.label }}
@@ -32,20 +32,12 @@ import { ref } from "vue";
 
 const data = ref([
   {
-    label: "Ismi",
-    input: "Ism",
-  },
-  {
     label: "Telfon raqam",
     input: "Sizning telfon raqamingiz",
   },
   {
-    label: "Yashash manziligiz",
-    input: "Sizning raqamingiz",
-  },
-  {
-    label: "Mashina rusumi",
-    input: "Rusumni kiriting",
+    label: "Parolingiz",
+    input: "Sizning parolingiz",
   },
 ]);
 </script>
