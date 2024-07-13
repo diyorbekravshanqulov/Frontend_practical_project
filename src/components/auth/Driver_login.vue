@@ -16,11 +16,33 @@
           <h2 class="text-white mb-10 text-2xl font-medium text-center">
             Kirish
           </h2>
-          <label class="my-5 text-white text-[17px] font-medium w-full block" v-for="(item, index) in data" :key="index" for="name"
+          <label
+            class="my-5 text-white text-[17px] font-medium w-full block"
+            v-for="(item, index) in data"
+            :key="index"
+            for="name"
             >{{ item.label }}
-            <input class=" block mt-1 w-[406px] p-[10px] text-sm placeholder:text-[#666] placeholder:font-normal rounded-md border-2 border-transparent focus:border-primary" type="text" :placeholder="item.input" name="name" id="" />
+            <input
+              class="block mt-1 w-[406px] p-[10px] text-sm placeholder:text-[#666] placeholder:font-normal rounded-md border-2 border-transparent focus:border-primary"
+              type="text"
+              :placeholder="item.input"
+              name="name"
+              id=""
+            />
           </label>
-          <input type="submit" name="" class="cursor-pointer mt-[10px] p-[10px] text-center text-white font-medium rounded-md bg-primary w-[406px]"  value="Ariza qoldirish" id="">
+          <input
+            type="submit"
+            name=""
+            class="cursor-pointer mt-5 p-[10px] text-center border-2 border-primary text-white font-medium rounded-md bg-primary w-[406px]"
+            value="Kirish"
+            id=""
+          />
+          <router-link :to="{ name: 'driver_regis' }" class="block mt-5 text-white group">
+            Ro‘yxatdan o‘tish
+            <span class="group-hover:ml-2 m-1 text-lg duration-300"
+              >&rarr;</span
+            >
+          </router-link>
         </form>
       </div>
     </div>
@@ -29,6 +51,9 @@
 
 <script setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const data = ref([
   {
