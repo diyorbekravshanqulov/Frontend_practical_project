@@ -17,24 +17,29 @@ const routes = [
         name: "home",
         component: () => import("../pages/Home.vue"),
       },
+      {
+        path: "/about",
+        name: "about",
+        component: () => import("../pages/About.vue"),
+      },
     ],
   },
-//   {
-//     path: "/",
-//     component: () => import("../layouts/auth.vue"),
-//     children: [
-//       {
-//         path: "/login",
-//         name: "login",
-//         component: () => import("../pages/auth/Login.vue"),
-//       },
-//       {
-//         path: "/regis",
-//         name: "regis",
-//         component: () => import("../pages/auth/Regis.vue"),
-//       },
-//     ],
-//   },
+  //   {
+  //     path: "/",
+  //     component: () => import("../layouts/auth.vue"),
+  //     children: [
+  //       {
+  //         path: "/login",
+  //         name: "login",
+  //         component: () => import("../pages/auth/Login.vue"),
+  //       },
+  //       {
+  //         path: "/regis",
+  //         name: "regis",
+  //         component: () => import("../pages/auth/Regis.vue"),
+  //       },
+  //     ],
+  //   },
 ];
 
 const router = createRouter({

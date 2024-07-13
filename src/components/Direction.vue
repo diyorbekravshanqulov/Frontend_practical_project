@@ -58,10 +58,12 @@
         <div
           v-for="(item, index) in options_all_data"
           :key="index"
+          @click="router.push('/about')"
           class="col-span-3 cursor-pointer mb-6 w-full grid grid-cols-3 py-[26px] rounded-md shadow-lg bg-white"
         >
           <p class="font-medium text-center text-2xl">
-            {{ item.time }} <span class="text-center text-[22px]">{{ item.date }}</span>
+            {{ item.time }}
+            <span class="text-center text-[22px]">{{ item.date }}</span>
           </p>
           <p class="text-center font-medium text-2xl">{{ item.where }}</p>
           <p class="font-medium text-center text-2xl">{{ item.price }}(so‘m)</p>
@@ -74,6 +76,9 @@
 <script setup>
 import { Icon } from "@iconify/vue";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const Direct_options = ref(["Qayerdan", "Qayerga", "Qachon", "Qidirish"]);
 const day = ref([

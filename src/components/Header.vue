@@ -1,7 +1,7 @@
 <template>
   <!-- class="h-screen mt-[108px] py-20 mainBack" -->
   <div 
-  class="py-[162px] mainBack"
+  class="py-[168px] mainBack"
   >
     <div class="container">
       <div class="flex items-center justify-center">
