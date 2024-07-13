@@ -1,14 +1,14 @@
 <template>
   <!-- class="h-screen mt-[108px] py-20 mainBack" -->
   <div 
-  class="h-screen pt-[172px] mainBack"
+  class="py-[162px] mainBack"
   >
     <div class="container">
       <div class="flex items-center justify-center">
         <button
           @click="carType = 2"
           :class="[
-            'text-white py-3 text-[26px] font-medium duration-300 px-[75px] border border-primary',
+            'text-white py-2.5 text-[26px] font-medium duration-300 px-16 border border-primary',
             carType == 2 ? 'bg-primary active' : 'inactive',
           ]"
           style="border-radius: 45px 0 0 45px"
@@ -18,7 +18,7 @@
         <button
           @click="carType = 1"
           :class="[
-            'text-white py-3 text-[26px] font-medium duration-300 px-[75px] border border-primary',
+            'text-white py-2.5 text-[26px] font-medium duration-300 px-16 border border-primary',
             carType == 1 ? 'bg-primary active' : 'inactive',
           ]"
           style="border-radius: 0 45px 45px 0"
@@ -26,7 +26,7 @@
           Yuk
         </button>
       </div>
-      <h1 class="font-medium text-[42px] mt-20 text-white">
+      <h1 class="font-medium text-[42px] mt-16 text-white">
         Har kuni O'zbekiston bo'ylab taxi va yuk tashish xizmati
       </h1>
       <p class="mt-[30px] text-[22px] text-white">
@@ -35,9 +35,9 @@
       <div class="flex w-full justify-between mt-[70px]">
         <button
           v-for="(item, index) in options"
-          class="text-[30px] relative text-white py-7 px-[87px] rounded-md bg-second/35"
+          class="text-[30px] relative text-white py-7 px-[87px] rounded-md"
           :class="[
-            index == options.length - 1 ? 'bg-[#404040] px-[50px]' : '',
+            index == options.length - 1 ? 'bg-[#404040] px-[50px]' : 'bg-second/35',
             index == options.length - 2 ? 'pr-28' : '',
           ]"
           :key="index"
