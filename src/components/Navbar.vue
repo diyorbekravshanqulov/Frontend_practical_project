@@ -1,22 +1,26 @@
 <template>
   <div
     class="fixed top-0 left-0 z-20 w-full"
-    :class="
-      isScrolled ? 'backdrop-blur-lg bg-primary/50' : 'bg-primary'
-    "
+    :class="isScrolled ? 'backdrop-blur-lg bg-primary/50' : 'bg-primary'"
   >
     <div class="container py-3.5 flex items-center justify-between w-full">
-      <p class="text-black text-[40px] font-bold">Logo</p>
+      <p
+        @click="router.push('/')"
+        class="text-black cursor-pointer text-[40px] font-bold"
+      >
+        Logo
+      </p>
       <div class="flex gap-[30px] items-center">
         <p
+          @click="navigate(index)"
           v-for="(item, index) in 2"
           :key="index"
-          class="text-lg text-white font-medium"
+          class="text-lg cursor-pointer text-white font-medium"
         >
           {{ index == 0 ? "Biz haqimizda" : "Savol/javob" }}
         </p>
         <FlagDropdown />
-        <Icon icon="bxs:user" class="text-white text-4xl" />
+        <Icon icon="bxs:user" class="text-white cursor-pointer text-4xl" />
       </div>
     </div>
   </div>
@@ -26,6 +30,9 @@
 import { Icon } from "@iconify/vue";
 import FlagDropdown from "./FlagDropdown.vue"; // Adjust the path as necessary
 import { onMounted, onUnmounted, ref } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const isScrolled = ref(false);
 
@@ -40,6 +47,13 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
 });
+
+const navigate = (index) => {
+  if(index == 0) {
+    router.push('/about')
+  }
+}
+
 </script>
 
 <style scoped>
