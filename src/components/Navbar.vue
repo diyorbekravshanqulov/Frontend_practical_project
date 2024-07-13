@@ -1,14 +1,14 @@
 <template>
   <div
-    class="fixed top-0 left-0 z-20 w-full"
-    :class="isScrolled ? 'backdrop-blur-lg bg-primary/50' : 'bg-primary'"
+    class="fixed top-0 left-0 z-20 w-full bg-primary"
+    :class="isScrolled ? 'shadow-md shadow-black/30' : ''"
   >
     <div class="container py-3.5 flex items-center justify-between w-full">
       <p
         @click="router.push('/')"
         class="text-black cursor-pointer text-[40px] font-bold"
       >
-        Logo
+        {{ $t("logo") }}
       </p>
       <div class="flex gap-[30px] items-center">
         <p
@@ -19,7 +19,8 @@
         >
           {{ index == 0 ? "Biz haqimizda" : "Savol/javob" }}
         </p>
-        <FlagDropdown />
+        <!-- <FlagDropdown /> -->
+        <selectOp />
         <Icon icon="bxs:user" class="text-white cursor-pointer text-4xl" />
       </div>
     </div>
@@ -29,6 +30,7 @@
 <script setup>
 import { Icon } from "@iconify/vue";
 import FlagDropdown from "./FlagDropdown.vue"; // Adjust the path as necessary
+import selectOp from "./selectOp.vue"; // Adjust the path as necessary
 import { onMounted, onUnmounted, ref } from "vue";
 import { useRouter } from "vue-router";
 
@@ -49,11 +51,10 @@ onUnmounted(() => {
 });
 
 const navigate = (index) => {
-  if(index == 0) {
-    router.push('/about')
+  if (index == 0) {
+    router.push("/about");
   }
-}
-
+};
 </script>
 
 <style scoped>
