@@ -24,22 +24,51 @@ const routes = [
       },
     ],
   },
-  //   {
-  //     path: "/",
-  //     component: () => import("../layouts/auth.vue"),
-  //     children: [
-  //       {
-  //         path: "/login",
-  //         name: "login",
-  //         component: () => import("../pages/auth/Login.vue"),
-  //       },
-  //       {
-  //         path: "/regis",
-  //         name: "regis",
-  //         component: () => import("../pages/auth/Regis.vue"),
-  //       },
-  //     ],
-  //   },
+  {
+    path: "/login",
+    component: () => import("../layouts/auth.vue"),
+    children: [
+      {
+        path: "/user",
+        name: "user",
+        component: () => import("../pages/auth/User.vue"),
+      },
+      {
+        path: "/",
+        name: "passenger",
+        component: () => import("../pages/auth/Passenger.vue"),
+        children: [
+          {
+            path: "/passenger/login",
+            name: "passenger_login",
+            component: () => import("../components/auth/Pas_login.vue"),
+          },
+          {
+            path: "/passenger/regis",
+            name: "passenger_regis",
+            component: () => import("../components/auth/Pas_regis.vue"),
+          },
+        ],
+      },
+      {
+        path: "/",
+        name: "driver",
+        component: () => import("../pages/auth/Driver.vue"),
+        children: [
+          {
+            path: "/driver/login",
+            name: "driver_login",
+            component: () => import("../components/auth/Driver_login.vue"),
+          },
+          {
+            path: "/driver/regis",
+            name: "driver_regis",
+            component: () => import("../components/auth/Driver_regis.vue"),
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 const router = createRouter({

@@ -21,7 +21,7 @@
         </p>
         <!-- <FlagDropdown /> -->
         <selectOp />
-        <Icon icon="bxs:user" class="text-white cursor-pointer text-4xl" />
+        <Icon @click="router.push('/user')" icon="bxs:user" class="text-white cursor-pointer text-4xl" />
       </div>
     </div>
   </div>
