@@ -8,7 +8,7 @@
         @click="router.push('/')"
         class="text-black cursor-pointer text-[40px] font-bold"
       >
-        {{ $t("logo") }}
+        Logo
       </p>
       <div class="flex gap-[30px] items-center">
         <p
@@ -17,7 +17,7 @@
           :key="index"
           class="text-lg cursor-pointer text-white font-medium"
         >
-          {{ index == 0 ? "Biz haqimizda" : "Savol/javob" }}
+          {{ index == 0 ? $t("about") : $t("ques") }}
         </p>
         <!-- <FlagDropdown /> -->
         <selectOp />

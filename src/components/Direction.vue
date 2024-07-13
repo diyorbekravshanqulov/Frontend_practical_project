@@ -24,7 +24,7 @@
 
       <!-- options day -->
 
-      <p class="mt-[100px] text-[42px]">Yo‘nalishni tanlash</p>
+      <p class="mt-[100px] text-[42px]">{{ $t("direction") }}</p>
       <div
         class="flex w-full mt-[52px] overflow-auto gap-0 rounded-md shadow-lg"
       >

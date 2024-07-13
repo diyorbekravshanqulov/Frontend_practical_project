@@ -13,7 +13,7 @@
           ]"
           style="border-radius: 45px 0 0 45px"
         >
-          Taxi
+          {{ $t("taxi") }}
         </button>
         <button
           @click="carType = 1"
@@ -23,14 +23,14 @@
           ]"
           style="border-radius: 0 45px 45px 0"
         >
-          Yuk
+          {{ $t("truck") }}
         </button>
       </div>
       <h1 class="font-medium text-[42px] mt-16 text-white">
-        Har kuni O'zbekiston bo'ylab taxi va yuk tashish xizmati
+        {{ $t("service") }}
       </h1>
       <p class="mt-[30px] text-[22px] text-white">
-        Biz viloyatlar bo'ylab hamyonbop qatnov turlarini taklif qilamiz
+        {{ $t("ser_offer") }}
       </p>
       <div class="flex w-full justify-between mt-[70px]">
         <button
@@ -60,6 +60,7 @@ import { ref } from "vue";
 
 const carType = ref(1);
 const options = ref(["Qayerdan", "Qayerga", "Qachon", "Qidirish"]);
+// const options = ref([$t("from"), $t("to"), $t("when"), $t("search")]);
 </script>
 
 <style scoped>
