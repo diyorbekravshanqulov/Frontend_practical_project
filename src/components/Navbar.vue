@@ -19,8 +19,7 @@
         >
           {{ index == 0 ? $t("about") : $t("ques") }}
         </p>
-        <!-- <FlagDropdown /> -->
-        <selectOp />
+        <FlagDropdown />
         <Icon @click="router.push('/user')" icon="bxs:user" class="text-white cursor-pointer text-4xl" />
       </div>
     </div>
@@ -30,7 +29,6 @@
 <script setup>
 import { Icon } from "@iconify/vue";
 import FlagDropdown from "./FlagDropdown.vue"; // Adjust the path as necessary
-import selectOp from "./selectOp.vue"; // Adjust the path as necessary
 import { onMounted, onUnmounted, ref } from "vue";
 import { useRouter } from "vue-router";
 

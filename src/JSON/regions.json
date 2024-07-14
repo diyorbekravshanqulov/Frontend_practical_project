@@ -1,0 +1,226 @@
+{
+  "regions": [
+    {
+      "region": "Toshkent",
+      "district": [
+        "Bektemir",
+        "Mirzo Ulugbek",
+        "Mirobod",
+        "Olmazor",
+        "Sergeli",
+        "Shayxontohur",
+        "Uchtepa",
+        "Yakkasaroy",
+        "Yunusobod",
+        "Chilonzor",
+        "Yashnobod"
+      ]
+    },
+    {
+      "region": "Andijon",
+      "district": [
+        "Andijon",
+        "Asaka",
+        "Baliqchi",
+        "Bo'z",
+        "Buloqboshi",
+        "Jalaquduq",
+        "Izboskan",
+        "Qo'rg'ontepa",
+        "Marhamat",
+        "Oltinko'l",
+        "Paxtaobod",
+        "Shahrixon",
+        "Ulug'nor",
+        "Xo'jaobod"
+      ]
+    },
+    {
+      "region": "Buxoro",
+      "district": [
+        "Buxoro",
+        "G'ijduvon",
+        "Jondor",
+        "Kogon",
+        "Olot",
+        "Peshku",
+        "Qorako'l",
+        "Qorovulbozor",
+        "Romitan",
+        "Shofirkon",
+        "Vobkent"
+      ]
+    },
+    {
+      "region": "Farg'ona",
+      "district": [
+        "Beshariq",
+        "Bog'dod",
+        "Buvayda",
+        "Dang'ara",
+        "Farg'ona",
+        "Furqat",
+        "Oltiariq",
+        "Quva",
+        "Quvasoy",
+        "Qo'qon",
+        "Rishton",
+        "So'x",
+        "Toshloq",
+        "Uchko'prik",
+        "O'zbekiston",
+        "Yozyovon"
+      ]
+    },
+    {
+      "region": "Jizzax",
+      "district": [
+        "Arnasoy",
+        "Baxmal",
+        "Do'stlik",
+        "Forish",
+        "G'allaorol",
+        "Jizzax",
+        "Mirzacho'l",
+        "Paxtakor",
+        "Yangiobod",
+        "Zafarobod",
+        "Zarbdor",
+        "Zomin"
+      ]
+    },
+    {
+      "region": "Xorazm",
+      "district": [
+        "Bog'ot",
+        "Gurlan",
+        "Qo'shko'pir",
+        "Shovot",
+        "Urganch",
+        "Xazorasp",
+        "Xiva",
+        "Xonqa",
+        "Yangiariq",
+        "Yangibozor"
+      ]
+    },
+    {
+      "region": "Namangan",
+      "district": [
+        "Chortoq",
+        "Chust",
+        "Kosonsoy",
+        "Mingbuloq",
+        "Namangan",
+        "Norin",
+        "Pop",
+        "To'raqo'rg'on",
+        "Uchqo'rg'on",
+        "Uychi",
+        "Yangiqo'rg'on"
+      ]
+    },
+    {
+      "region": "Navoiy",
+      "district": [
+        "Konimex",
+        "Karmana",
+        "Navbahor",
+        "Nurota",
+        "Qiziltepa",
+        "Tomdi",
+        "Uchquduq",
+        "Xatirchi"
+      ]
+    },
+    {
+      "region": "Qashqadaryo",
+      "district": [
+        "Chiroqchi",
+        "Dehqonobod",
+        "G'uzor",
+        "Qamashi",
+        "Qarshi",
+        "Koson",
+        "Kasbi",
+        "Kitob",
+        "Mirishkor",
+        "Muborak",
+        "Nishon",
+        "Shahrisabz",
+        "Yakkabog'"
+      ]
+    },
+    {
+      "region": "Qoraqalpog'iston",
+      "district": [
+        "Amudaryo",
+        "Beruniy",
+        "Chimboy",
+        "Ellikqala",
+        "Kegeyli",
+        "Mo'ynoq",
+        "Nukus",
+        "Qonliko'l",
+        "Qo'ng'irot",
+        "Qorao'zak",
+        "Shumanay",
+        "Taxtako'pir",
+        "To'rtko'l",
+        "Xo'jayli"
+      ]
+    },
+    {
+      "region": "Samarqand",
+      "district": [
+        "Bulung'ur",
+        "Ishtixon",
+        "Jomboy",
+        "Kattaqo'rg'on",
+        "Narpay",
+        "Nurobod",
+        "Oqdaryo",
+        "Pastdarg'om",
+        "Paxtachi",
+        "Qo'shrabot",
+        "Samarqand",
+        "Toyloq",
+        "Urgut"
+      ]
+    },
+    {
+      "region": "Sirdaryo",
+      "district": [
+        "Boyovut",
+        "Guliston",
+        "Mirzaobod",
+        "Oqoltin",
+        "Sardoba",
+        "Sayxunobod",
+        "Sirdaryo",
+        "Xovos",
+        "Yangiyer",
+        "Shirin"
+      ]
+    },
+    {
+      "region": "Surxondaryo",
+      "district": [
+        "Angor",
+        "Bandixon",
+        "Boysun",
+        "Denov",
+        "Jarqo'rg'on",
+        "Muzrabot",
+        "Oltinsoy",
+        "Qiziriq",
+        "Qumqo'rg'on",
+        "Sariosiyo",
+        "Sherobod",
+        "Sho'rchi",
+        "Termiz",
+        "Uzun"
+      ]
+    }
+  ]
+}
