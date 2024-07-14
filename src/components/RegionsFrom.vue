@@ -6,11 +6,19 @@
   ></div>
   <div class="relative">
     <button
-      class="text-[30px] bg-second/35 px-[87px] relative text-white py-7 rounded-md"
+      class="text-[30px] w-[301px] block bg-second/35 relative text-white rounded-md"
+      :class="!setPlace ? 'px-[87px] py-7' : 'px-[15px] py-[11px]'"
       @click="toggleDropdown"
     >
-      <slot name="first"></slot>
-      <slot name="second"></slot>
+      <div class="duration-300" :class="setPlace?'scale-100': 'h-0 w-0 scale-0'">
+        <p class="text-[20px] text-start text-[#D1D1D1]">{{
+          $t("from")
+        }}</p>
+        <p class="line-clamp-1 mt-1 text-start">{{ setPlace }}</p>
+      </div>
+      <div class="duration-300" :class="!setPlace?'scale-100': 'h-0 w-0 scale-0'">
+        <p>{{ $t("from") }}</p>
+      </div>
     </button>
     <div
       :class="isDropdownOpen ? 'scale-100' : 'h-0 scale-0 w-0'"
@@ -38,6 +46,9 @@
           class="w-1/2 max-h-56 overflow-y-auto"
         >
           <p
+            @click="
+              setPlaceFromDistrict(regions[selectedRegion].region, district)
+            "
             v-for="(district, districtIndex) in regions[selectedRegion]
               .district"
             :key="districtIndex"
@@ -56,8 +67,9 @@ import { ref, reactive } from "vue";
 import regionsData from "../JSON/regions.json";
 
 const regions = reactive(regionsData.regions);
-const selectedRegion = ref(null);
+const selectedRegion = ref(0);
 const isDropdownOpen = ref(false);
+const setPlace = ref(null);
 
 const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value;
@@ -66,10 +78,9 @@ const toggleDropdown = () => {
 const selectRegion = (index) => {
   selectedRegion.value = index;
 };
-</script>
 
-<!-- <style scoped>
-.cursor-pointer {
-  cursor: pointer;
-}
-</style> -->
+const setPlaceFromDistrict = (region, district) => {
+  setPlace.value = `${region}.  ${district}`;
+  isDropdownOpen.value = false;
+};
+</script>

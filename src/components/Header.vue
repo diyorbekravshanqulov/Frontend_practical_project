@@ -32,16 +32,8 @@
       </p>
       <p class="text-white">{{ name }}</p>
       <div class="flex w-full justify-between mt-[70px]">
-        <Regions>
-          <template #first>
-            <h1>Qayerdan</h1>
-          </template>
-        </Regions>
-        <Regions>
-          <template #second>
-            <h1>Qayerga</h1>
-          </template>
-        </Regions>
+        <RegionsFrom />
+        <RegionsTo />
 
         <button
           @click=""
@@ -71,7 +63,8 @@
 import { Icon } from "@iconify/vue";
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
-import Regions from "./Regions.vue";
+import RegionsFrom from "./RegionsFrom.vue";
+import RegionsTo from "./RegionsTo.vue";
 
 const { t } = useI18n();
 
