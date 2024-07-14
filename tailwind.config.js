@@ -6,8 +6,8 @@ export default {
       center: true,
       padding: "16px",
       screens: {
-        xl: "1232px",
-        "2xl": "1232px",
+        xl: "1236px",
+        "2xl": "1236px",
       },
     },
     extend: {

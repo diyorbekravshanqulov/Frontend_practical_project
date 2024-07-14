@@ -6,23 +6,23 @@
   ></div>
   <div class="relative">
     <button
-      class="text-[30px] w-[301px] duration-300 block bg-second/35 relative text-white rounded-md"
+      class="text-[30px] w-[301px] block bg-second/35 relative text-white rounded-md"
       :class="!setPlace ? 'px-[87px] py-7' : 'px-[15px] py-[11px]'"
       @click="toggleDropdown"
     >
       <div class="duration-300" :class="setPlace?'scale-100': 'h-0 w-0 scale-0'">
-        <p class="text-[20px] duration-300 text-start text-[#D1D1D1]">{{
-          $t("to") 
+        <p class="text-[20px] text-start text-[#D1D1D1]">{{
+          $t("to")
         }}</p>
-        <p class="line-clamp-1 duration-300 mt-1 text-start">{{ setPlace }}</p>
+        <p class="line-clamp-1 mt-1 text-start">{{ setPlace }}</p>
       </div>
       <div class="duration-300" :class="!setPlace?'scale-100': 'h-0 w-0 scale-0'">
         <p>{{ $t("to") }}</p>
       </div>
     </button>
     <div
-      :class="isDropdownOpen ? 'scale-100' : 'h-0 scale-0 w-0'"
-      class="absolute left-0 duration-300 mt-2 w-[600px] bg-second/35 rounded shadow-lg z-10"
+      :class="isDropdownOpen ? 'scale-100 w-full' : 'h-0 scale-0 w-0'"
+      class="absolute left-0 top-0 duration-300 mt-2 w-[600px] bg-second/35 rounded shadow-lg z-10"
     >
       <div class="flex">
         <!-- Region List -->
@@ -80,7 +80,7 @@ const selectRegion = (index) => {
 };
 
 const setPlaceFromDistrict = (region, district) => {
-  setPlace.value = `${region}. ${district}`;
+  setPlace.value = `${region}.  ${district}`;
   isDropdownOpen.value = false;
 };
 </script>
