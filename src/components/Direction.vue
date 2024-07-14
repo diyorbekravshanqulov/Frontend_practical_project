@@ -60,7 +60,7 @@
         <div
           v-for="(item, index) in options_all_data"
           :key="index"
-          @click="router.push('/about')"
+          @click="navigate()"
           class="col-span-3 cursor-pointer mb-6 w-full grid grid-cols-3 py-[26px] rounded-md shadow-lg bg-white"
         >
           <p class="font-medium text-center text-2xl">
@@ -81,6 +81,9 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import RegionsFromDr from "./RegionsFromDr.vue";
 import RegionsToDr from "./RegionsToDr.vue";
+import { useStore } from "../store";
+
+const store = useStore();
 
 const router = useRouter();
 
@@ -140,6 +143,15 @@ const selectedButtonIndex = ref(0);
 const selectButton = (index) => {
   selectedButtonIndex.value = index;
 };
+
+const navigate = () => {
+  if (store.carType == 1) {
+    router.push("/truck-order")
+  } else {
+    router.push("/taxi-order")
+  }
+}
+
 </script>
 
 <style scoped>

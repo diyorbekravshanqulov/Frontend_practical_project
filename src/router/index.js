@@ -22,6 +22,16 @@ const routes = [
         name: "about",
         component: () => import("../pages/About.vue"),
       },
+      {
+        path: "/taxi-order",
+        name: "taxi-order",
+        component: () => import("../pages/Taxi_Order.vue"),
+      },
+      {
+        path: "/truck-order",
+        name: "truck-order",
+        component: () => import("../pages/Truck_Order.vue"),
+      },
     ],
   },
   {

@@ -4,20 +4,20 @@
     <div class="container">
       <div class="flex items-center justify-center">
         <button
-          @click="carType = 2"
+          @click="store.carType = 2"
           :class="[
             'text-white py-2.5 text-[26px] font-medium duration-300 px-16 border border-primary',
-            carType == 2 ? 'bg-primary active' : 'inactive',
+            store.carType == 2 ? 'bg-primary active' : 'inactive',
           ]"
           style="border-radius: 45px 0 0 45px"
         >
           {{ $t("taxi") }}
         </button>
         <button
-          @click="carType = 1"
+          @click="store.carType = 1"
           :class="[
             'text-white py-2.5 text-[26px] font-medium duration-300 px-16 border border-primary',
-            carType == 1 ? 'bg-primary active' : 'inactive',
+            store.carType == 1 ? 'bg-primary active' : 'inactive',
           ]"
           style="border-radius: 0 45px 45px 0"
         >
@@ -56,12 +56,11 @@
 
 <script setup>
 import { Icon } from "@iconify/vue";
-import { ref } from "vue";
 import RegionsFrom from "./RegionsFrom.vue";
 import RegionsTo from "./RegionsTo.vue";
+import { useStore } from "../store";
 
-
-const carType = ref(1);
+const store = useStore();
 </script>
 
 <style scoped>
