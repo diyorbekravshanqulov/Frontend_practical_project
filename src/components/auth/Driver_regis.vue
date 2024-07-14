@@ -65,8 +65,8 @@ const data = ref([
     input: "Sizning telfon raqamingiz",
   },
   {
-    label: "Yashash manziligiz",
-    input: "Sizning raqamingiz",
+    label: "Parol",
+    input: "Sizning parolingiz",
   },
   {
     label: "Mashina rusumi",
