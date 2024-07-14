@@ -2,8 +2,16 @@
   <div class="bg-gray-50 h-[920px] bg-no-repeat bg-cover py-[168px]">
     <div class="container">
       <div class="flex justify-center items-center mt-16">
-        <form class="bg-white rounded-md px-9 py-8 relative" style="box-shadow: 0px 1px 3px 0px #00000040;" action="">
-          <span class="text-3xl text-primary absolute top-0 -translate-x-3 translate-y-3 right-0 ">&times;</span>
+        <form
+          class="bg-white rounded-md px-9 py-8 relative"
+          style="box-shadow: 0px 1px 3px 0px #00000040"
+          action=""
+        >
+          <button
+            @click="router.push('/')"
+            class="text-3xl text-primary absolute top-0 -translate-x-3 translate-y-3 right-0"
+            >&times;</button
+          >
 
           <h2 class="text-black mb-10 text-2xl font-medium text-center">
             Kirish
@@ -21,7 +29,7 @@
               name="name"
               id=""
             />
-           </label>
+          </label>
           <input
             type="submit"
             name=""

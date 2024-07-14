@@ -7,9 +7,10 @@
           style="box-shadow: 0px 1px 3px 0px #00000040"
           action=""
         >
-          <span
+          <button
+            @click="router.push('/')"
             class="text-3xl text-primary absolute top-0 -translate-x-3 translate-y-3 right-0"
-            >&times;</span
+            >&times;</button
           >
 
           <h2 class="text-black mb-10 text-2xl font-medium text-center">
@@ -53,6 +54,9 @@
 
 <script setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const data = ref([
   {
