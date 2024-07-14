@@ -2,23 +2,25 @@
   <div class="bg-gray-50">
     <div class="container py-[60px]">
       <div class="flex w-full justify-between mt-[70px]">
+        <RegionsFromDr />
+        <RegionsToDr />
+
         <button
-          v-for="(item, index) in Direct_options"
-          class="text-[30px] relative shadow-lg py-7 px-[87px] rounded-md"
-          :class="[
-            index == Direct_options.length - 1
-              ? 'bg-primary text-white px-[50px]'
-              : 'bg-white text-black',
-            index == Direct_options.length - 2 ? 'pr-28' : '',
-          ]"
-          :key="index"
+          style="box-shadow: 0px 5px 10px 0px #0000001a"
+          class="text-[30px] relative text-black py-7 rounded-md bg-white w-[301px] pr-28"
         >
-          {{ item }}
+          {{ $t("when") }}
           <Icon
             icon="bx:calendar"
             class="text-[40px] absolute top-1/2 right-1/4 -translate-y-1/2 translate-x-10 text-primary"
-            v-show="index == Direct_options.length - 2"
           />
+        </button>
+        <button
+          style="box-shadow: 0px 5px 10px 0px #0000001a"
+          @click=""
+          class="text-[30px] relative text-white py-7 rounded-md bg-primary px-[50px]"
+        >
+          {{ $t("search") }}
         </button>
       </div>
 
@@ -26,7 +28,7 @@
 
       <p class="mt-[100px] text-[42px]">{{ $t("direction") }}</p>
       <div
-        class="flex w-full mt-[52px] overflow-auto gap-0 rounded-md shadow-lg"
+        class="flex w-full mt-[52px] overflow-auto scrollable-element gap-0 rounded-md shadow-lg"
       >
         <div class="flex divide-x divide-[#313131] w-full">
           <button
@@ -77,6 +79,8 @@
 import { Icon } from "@iconify/vue";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import RegionsFromDr from "./RegionsFromDr.vue";
+import RegionsToDr from "./RegionsToDr.vue";
 
 const router = useRouter();
 
@@ -137,3 +141,11 @@ const selectButton = (index) => {
   selectedButtonIndex.value = index;
 };
 </script>
+
+<style scoped>
+.scrollable-element {
+  scrollbar-width: none;
+  /* scrollbar-gutter: both-edges;
+  scrollbar-color: red yellow; */
+}
+</style>

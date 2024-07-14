@@ -6,7 +6,8 @@
   ></div>
   <div class="relative">
     <button
-      class="text-[30px] w-[301px] block bg-second/35 relative text-white rounded-md"
+      class="text-[30px] w-[301px] block bg-white relative text-black rounded-md"
+      style="box-shadow: 0px 5px 10px 0px #0000001a"
       :class="!store.setPlacePinTo ? 'px-[87px] py-7' : 'px-[15px] py-[11px]'"
       @click="toggleDropdown"
     >
@@ -26,7 +27,7 @@
     </button>
     <div
       :class="isDropdownOpen ? 'scale-100' : 'h-0 scale-0 w-0'"
-      class="absolute left-0 duration-300 mt-2 w-[600px] bg-second/35 rounded shadow-lg z-10"
+      class="absolute left-0 duration-300 mt-2 w-[600px] bg-white rounded shadow-lg z-10"
     >
       <div class="flex">
         <!-- Region List -->
@@ -37,7 +38,7 @@
             @click="selectRegion(index)"
             :class="{
               'bg-primary text-white': selectedRegion === index,
-              'hover:bg-gray-200': selectedRegion !== index,
+              'hover:bg-gray-200 ': selectedRegion !== index,
             }"
             class="cursor-pointer p-2 text-sm rounded-md"
           >

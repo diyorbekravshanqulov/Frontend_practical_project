@@ -6,27 +6,28 @@
   ></div>
   <div class="relative">
     <button
-      class="text-[30px] w-[301px] block bg-second/35 relative text-white rounded-md"
-      :class="!store.setPlacePinTo ? 'px-[87px] py-7' : 'px-[15px] py-[11px]'"
+      class="text-[30px] w-[301px] block bg-white relative text-black rounded-md"
+      style="box-shadow: 0px 5px 10px 0px #0000001a"
+      :class="!store.setPlacePinFrom ? 'px-[87px] py-7' : 'px-[15px] py-[11px]'"
       @click="toggleDropdown"
     >
       <div
         class="duration-300"
-        :class="store.setPlacePinTo ? 'scale-100' : 'h-0 w-0 scale-0'"
+        :class="store.setPlacePinFrom ? 'scale-100' : 'h-0 w-0 scale-0'"
       >
-        <p class="text-[20px] text-start text-[#D1D1D1]">{{ $t("to") }}</p>
-        <p class="line-clamp-1 mt-1 text-start">{{ store.setPlacePinTo }}</p>
+        <p class="text-[20px] text-start text-[#D1D1D1]">{{ $t("from") }}</p>
+        <p class="line-clamp-1 mt-1 text-start">{{ store.setPlacePinFrom }}</p>
       </div>
       <div
         class="duration-300"
-        :class="!store.setPlacePinTo ? 'scale-100' : 'h-0 w-0 scale-0'"
+        :class="!store.setPlacePinFrom ? 'scale-100' : 'h-0 w-0 scale-0'"
       >
-        <p>{{ $t("to") }}</p>
+        <p>{{ $t("from") }}</p>
       </div>
     </button>
     <div
       :class="isDropdownOpen ? 'scale-100' : 'h-0 scale-0 w-0'"
-      class="absolute left-0 duration-300 mt-2 w-[600px] bg-second/35 rounded shadow-lg z-10"
+      class="absolute left-0 duration-300 mt-2 w-[600px] bg-white rounded shadow-lg z-10"
     >
       <div class="flex">
         <!-- Region List -->
@@ -37,7 +38,7 @@
             @click="selectRegion(index)"
             :class="{
               'bg-primary text-white': selectedRegion === index,
-              'hover:bg-gray-200': selectedRegion !== index,
+              'hover:bg-gray-200 ': selectedRegion !== index,
             }"
             class="cursor-pointer p-2 text-sm rounded-md"
           >
@@ -88,12 +89,11 @@ const selectRegion = (index) => {
 
 const setPlaceFromDistrict = (region, district) => {
   // setPlace.value = `${region}. ${district}`;
-  store.setPlacePinTo = `${region}. ${district}`;
-  console.log("object", store.setPlacePinTo);
+  store.setPlacePinFrom = `${region}. ${district}`;
+  console.log("object", store.setPlacePinFrom);
   isDropdownOpen.value = false;
 };
 </script>
-
 <style scoped>
 .scrollable-element {
   scrollbar-width: none;

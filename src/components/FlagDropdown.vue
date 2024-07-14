@@ -33,8 +33,12 @@
 import { ref } from "vue";
 import { Icon } from "@iconify/vue";
 import { useI18n } from "vue-i18n";
-
+import { useStore } from "../store";
 const { locale, locales } = useI18n();
+
+const store = useStore();
+
+
 
 const options = [
   { value: "UZ", icon: "openmoji:flag-uzbekistan" },

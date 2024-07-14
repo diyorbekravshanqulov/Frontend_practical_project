@@ -30,29 +30,24 @@
       <p class="mt-[30px] text-[22px] text-white">
         {{ $t("ser_offer") }}
       </p>
-      <p class="text-white">{{ name }}</p>
       <div class="flex w-full justify-between mt-[70px]">
         <RegionsFrom />
         <RegionsTo />
 
         <button
-          @click=""
-          v-for="(item, index) in options"
-          class="text-[30px] relative text-white py-7 px-[87px] rounded-md"
-          :class="[
-            index == options.length - 1
-              ? 'bg-[#404040] px-[50px]'
-              : 'bg-second/35',
-            index == options.length - 2 ? 'pr-28' : '',
-          ]"
-          :key="index"
+          class="text-[30px] relative text-white py-7 rounded-md bg-second/35 w-[301px] pr-28"
         >
-          {{ item }}
+          {{ $t("when") }}
           <Icon
             icon="bx:calendar"
             class="text-[40px] absolute top-1/2 right-1/4 -translate-y-1/2 translate-x-10 text-primary"
-            v-show="index == options.length - 2"
           />
+        </button>
+        <button
+          @click=""
+          class="text-[30px] relative text-white py-7 rounded-md bg-[#404040] px-[50px]"
+        >
+          {{ $t("search") }}
         </button>
       </div>
     </div>
@@ -62,15 +57,11 @@
 <script setup>
 import { Icon } from "@iconify/vue";
 import { ref } from "vue";
-import { useI18n } from "vue-i18n";
 import RegionsFrom from "./RegionsFrom.vue";
 import RegionsTo from "./RegionsTo.vue";
 
-const { t } = useI18n();
 
 const carType = ref(1);
-// const options = ref(["Qayerdan", "Qayerga", "Qachon", "Qidirish"]);
-const options = ref([t("when"), t("search")]);
 </script>
 
 <style scoped>
