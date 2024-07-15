@@ -26,7 +26,8 @@
     </button>
     <div
       :class="isDropdownOpen ? 'scale-100' : 'h-0 scale-0 w-0'"
-      class="absolute left-0 duration-300 mt-2 w-[600px] bg-second/35 rounded shadow-lg z-10"
+      class="absolute left-0 p-2 duration-300 mt-2 w-[600px] bg-second/35 rounded z-10"
+      style="box-shadow: 0 0px 10px 0 white;"
     >
       <div class="flex">
         <!-- Region List -->

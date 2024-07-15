@@ -26,7 +26,8 @@
     </button>
     <div
       :class="isDropdownOpen ? 'scale-100' : 'h-0 scale-0 w-0'"
-      class="absolute left-0 duration-300 mt-2 w-[600px] bg-second/35 rounded shadow-lg z-10"
+      class="absolute left-0 duration-300 mt-2 p-2 w-[600px] bg-second/35 rounded z-10"
+      style="box-shadow: 0 0px 10px 0 white"
     >
       <div class="flex">
         <!-- Region List -->
@@ -73,7 +74,6 @@ import { useStore } from "../store";
 
 const store = useStore();
 
-
 const regions = reactive(regionsData.regions);
 const selectedRegion = ref(0);
 const isDropdownOpen = ref(false);
@@ -99,4 +99,5 @@ const setPlaceFromDistrict = (region, district) => {
   /* scrollbar-gutter: both-edges;
   scrollbar-color: red yellow; */
 }
+
 </style>

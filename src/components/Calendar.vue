@@ -1,155 +1,66 @@
 <template>
-  <div class="calendar max-w-xs mx-auto mt-6">
-    <div class="calendar-header flex justify-between items-center bg-gray-200 px-4 py-2">
-      <button @click="prevMonth" class="text-gray-700">&lsaquo;</button>
-      <div>{{ months[currentMonth] }} {{ currentYear }}</div>
-      <button @click="nextMonth" class="text-gray-700">&rsaquo;</button>
-    </div>
-    <div class="calendar-body grid grid-cols-7 gap-1 bg-white">
-      <div v-for="day in daysOfWeek" :key="day" class="calendar-day text-center text-sm text-gray-700 bg-gray-100 p-2">
-        {{ day }}
+  <div
+    v-if="isDropdownOpen"
+    @click="toggleDropdown"
+    class="fixed top-0 left-0 h-screen w-screen z-10"
+  ></div>
+  <div class="relative">
+    <button
+      @click="toggleDropdown"
+      :class="!setDate ? ' py-7 pr-12' : 'pl-[15px]  py-[11px]'"
+      class="text-[30px] relative text-white rounded-md bg-second/35 w-[301px]"
+    >
+      <div
+        class="duration-300"
+        :class="setDate ? 'scale-100' : 'h-0 w-0 scale-0'"
+      >
+        <p class="text-[20px] text-start text-[#D1D1D1]">{{ $t("from") }}</p>
+        <p class="line-clamp-1 mt-1 text-start">{{ formattedDate }}</p>
       </div>
       <div
-        v-for="date in calendarDays"
-        :key="date.date.getTime()"
-        @click="selectDate(date)"
-        :class="{
-          'cursor-pointer': date.isCurrentMonth,
-          'text-gray-400': !date.isCurrentMonth,
-          'bg-yellow-300': date.isToday && date.isCurrentMonth,
-          'bg-gray-200': !date.isCurrentMonth
-        }"
-        class="calendar-date flex justify-center items-center text-center text-sm p-2"
+        class="duration-300"
+        :class="!setDate ? 'scale-100' : 'h-0 w-0 scale-0'"
       >
-        {{ date.day }}
+        <p>{{ $t("from") }}</p>
       </div>
-    </div>
+      <Icon
+        icon="bx:calendar"
+        class="text-[40px] absolute top-1/2 right-1/4 -translate-y-1/2 translate-x-10 text-primary"
+      />
+    </button>
+    <VDatePicker
+      :class="isDropdownOpen ? 'scale-100 !h-[300px] !w-full' : '!h-0 scale-0 !w-0'"
+      @click="func"
+      v-model="date"
+      mode="date"
+      class="!absolute top-[105px] !text-gray-300 duration-300 !p-5 left-0 !z-10 cursor-pointer !w-full !bg-second/35 !border-none opacity-1"
+      style="box-shadow: 0 0px 10px 0 white"
+    />
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, computed } from 'vue';
+import { Icon } from "@iconify/vue";
+import { ref, computed } from "vue";
 
-const daysInWeek = 7;
-const dayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-const monthLabels = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'
-];
+const date = ref(new Date());
+const setDate = ref(null);
+const isDropdownOpen = ref(false);
 
-const getDaysInMonth = (year, month) => {
-  return new Date(year, month + 1, 0).getDate();
+const func = () => {
+  setDate.value = date.value;
+  // isDropdownOpen.value = false;
 };
 
-const getDayOfWeek = (year, month, day) => {
-  return new Date(year, month, day).getDay();
+const toggleDropdown = () => {
+  isDropdownOpen.value = !isDropdownOpen.value;
 };
 
-const generateCalendarDays = (year, month) => {
-  const daysInCurrentMonth = getDaysInMonth(year, month);
-  const firstDayOfMonth = getDayOfWeek(year, month, 1);
-
-  const prevMonth = month === 0 ? 11 : month - 1;
-  const prevYear = month === 0 ? year - 1 : year;
-  const daysInPrevMonth = getDaysInMonth(prevYear, prevMonth);
-
-  const nextMonth = month === 11 ? 0 : month + 1;
-  const nextYear = month === 11 ? year + 1 : year;
-
-  let days = [];
-  for (let i = firstDayOfMonth - 1; i >= 0; i--) {
-    days.push({
-      day: daysInPrevMonth - i,
-      isToday: false,
-      isCurrentMonth: false,
-      date: new Date(prevYear, prevMonth, daysInPrevMonth - i)
-    });
-  }
-
-  for (let i = 1; i <= daysInCurrentMonth; i++) {
-    days.push({
-      day: i,
-      isToday: new Date().toDateString() === new Date(year, month, i).toDateString(),
-      isCurrentMonth: true,
-      date: new Date(year, month, i)
-    });
-  }
-
-  const remainingDays = daysInWeek - (days.length % daysInWeek);
-  if (remainingDays < daysInWeek) {
-    for (let i = 1; i <= remainingDays; i++) {
-      days.push({
-        day: i,
-        isToday: false,
-        isCurrentMonth: false,
-        date: new Date(nextYear, nextMonth, i)
-      });
-    }
-  }
-
-  return days;
-};
-
-const state = reactive({
-  currentYear: ref(new Date().getFullYear()),
-  currentMonth: ref(new Date().getMonth())
+const formattedDate = computed(() => {
+  if (!setDate.value) return "";
+  const year = setDate.value.getFullYear();
+  const month = String(setDate.value.getMonth() + 1).padStart(2, "0");
+  const day = String(setDate.value.getDate()).padStart(2, "0");
+  return `${year}.${month}.${day}`;
 });
-
-const calendarDays = computed(() => {
-  return generateCalendarDays(state.currentYear.value, state.currentMonth.value);
-});
-
-const prevMonth = () => {
-  if (state.currentMonth.value === 0) {
-    state.currentYear.value--;
-    state.currentMonth.value = 11;
-  } else {
-    state.currentMonth.value--;
-  }
-};
-
-const nextMonth = () => {
-  if (state.currentMonth.value === 11) {
-    state.currentYear.value++;
-    state.currentMonth.value = 0;
-  } else {
-    state.currentMonth.value++;
-  }
-};
-
-const selectDate = (date) => {
-  if (date.isCurrentMonth) {
-    console.log('Selected Date:', date.date.toDateString());
-    // Handle your logic here for selecting a date
-  }
-};
-
-const daysOfWeek = dayLabels;
-const months = monthLabels;
-
 </script>
-
-<style scoped>
-.calendar {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-.calendar-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.calendar-day, .calendar-date {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-}
-
-.calendar-date {
-  cursor: pointer;
-}
-</style>
