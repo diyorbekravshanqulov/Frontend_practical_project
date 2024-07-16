@@ -36,8 +36,8 @@
         <Calendar />
 
         <button
-          @click=""
-          class="text-[30px] h-[101px] textShadow duration-500 relative text-white py-7 rounded-md bg-[#404040] px-[50px]"
+          :class="store.setPlacePinFrom && store.setPlacePinTo && store.setDatePin? 'bg-primary text-white':'text-white bg-[#404040]'"
+          class="text-[30px] h-[101px] textShadow duration-500 relative  py-7 rounded-md px-[50px]"
         >
           {{ $t("search") }}
         </button>
