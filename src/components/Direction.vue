@@ -1,11 +1,18 @@
 <template>
-  <div class="bg-gray-50">
+  <div
+    @click="notify()"
+    :class="
+      store.setPlacePinFrom && store.setPlacePinTo && store.setDatePin
+        ? 'before:absolute before:w-0 before:h-0 before:scale-0 before:bg-transparent before:-z-10 before:backdrop-blur-sm '
+        : 'before:absolute before:w-full before:h-full before:top-0 before:left-0 before:bg-white/5 before:backdrop-blur-sm before:z-10'
+    "
+    class="relative bg-gray-50"
+  >
     <div class="container py-[60px]">
       <div class="flex w-full justify-between mt-[70px]">
         <RegionsFromDr />
         <RegionsToDr />
         <CalendarDr />
-
         <button
           style="box-shadow: 0px 5px 10px 0px #0000001a"
           @click=""
@@ -14,9 +21,7 @@
           {{ $t("search") }}
         </button>
       </div>
-
       <!-- options day -->
-
       <p class="mt-[100px] text-[42px]">{{ $t("direction") }}</p>
       <div
         class="flex w-full mt-[52px] overflow-auto scrollable-element gap-0 rounded-md shadow-lg"
@@ -37,9 +42,7 @@
           </button>
         </div>
       </div>
-
-      <!-- options leave / diraction / price -->
-
+      <!-- options leave / direction / price -->
       <div class="grid grid-cols-3 gap-y-3">
         <p
           v-for="(item, index) in option_name"
@@ -51,7 +54,7 @@
         <div
           v-for="(item, index) in options_all_data"
           :key="index"
-          @click="navigate()"
+          @click="navigate"
           class="col-span-3 cursor-pointer mb-6 w-full grid grid-cols-3 py-[26px] rounded-md shadow-lg bg-white"
         >
           <p class="font-medium text-center text-2xl">
@@ -76,8 +79,16 @@ import RegionsToDr from "./RegionsToDr.vue";
 import { useStore } from "../store";
 
 const store = useStore();
-
 const router = useRouter();
+
+const notify = () => {
+  toast("Please select today or a future date!", {
+    theme: "dark",
+    type: "warning",
+    transition: "slide",
+    dangerouslyHTMLString: true,
+  });
+};
 
 const Direct_options = ref(["Qayerdan", "Qayerga", "Qachon", "Qidirish"]);
 const day = ref([
@@ -96,8 +107,19 @@ const day = ref([
 ]);
 
 const option_name = ref(["Ketish", "Yo‘nalish nomi", "Narxi(so‘m)"]);
-
 const options_all_data = ref([
+  {
+    time: "08:00",
+    date: "21.05.2021",
+    where: "Toshkent - G‘ijduvon",
+    price: "500.000",
+  },
+  {
+    time: "08:00",
+    date: "21.05.2021",
+    where: "Toshkent - G‘ijduvon",
+    price: "500.000",
+  },
   {
     time: "08:00",
     date: "21.05.2021",
@@ -146,10 +168,27 @@ const navigate = () => {
 </script>
 
 <style scoped>
-.scrollable-element {
-  scrollbar-width: none;
-  /* scrollbar-gutter: both-edges;
-  scrollbar-color: red yellow; */
+.scrollable-element::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Define the thumb style */
+.scrollable-element::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom right, #F7931E 0%, #F7931E 100%);
+  border-radius: 5px;
+}
+
+/* Define the track style */
+.scrollable-element::-webkit-scrollbar-track {
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+/* Define the button style */
+.scrollable-element::-webkit-scrollbar-button {
+  background-color: tr;
+  border-radius: 5px;
 }
 
 .textShadow:hover {

@@ -95,9 +95,26 @@ const setPlaceFromDistrict = (region, district) => {
 };
 </script>
 <style scoped>
-.scrollable-element {
-  scrollbar-width: none;
-  /* scrollbar-gutter: both-edges;
-  scrollbar-color: red yellow; */
+.scrollable-element::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Define the thumb style */
+.scrollable-element::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom right, #F7931E 0%, #F7931E 100%);
+  border-radius: 5px;
+}
+
+/* Define the track style */
+.scrollable-element::-webkit-scrollbar-track {
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+/* Define the button style */
+.scrollable-element::-webkit-scrollbar-button {
+  background-color: tr;
+  border-radius: 5px;
 }
 </style>
