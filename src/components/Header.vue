@@ -1,5 +1,4 @@
 <template>
-  <!-- class="h-screen mt-[108px] py-20 mainBack" -->
   <div class="pt-[168px] pb-[325px] mainBack">
     <div class="container">
       <div class="flex items-center justify-center">
@@ -36,8 +35,13 @@
         <Calendar />
 
         <button
-          :class="store.setPlacePinFrom && store.setPlacePinTo && store.setDatePin? 'bg-primary text-white':'text-white bg-[#404040]'"
-          class="text-[30px] h-[101px] textShadow duration-500 relative  py-7 rounded-md px-[50px]"
+          @click="find()"
+          :class="
+            store.setPlacePinFrom && store.setPlacePinTo && store.setDatePin
+              ? 'bg-primary text-white'
+              : 'text-white bg-[#404040]'
+          "
+          class="text-[30px] h-[101px] textShadow duration-500 relative py-7 rounded-md px-[50px]"
         >
           {{ $t("search") }}
         </button>
@@ -53,6 +57,15 @@ import Calendar from "./Calendar.vue";
 import { useStore } from "../store";
 
 const store = useStore();
+
+const find = () => {
+  if (store.setPlacePinFrom && store.setPlacePinTo && store.setDatePin) {
+    window.scrollTo({
+      top: 900,
+      behavior: "smooth",
+    });
+  }
+};
 </script>
 
 <style scoped>

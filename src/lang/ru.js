@@ -1,4 +1,5 @@
 export default {
+  login: "Войти",
   about: "О нас",
   ques: "Вопрос/ответ",
   about_text:

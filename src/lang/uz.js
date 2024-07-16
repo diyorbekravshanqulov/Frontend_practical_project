@@ -1,4 +1,5 @@
 export default {
+  login: "Kirish",
   about: "Biz haqimizda",
   ques: "Savol/javob",
   about_text:

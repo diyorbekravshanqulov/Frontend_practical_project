@@ -1,9 +1,9 @@
 <template>
-    <div>
-        <AboutCom />
-    </div>
+  <div>
+    <AboutCom />
+  </div>
 </template>
 
 <script setup>
-import AboutCom from '../components/AboutCom.vue'
+import AboutCom from "../components/AboutCom.vue";
 </script>

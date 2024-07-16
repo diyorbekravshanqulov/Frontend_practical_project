@@ -5,10 +5,11 @@
   >
     <div class="container py-3.5 flex items-center justify-between w-full">
       <p
+        id="taxi"
         @click="router.push('/')"
         class="text-black cursor-pointer text-[40px] font-bold"
       >
-        Logo
+        T<span class="text-white">a</span>x<span class="text-white">i</span>
       </p>
       <div class="flex gap-[30px] items-center">
         <p
@@ -20,7 +21,19 @@
           {{ index == 0 ? $t("about") : $t("ques") }}
         </p>
         <FlagDropdown />
-        <Icon @click="router.push('/user')" icon="bxs:user" class="text-white cursor-pointer text-4xl" />
+        <button
+          @click="router.push('/user')"
+          v-if="!token"
+          class="text-lg cursor-pointer text-white font-medium border px-4 py-1 rounded-md border-gray-300 hover:border-white duration-300 hover:shadow-sm hover:shadow-white"
+        >
+          {{ $t('login') }}
+        </button>
+        <Icon
+          v-else
+          @click="router.push('/user')"
+          icon="bxs:user"
+          class="text-white cursor-pointer text-4xl"
+        />
       </div>
     </div>
   </div>
@@ -33,6 +46,8 @@ import { onMounted, onUnmounted, ref } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
+
+const token = ref(false);
 
 const isScrolled = ref(false);
 
@@ -57,4 +72,15 @@ const navigate = (index) => {
 
 <style scoped>
 /* Add your styles here */
+
+#taxi,
+#taxi span {
+  font-family: "Rubik Mono One", monospace;
+}
+#taxi {
+  text-shadow: 0 0px 5px white;
+}
+#taxi span {
+  text-shadow: 0 0px 5px black;
+}
 </style>
