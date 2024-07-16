@@ -1,5 +1,8 @@
 export default {
   login: "Войти",
+  loginsys: "Войти",
+  passen: "Пассажир",
+  driver: "Водитель",
   about: "О нас",
   ques: "Вопрос/ответ",
   about_text:
@@ -16,4 +19,5 @@ export default {
   leave: "Оставлять",
   direct_name: "Название маршрута",
   price: "Цена (сум)",
+  driverLog: "Работа водителем такси по регионам",
 };

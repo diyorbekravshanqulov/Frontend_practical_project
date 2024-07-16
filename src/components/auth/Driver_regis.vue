@@ -5,9 +5,9 @@
   >
     <div class="container">
       <p class="text-[42px] font-medium text-white">
-        Viloyatlar bo‘ylab taksi haydovchisi sifatida ishlash
+        {{ $t("driverLog") }}
       </p>
-      <div class="flex justify-center items-center mt-16">
+      <div class="flex justify-center items-center mt-10">
         <form
           class="backdrop-blur-sm rounded-md px-[42px] py-11"
           style="background: rgba(185, 185, 185, 0.37)"

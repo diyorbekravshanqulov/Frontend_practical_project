@@ -5,7 +5,7 @@
   >
     <div class="container">
       <p class="text-[42px] font-medium text-white">
-        Viloyatlar bo‘ylab taksi haydovchisi sifatida ishlash
+        {{ $t('driverLog') }}
       </p>
       <div class="flex justify-center items-center mt-16">
         <form

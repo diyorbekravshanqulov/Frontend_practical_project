@@ -7,10 +7,10 @@
           style="box-shadow: 0px 1px 3px 0px #00000040"
           action=""
         >
-          <button
-            @click="router.push('/')"
+          <router-link
+            :to="{ name: 'home' }"
             class="text-3xl text-primary absolute top-0 -translate-x-3 translate-y-3 right-0"
-            >&times;</button
+            >&times;</router-link
           >
 
           <h2 class="text-black mb-10 text-2xl font-medium text-center">

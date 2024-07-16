@@ -1,5 +1,8 @@
 export default {
   login: "Kirish",
+  loginsys: "Tizimga kirish",
+  passen: "Yo'lovchi",
+  driver: "Xaydovchi",
   about: "Biz haqimizda",
   ques: "Savol/javob",
   about_text:
@@ -16,4 +19,5 @@ export default {
   leave: "Ketish",
   direct_name: "Yo‘nalish nomi",
   price: "Narxi(so‘m)",
+  driverLog: "Viloyatlar bo‘ylab taksi haydovchisi sifatida ishlash",
 };
