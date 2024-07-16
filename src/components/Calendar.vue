@@ -29,7 +29,9 @@
       />
     </button>
     <VDatePicker
-      :class="isDropdownOpen ? 'scale-100 !h-[300px] !w-full' : '!h-0 scale-0 !w-0'"
+      :class="
+        isDropdownOpen ? 'scale-100 !h-[300px] !w-full' : '!h-0 scale-0 !w-0'
+      "
       @click="func"
       v-model="date"
       mode="date"
@@ -40,6 +42,8 @@
 </template>
 
 <script setup>
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 import { Icon } from "@iconify/vue";
 import { ref } from "vue";
 import { useStore } from "../store";
@@ -50,12 +54,27 @@ const date = ref(new Date());
 const isDropdownOpen = ref(false);
 
 const func = () => {
-  store.setDatePin = date.value;
-  if (store.setDatePin) {
-    const year = String(store.setDatePin.getFullYear());
-    const month = String(store.setDatePin.getMonth() + 1).padStart(2, "0");
-    const day = String(store.setDatePin.getDate()).padStart(2, "0");
+  const selectedDate = date.value;
+  const today = new Date();
+
+  // Reset time to compare only date parts
+  selectedDate.setHours(0, 0, 0, 0);
+  today.setHours(0, 0, 0, 0);
+
+  // Check if selectedDate is today or a future date
+  if (selectedDate >= today) {
+    store.setDatePin = selectedDate;
+    const year = String(selectedDate.getFullYear());
+    const month = String(selectedDate.getMonth() + 1).padStart(2, "0");
+    const day = String(selectedDate.getDate()).padStart(2, "0");
     store.setDatePin = `${year}.${month}.${day}`;
+  } else {
+    toast("Please select today or a future date!", {
+      theme: "dark",
+      type: "warning",
+      transition: "slide",
+      dangerouslyHTMLString: true,
+    });
   }
 };
 
