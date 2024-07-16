@@ -101,3 +101,6 @@ const setPlaceFromDistrict = (region, district) => {
 }
 
 </style>
+
+<!--  showToList || showFromList -->
+<!-- showToList = !showTolist, showFromList = !showFromList -->

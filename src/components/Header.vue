@@ -35,19 +35,6 @@
         <RegionsTo />
         <Calendar />
 
-        <!-- <button
-          class="text-[30px] relative text-white py-7 rounded-md bg-second/35 w-[301px] pr-28"
-        >
-          {{ $t("when") }}
-          <Icon
-            icon="bx:calendar"
-            class="text-[40px] absolute top-1/2 right-1/4 -translate-y-1/2 translate-x-10 text-primary"
-          />
-          <Calendar
-            class="!absolute top-[105px] !text-gray-300 !p-5 left-0 !z-10 cursor-pointer !w-full !bg-second/35 !border-none opacity-1"
-            style="box-shadow: 0 0px 10px 0 white;"
-          />
-        </button> -->
         <button
           @click=""
           class="text-[30px] h-[101px] textShadow duration-500 relative text-white py-7 rounded-md bg-[#404040] px-[50px]"

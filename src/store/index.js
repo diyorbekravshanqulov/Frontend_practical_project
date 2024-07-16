@@ -6,8 +6,9 @@ export const useStore = defineStore("store", {
       carType: 2,
       setPlacePinFrom: null,
       setPlacePinTo: null,
+      setDatePin: null,
       lang: null,
-      regClick: false, 
+      regClick: false,
     };
   },
 });

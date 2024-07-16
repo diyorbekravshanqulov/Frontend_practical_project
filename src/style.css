@@ -11,6 +11,10 @@
 }
 html {
   scrollbar-width: none;
+  /* scrollbar-width: thin;
+  scrollbar-color: orange transparent;
+  scroll-behavior: smooth;
+  scrollbar-3dlight-color: antiquewhite; */
 }
 
 input,

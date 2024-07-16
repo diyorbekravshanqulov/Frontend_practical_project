@@ -7,7 +7,7 @@ import router from "./router";
 import VCalendar from "v-calendar";
 import "v-calendar/style.css";
 // import { setupCalendar, Calendar, DatePicker } from "v-calendar";
-import "v-calendar/style.css";
+// import "v-calendar/style.css";
 
 
 // Use plugin with optional defaults

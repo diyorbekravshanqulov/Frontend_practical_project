@@ -4,21 +4,12 @@
       <div class="flex w-full justify-between mt-[70px]">
         <RegionsFromDr />
         <RegionsToDr />
+        <CalendarDr />
 
         <button
           style="box-shadow: 0px 5px 10px 0px #0000001a"
-          class="text-[30px] relative text-black py-7 rounded-md bg-white w-[301px] pr-28"
-        >
-          {{ $t("when") }}
-          <Icon
-            icon="bx:calendar"
-            class="text-[40px] absolute top-1/2 right-1/4 -translate-y-1/2 translate-x-10 text-primary"
-          />
-        </button>
-        <button
-          style="box-shadow: 0px 5px 10px 0px #0000001a"
           @click=""
-          class="text-[30px] relative text-white py-7 rounded-md bg-primary px-[50px]"
+          class="text-[30px] textShadow duration-500 relative text-white py-7 rounded-md bg-primary px-[50px]"
         >
           {{ $t("search") }}
         </button>
@@ -77,6 +68,7 @@
 
 <script setup>
 import { Icon } from "@iconify/vue";
+import CalendarDr from "./CalendarDr.vue";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import RegionsFromDr from "./RegionsFromDr.vue";
@@ -146,12 +138,11 @@ const selectButton = (index) => {
 
 const navigate = () => {
   if (store.carType == 1) {
-    router.push("/truck-order")
+    router.push("/truck-order");
   } else {
-    router.push("/taxi-order")
+    router.push("/taxi-order");
   }
-}
-
+};
 </script>
 
 <style scoped>
@@ -159,5 +150,9 @@ const navigate = () => {
   scrollbar-width: none;
   /* scrollbar-gutter: both-edges;
   scrollbar-color: red yellow; */
+}
+
+.textShadow:hover {
+  text-shadow: 0 0px 5px white;
 }
 </style>

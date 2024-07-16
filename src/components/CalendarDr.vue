@@ -8,20 +8,23 @@
     <button
       @click="toggleDropdown"
       :class="!store.setDatePin ? 'py-7 pr-12' : 'pl-[15px] py-[11px]'"
-      class="text-[30px] relative text-white block rounded-md bg-second/35 w-[301px]"
+      class="text-[30px] relative text-white block rounded-md bg-white w-[301px]"
+      style="box-shadow: 0px 5px 10px 0px #0000001a"
     >
       <div
         class="duration-300"
         :class="store.setDatePin ? 'scale-100' : 'h-0 w-0 scale-0'"
       >
-        <p class="text-[20px] text-start text-[#D1D1D1]">{{ $t("from") }}</p>
-        <p class="line-clamp-1 mt-1 text-start">{{ store.setDatePin }}</p>
+        <p class="text-[20px] text-start text-[#828282]">{{ $t("from") }}</p>
+        <p class="line-clamp-1 mt-1 text-start text-black">
+          {{ store.setDatePin }}
+        </p>
       </div>
       <div
         class="duration-300"
         :class="!store.setDatePin ? 'scale-100' : 'h-0 w-0 scale-0'"
       >
-        <p>{{ $t("from") }}</p>
+        <p class="text-black">{{ $t("from") }}</p>
       </div>
       <Icon
         icon="bx:calendar"
@@ -29,11 +32,13 @@
       />
     </button>
     <VDatePicker
-      :class="isDropdownOpen ? 'scale-100 !h-[300px] !w-full' : '!h-0 scale-0 !w-0'"
+      :class="
+        isDropdownOpen ? 'scale-100 !h-[300px] !w-full' : '!h-0 scale-0 !w-0'
+      "
       @click="func"
       v-model="date"
       mode="date"
-      class="!absolute top-[105px] !text-gray-300 duration-300 !p-5 left-0 !z-10 cursor-pointer !w-full !bg-second/35 !border-none opacity-1"
+      class="!absolute top-[105px] duration-300 !p-5 left-0 !shadow-lg !z-10 cursor-pointer !w-full !border-none opacity-1"
       style="box-shadow: 0 0px 10px 0 white"
     />
   </div>

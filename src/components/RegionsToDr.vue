@@ -15,7 +15,7 @@
         class="duration-300"
         :class="store.setPlacePinTo ? 'scale-100' : 'h-0 w-0 scale-0'"
       >
-        <p class="text-[20px] text-start text-[#D1D1D1]">{{ $t("to") }}</p>
+        <p class="text-[20px] text-start text-[#828282]">{{ $t("to") }}</p>
         <p class="line-clamp-1 mt-1 text-start">{{ store.setPlacePinTo }}</p>
       </div>
       <div
