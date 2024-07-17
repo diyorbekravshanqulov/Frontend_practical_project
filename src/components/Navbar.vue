@@ -24,7 +24,7 @@
         <button
           @click="router.push('/user')"
           v-if="!token"
-          class="text-lg cursor-pointer text-white font-medium border px-4 py-1 rounded-md border-gray-300 hover:border-white duration-300 hover:shadow-sm hover:shadow-white"
+          class="text-lg shadowWhite cursor-pointer text-white font-medium border px-4 py-1 rounded-md border-gray-300 hover:border-white duration-300 hover:shadow-white"
         >
           {{ $t('login') }}
         </button>
@@ -82,5 +82,13 @@ const navigate = (index) => {
 }
 #taxi span {
   text-shadow: 0 0px 5px black;
+}
+
+.shadowWhite  {
+  box-shadow: 0 0 3px 0 white;
+}
+
+.shadowWhite:hover  {
+  box-shadow: 0 0 7px 0 white;
 }
 </style>

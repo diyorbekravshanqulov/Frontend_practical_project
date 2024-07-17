@@ -17,7 +17,7 @@
         'scale-100 opacity-100': isOpen,
         'scale-0 h-0 opacity-0': !isOpen,
       }"
-      class="absolute mt-2 w-full bg-gray-800  text-gray-300 duration-500 shadow-lg rounded-md z-20"
+      class="absolute mt-2 w-full bg-gray-800 text-gray-300 duration-500 shadow-lg rounded-md z-20"
     >
       <div
         v-for="option in options"
@@ -35,15 +35,17 @@
 <script setup>
 import { ref } from "vue";
 import { Icon } from "@iconify/vue";
-import { useI18n } from "vue-i18n";
 import { useStore } from "../store";
+import { useI18n } from "vue-i18n";
 const { locale, locales } = useI18n();
 
 const store = useStore();
 
 const options = [
-  { value: "UZ", icon: "openmoji:flag-uzbekistan" },
-  { value: "RU", icon: "openmoji:flag-russia" },
+  { value: "UZ", icon: "twemoji:flag-uzbekistan" },
+  { value: "RU", icon: "twemoji:flag-russia" },
+  // { value: "UZ", icon: "openmoji:flag-uzbekistan" },
+  // { value: "RU", icon: "openmoji:flag-russia" },
 ];
 
 const selected = ref(options[0]);
@@ -60,8 +62,10 @@ const selectOption = (option) => {
   // Assuming $i18n is your localization library or Vue i18n plugin
   if (option.value == "UZ") {
     locale.value = "uz";
+    store.lang = "uz";
   } else {
     locale.value = "ru";
+    store.lang = "ru";
   }
 };
 </script>

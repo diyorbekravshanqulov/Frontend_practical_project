@@ -7,7 +7,7 @@ export const useStore = defineStore("store", {
       setPlacePinFrom: null,
       setPlacePinTo: null,
       setDatePin: null,
-      lang: null,
+      lang: "uz",
       regClick: false,
     };
   },
