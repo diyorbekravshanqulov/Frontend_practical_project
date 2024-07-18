@@ -175,7 +175,7 @@ const navigate = () => {
 
 /* Define the thumb style */
 .scrollable-element::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom right, #F7931E 0%, #F7931E 100%);
+  background: linear-gradient(to bottom right, #f7931e 0%, #f7931e 100%);
   border-radius: 5px;
 }
 

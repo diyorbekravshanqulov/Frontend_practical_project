@@ -68,31 +68,44 @@
 </template>
 
 <script setup>
-import { ref, reactive } from "vue";
-import regionsData from "../JSON/regions.json";
+import { ref, reactive, watch } from "vue";
+import regionsDataJson from "../JSON/regions2.json";
 import { useStore } from "../store";
 
 const store = useStore();
 
-const regions = reactive(regionsData.regions);
-const selectedRegion = ref(0);
+// Define reactive variables
+const regions = ref([]);
+const selectedRegion = ref(null); // Initialize with null
 const isDropdownOpen = ref(false);
-const setPlace = ref(null);
 
+// Load regions data based on store.lang
+const loadRegions = () => {
+  const data = store.lang === "uz" ? regionsDataJson.uz : regionsDataJson.ru;
+  regions.value = data.regions;
+  selectedRegion.value = 0; // Default to the first region
+  store.setPlacePinFrom = ""; // Reset place pin in store
+};
+
+watch(() => store.lang, loadRegions, { immediate: true });
+
+// Toggle dropdown visibility
 const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value;
 };
 
+// Select a region
 const selectRegion = (index) => {
   selectedRegion.value = index;
 };
 
+// Set place from district
 const setPlaceFromDistrict = (region, district) => {
-  // setPlace.value = `${region}. ${district}`;
   store.setPlacePinFrom = `${region}. ${district}`;
-  console.log("object", store.setPlacePinFrom);
   isDropdownOpen.value = false;
 };
+
+// Watch for changes in store.lang and reload regions accordingly
 </script>
 <style scoped>
 .scrollable-element::-webkit-scrollbar {
@@ -102,7 +115,7 @@ const setPlaceFromDistrict = (region, district) => {
 
 /* Define the thumb style */
 .scrollable-element::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom right, #F7931E 0%, #F7931E 100%);
+  background: linear-gradient(to bottom right, #f7931e 0%, #f7931e 100%);
   border-radius: 5px;
 }
 
