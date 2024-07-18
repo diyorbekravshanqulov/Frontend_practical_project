@@ -9,6 +9,7 @@ export const useStore = defineStore("store", {
       setDatePin: null,
       lang: "uz",
       regClick: false,
+      location: false,
     };
   },
 });

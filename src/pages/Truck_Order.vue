@@ -1,6 +1,6 @@
 <template>
   <div class="bg-slate-50 h-screen py-[168px]">
-    <div class="container">
+    <div class="container pb-40">
       <div class="flex items-center justify-start">
         <div class="flex items-center gap-14">
           <button
@@ -50,6 +50,7 @@
       </form>
     </div>
     <Confirm />
+    <location />
   </div>
 </template>
 
@@ -58,6 +59,7 @@ import { ref } from "vue";
 import { Icon } from "@iconify/vue";
 import { useRouter } from "vue-router";
 import Confirm from "../components/Confirm.vue";
+import location from "../components/location.vue";
 
 const router = useRouter();
 

@@ -1,6 +1,6 @@
 <template>
   <div class="bg-slate-50 h-screen py-[168px]">
-    <div class="container">
+    <div class="container pb-40">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-14">
           <button
@@ -68,6 +68,7 @@
             Olib ketish manzilini belgilang
           </p>
           <button
+            @click="store.location = !store.location"
             class="mt-[9px] border border-primary rounded-md px-[47px] py-[11px]"
           >
             <Icon icon="weui:location-outlined" class="text-4xl text-primary" />
@@ -76,6 +77,7 @@
       </form>
     </div>
     <Confirm />
+    <location />
   </div>
 </template>
 
@@ -83,7 +85,11 @@
 import { ref } from "vue";
 import { Icon } from "@iconify/vue";
 import { useRouter } from "vue-router";
-import Confirm from '../components/Confirm.vue'
+import Confirm from "../components/Confirm.vue";
+import location from "../components/location.vue";
+import { useStore } from "../store";
+
+const store = useStore();
 
 const router = useRouter();
 const count = ref(1);
