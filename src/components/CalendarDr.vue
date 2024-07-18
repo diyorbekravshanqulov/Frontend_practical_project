@@ -15,7 +15,7 @@
         class="duration-300"
         :class="store.setDatePin ? 'scale-100' : 'h-0 w-0 scale-0'"
       >
-        <p class="text-[20px] text-start text-[#828282]">{{ $t("from") }}</p>
+        <p class="text-[20px] text-start text-[#828282]">{{ $t("when") }}</p>
         <p class="line-clamp-1 mt-1 text-start text-black">
           {{ store.setDatePin }}
         </p>
@@ -24,7 +24,7 @@
         class="duration-300"
         :class="!store.setDatePin ? 'scale-100' : 'h-0 w-0 scale-0'"
       >
-        <p class="text-black">{{ $t("from") }}</p>
+        <p class="text-black">{{ $t("when") }}</p>
       </div>
       <Icon
         icon="bx:calendar"

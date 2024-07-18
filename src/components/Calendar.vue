@@ -14,14 +14,14 @@
         class="duration-300"
         :class="store.setDatePin ? 'scale-100' : 'h-0 w-0 scale-0'"
       >
-        <p class="text-[20px] text-start text-[#D1D1D1]">{{ $t("from") }}</p>
+        <p class="text-[20px] text-start text-[#D1D1D1]">{{ $t("when") }}</p>
         <p class="line-clamp-1 mt-1 text-start">{{ store.setDatePin }}</p>
       </div>
       <div
         class="duration-300"
         :class="!store.setDatePin ? 'scale-100' : 'h-0 w-0 scale-0'"
       >
-        <p>{{ $t("from") }}</p>
+        <p>{{ $t("when") }}</p>
       </div>
       <Icon
         icon="bx:calendar"
