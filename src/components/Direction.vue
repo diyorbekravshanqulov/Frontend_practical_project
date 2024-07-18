@@ -1,22 +1,22 @@
 <template>
-  <div
-    @click="notify()"
-    :class="
+    <!-- :class="
       store.setPlacePinFrom && store.setPlacePinTo && store.setDatePin
         ? 'before:absolute before:w-0 before:h-0 before:scale-0 before:bg-transparent before:-z-10 before:backdrop-blur-sm '
         : 'before:absolute before:w-full before:h-full before:top-0 before:left-0 before:bg-white/5 before:backdrop-blur-sm before:z-10'
-    "
+    " -->
+  <div
+    @click="notify()"
     class="relative bg-gray-50"
   >
     <div class="container py-[60px]">
-      <div class="flex w-full justify-between mt-[70px]">
+      <div class="flex max-md:flex-col w-full justify-between max-md:items-center max-md:gap-[30px] mt-[70px]">
         <RegionsFromDr />
         <RegionsToDr />
         <CalendarDr />
         <button
           style="box-shadow: 0px 5px 10px 0px #0000001a"
           @click=""
-          class="text-[30px] textShadow duration-500 relative text-white py-7 rounded-md bg-primary px-[50px]"
+          class="text-[30px] textShadow duration-500 max-md:w-[219px] max-md:mt-[10px] max-md:py-[14px] relative text-white py-7 rounded-md bg-primary md:px-[50px]"
         >
           {{ $t("search") }}
         </button>

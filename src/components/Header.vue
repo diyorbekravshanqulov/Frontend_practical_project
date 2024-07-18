@@ -5,7 +5,7 @@
         <button
           @click="store.carType = 2"
           :class="[
-            'text-white py-2.5 text-[26px] font-medium duration-300 px-16 border border-primary',
+            'text-white py-2.5 max-md:py-2 md:text-[26px] font-medium duration-300 px-16 max-md:px-12 border border-primary',
             store.carType == 2 ? 'bg-primary active' : 'inactive',
           ]"
           style="border-radius: 45px 0 0 45px"
@@ -15,7 +15,7 @@
         <button
           @click="store.carType = 1"
           :class="[
-            'text-white py-2.5 text-[26px] font-medium duration-300 px-16 border border-primary',
+            'text-white py-2.5 max-md:py-2 md:text-[26px] font-medium duration-300 px-16 max-md:px-12 border border-primary',
             store.carType == 1 ? 'bg-primary active' : 'inactive',
           ]"
           style="border-radius: 0 45px 45px 0"
@@ -23,13 +23,13 @@
           {{ $t("truck") }}
         </button>
       </div>
-      <h1 class="font-medium text-[42px] mt-16 text-white">
+      <h1 class="font-medium text-[42px] max-md:text-[22px] mt-16 max-md:mt-12 text-white">
         {{ $t("service") }}
       </h1>
-      <p class="mt-[30px] text-[22px] text-white">
+      <p class="mt-[30px] max-md:mt-4 text-[22px] max-md:text-lg text-white">
         {{ $t("ser_offer") }}
       </p>
-      <div class="flex w-full justify-between mt-[70px]">
+      <div class="flex w-full max-md:items-center max-md:gap-[30px] max-md:flex-col justify-between mt-[70px] max-md:mt-10">
         <RegionsFrom />
         <RegionsTo />
         <Calendar />
@@ -41,7 +41,7 @@
               ? 'bg-primary text-white'
               : 'text-white bg-[#404040]'
           "
-          class="text-[30px] h-[101px] textShadow duration-500 relative py-7 rounded-md px-[50px]"
+          class="text-[30px] h-[101px] max-md:mt-[10px]  max-md:w-[219px] textShadow duration-500 relative md:py-7 py-[14px] rounded-md md:px-[50px]"
         >
           {{ $t("search") }}
         </button>
