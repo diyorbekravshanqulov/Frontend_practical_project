@@ -42,6 +42,8 @@
         <div>
           <p class="font-medium text-sm">Olib ketish manzilini belgilang</p>
           <button
+            @click="store.location = !store.location"
+            type="button"
             class="mt-[9px] border border-primary rounded-md px-[47px] py-[11px]"
           >
             <Icon icon="weui:location-outlined" class="text-4xl text-primary" />
@@ -60,6 +62,9 @@ import { Icon } from "@iconify/vue";
 import { useRouter } from "vue-router";
 import Confirm from "../components/Confirm.vue";
 import location from "../components/location.vue";
+import { useStore } from "../store";
+
+const store = useStore();
 
 const router = useRouter();
 

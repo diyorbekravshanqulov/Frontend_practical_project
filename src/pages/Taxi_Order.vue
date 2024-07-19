@@ -69,6 +69,7 @@
           </p>
           <button
             @click="store.location = !store.location"
+            type="button"
             class="mt-[9px] border border-primary rounded-md px-[47px] py-[11px]"
           >
             <Icon icon="weui:location-outlined" class="text-4xl text-primary" />
