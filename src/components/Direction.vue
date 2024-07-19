@@ -1,13 +1,10 @@
 <template>
-  <div
-    @click="notify()"
-    :class="
+  <!-- :class="
       store.setPlacePinFrom && store.setPlacePinTo && store.setDatePin
         ? 'before:absolute before:w-0 before:h-0 before:scale-0 before:bg-transparent before:-z-10 before:backdrop-blur-sm '
         : 'before:absolute before:w-full before:h-full before:top-0 before:left-0 before:bg-white/5 before:backdrop-blur-sm before:z-10'
-    "
-    class="relative bg-gray-50"
-  >
+    " -->
+  <div @click="notify()" class="relative bg-gray-50">
     <div class="container py-[60px]">
       <div
         class="flex max-md:flex-col w-full justify-between max-md:items-center max-md:gap-[30px] mt-[70px]"
@@ -24,11 +21,11 @@
         </button>
       </div>
       <!-- options day -->
-      <p class="mt-[100px] text-[42px]">{{ $t("direction") }}</p>
+      <p class="mt-[100px] text-[42px] max-md:hidden">{{ $t("direction") }}</p>
       <div
-        class="flex w-full mt-[52px] overflow-auto scrollable-element gap-0 rounded-md shadow-lg"
+        class="flex md:w-full mt-[52px] max-md:-mx-4 overflow-hidden max-md:overflow-auto scrollable-element gap-0 rounded-md shadow-lg"
       >
-        <div class="flex divide-x divide-[#313131] w-full">
+        <div class="flex max-md:w-screen md:divide-x max-md:gap-[6px] divide-[#313131] md:w-full">
           <button
             v-for="(item, index) in day"
             :key="index"
@@ -38,33 +35,42 @@
                 ? 'bg-primary duration-300 text-white'
                 : 'bg-white text-black'
             "
-            class="py-7 text-[20px] w-1/6 px-[35px] whitespace-nowrap"
+            class="py-7 text-[20px] max-md:shadow-lg md:w-1/6 shrink-0 px-[35px] whitespace-nowrap"
           >
             {{ item }}
           </button>
         </div>
       </div>
       <!-- options leave / direction / price -->
-      <div class="grid grid-cols-3 gap-y-3">
-        <p
-          v-for="(item, index) in option_name"
-          :key="index"
-          class="text-[20px] text-center mt-[122px]"
-        >
-          {{ item }}
-        </p>
+      <div
+        class="grid grid-cols-3 max-md:-mx-4 gap-y-3 max-md:overflow-scroll scrollable-element"
+      >
+        <div class="col-span-3 flex justify-between max-md:w-[650px]">
+          <p
+            v-for="(item, index) in option_name"
+            :key="index"
+            class="text-[20px] text-center mt-[122px] w-full"
+          >
+            {{ item }}
+          </p>
+        </div>
         <div
           v-for="(item, index) in options_all_data"
           :key="index"
           @click="navigate"
-          class="col-span-3 cursor-pointer mb-6 w-full grid grid-cols-3 py-[26px] rounded-md shadow-lg bg-white"
+          class="col-span-3 cursor-pointer mb-6 w-full max-md:w-[650px] grid grid-cols-3 py-[26px] rounded-md shadow-lg bg-white"
         >
-          <p class="font-medium text-center text-2xl">
+          <p class="font-medium text-center text-2xl max-md:text-lg">
             {{ item.time }}
-            <span class="text-center text-[22px]">{{ item.date }}</span>
+            <span class="text-center md:text-[22px]">{{ item.date }}</span>
           </p>
-          <p class="text-center font-medium text-2xl">{{ item.where }}</p>
-          <p class="font-medium text-center text-2xl">{{ item.price }}(so‘m)</p>
+          <p class="text-center font-medium text-2xl max-md:text-lg">
+            {{ item.where }}
+          </p>
+          <p class="font-medium text-center text-2xl max-md:text-lg">
+            {{ item.price
+            }}<span class="md:text-[20px] text-[#999] font-normal">(so‘m)</span>
+          </p>
         </div>
       </div>
     </div>

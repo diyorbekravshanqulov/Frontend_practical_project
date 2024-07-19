@@ -11,7 +11,7 @@
     <YandexMap
       :coordinates="coordinates"
       @click="onClick"
-      :zoom="15"
+      :zoom="16"
       class="w-full h-full"
     >
       <YandexMarker
