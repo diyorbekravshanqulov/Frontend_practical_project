@@ -5,7 +5,7 @@
     class="fixed top-0 md:hidden left-0 h-screen bg-white/30 backdrop-blur-sm w-screen z-10"
   ></div>
   <div
-    class="fixed top-0 left-0 z-20 w-full bg-primary"
+    class="fixed top-0 left-0 z-40 w-full bg-primary"
     :class="isScrolled ? 'shadow-md shadow-black/30' : ''"
   >
     <div class="container py-3.5 flex items-center justify-between w-full">

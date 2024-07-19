@@ -35,7 +35,7 @@
       @click="func"
       v-model="date"
       mode="date"
-      class="!absolute top-[105px] !text-gray-300 duration-300 !p-5 left-0 !z-10 cursor-pointer !w-full !bg-second/35 !border-none opacity-1"
+      class="!absolute top-[105px] !text-gray-300 duration-300 !p-5 left-0 !z-20 cursor-pointer !w-full !bg-second/35 max-md:!bg-second/60 !border-none opacity-1"
       style="box-shadow: 0 0px 10px 0 white"
     />
   </div>

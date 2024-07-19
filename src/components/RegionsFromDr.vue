@@ -50,7 +50,7 @@
         <!-- District List -->
         <div
           v-if="selectedRegion !== null"
-          class="w-1/2 max-md:w-full max-h-56 max-md:border-t border-primary overflow-y-auto scrollable-element"
+          class="w-1/2 max-md:w-full max-h-56 max-md:border-t border-t-primary max-md:border-r max-md:border-r-gray-200 overflow-y-auto scrollable-element"
         >
           <p
             @click="
