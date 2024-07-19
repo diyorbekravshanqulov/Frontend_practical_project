@@ -22,10 +22,45 @@
       </div>
       <!-- options day -->
       <p class="mt-[100px] text-[42px] max-md:hidden">{{ $t("direction") }}</p>
+      <div class="md:hidden">
+        <swiper
+          :slidesPerView="2"
+          :centeredSlides="true"
+          :pagination="{
+            clickable: true,
+          }"
+          :modules="modules"
+          class="md:hidden mt-[58px]"
+        >
+          <swiper-slide v-for="(item, index) in day" :key="index">
+            <!-- <div
+              class="flex md:w-full mt-[52px] max-md:-mx-4 scrollable-element gap-0 rounded-md shadow-lg"
+            > -->
+            <!-- <div
+              class="flex mt-[52px] max-md:w-screen md:divide-x max-md:gap-[6px] divide-[#313131] md:w-full"
+            > -->
+            <button
+              @click="selectButton(index)"
+              :class="
+                index === selectedButtonIndex
+                  ? 'bg-primary duration-300 text-white'
+                  : 'bg-white text-black'
+              "
+              class="py-7 rounded-md max-md:shadow-lg md:w-1/6 shrink-0 px-[35px] whitespace-nowrap"
+            >
+              {{ item }}
+            </button>
+            <!-- </div> -->
+            <!-- </div> -->
+          </swiper-slide>
+        </swiper>
+      </div>
       <div
-        class="flex md:w-full mt-[52px] max-md:-mx-4 overflow-hidden max-md:overflow-auto scrollable-element gap-0 rounded-md shadow-lg"
+        class="flex md:w-full max-md:hidden mt-[52px] max-md:-mx-4 overflow-hidden max-md:overflow-auto scrollable-element gap-0 rounded-md shadow-lg"
       >
-        <div class="flex max-md:w-screen md:divide-x max-md:gap-[6px] divide-[#313131] md:w-full">
+        <div
+          class="flex max-md:w-screen md:divide-x max-md:gap-[6px] divide-[#313131] md:w-full"
+        >
           <button
             v-for="(item, index) in day"
             :key="index"
@@ -43,7 +78,7 @@
       </div>
       <!-- options leave / direction / price -->
       <div
-        class="grid grid-cols-3 max-md:-mx-4 gap-y-3 max-md:overflow-scroll scrollable-element"
+        class="grid grid-cols-3 max-md:-mr-4 gap-y-3 max-md:overflow-scroll scrollable-element"
       >
         <div class="col-span-3 flex justify-between max-md:w-[650px]">
           <p
@@ -85,6 +120,18 @@ import { useRouter } from "vue-router";
 import RegionsFromDr from "./RegionsFromDr.vue";
 import RegionsToDr from "./RegionsToDr.vue";
 import { useStore } from "../store";
+
+import { Swiper, SwiperSlide } from "swiper/vue";
+
+// Import Swiper styles
+import "swiper/css";
+
+import "swiper/css/pagination";
+
+// import required modules
+import { Pagination } from "swiper/modules";
+
+const modules = [Pagination];
 
 const store = useStore();
 const router = useRouter();
@@ -175,7 +222,7 @@ const navigate = () => {
 };
 </script>
 
-<style scoped>
+<style>
 .scrollable-element::-webkit-scrollbar {
   width: 5px;
   height: 5px;
@@ -201,5 +248,15 @@ const navigate = () => {
 
 .textShadow:hover {
   text-shadow: 0 0px 5px white;
+}
+
+.swiper-pagination {
+  margin-top: 20px;
+  position: static !important;
+}
+
+.swiper {
+  margin-left: -11%;
+  margin-right: -2%;
 }
 </style>

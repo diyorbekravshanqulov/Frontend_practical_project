@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-[168px] pb-[325px] mainBack">
+  <div class="pt-[168px] pb-[325px] max-md:py-[120px] mainBack">
     <div class="container">
       <div class="flex items-center justify-center">
         <button

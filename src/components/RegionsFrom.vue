@@ -26,12 +26,14 @@
     </button>
     <div
       :class="isDropdownOpen ? 'scale-100' : 'h-0 scale-0 w-0'"
-      class="absolute left-0 duration-300 mt-2 p-2 w-[600px] bg-second/35 rounded z-10"
+      class="absolute left-0 duration-300 mt-2 p-2 md:w-[600px] w-full bg-second/35 rounded z-10"
       style="box-shadow: 0 0px 10px 0 white"
     >
-      <div class="flex">
+      <div class="md:flex">
         <!-- Region List -->
-        <div class="w-1/2 border-r max-h-56 overflow-y-auto scrollable-element">
+        <div
+          class="w-1/2 max-md:w-full border-r max-h-56 overflow-y-auto scrollable-element"
+        >
           <p
             v-for="(region, index) in regions"
             :key="index"
@@ -48,7 +50,7 @@
         <!-- District List -->
         <div
           v-if="selectedRegion !== null"
-          class="w-1/2 max-h-56 overflow-y-auto scrollable-element"
+          class="w-1/2 max-md:w-full max-h-56 max-md:border-t border-primary overflow-y-auto scrollable-element"
         >
           <p
             @click="
