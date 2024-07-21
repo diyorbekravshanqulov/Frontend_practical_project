@@ -10,6 +10,7 @@ export const useStore = defineStore("store", {
       lang: "uz",
       regClick: false,
       location: false,
+      token: null,
     };
   },
 });

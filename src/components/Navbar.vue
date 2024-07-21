@@ -25,20 +25,32 @@
         >
           {{ index == 0 ? $t("about") : $t("ques") }}
         </p>
-        <FlagDropdown @click="isOpen = false"/>
+        <FlagDropdown @click="isOpen = false" />
         <button
           @click="router.push('/user')"
-          v-if="!token"
+          v-if="!store.token"
           class="text-lg shadowWhite cursor-pointer max-md:hidden text-white font-medium border px-4 py-1 rounded-md border-gray-300 hover:border-white duration-300 hover:shadow-white"
         >
           {{ $t("login") }}
         </button>
-        <Icon
-          v-else
-          @click="router.push('/user')"
-          icon="bxs:user"
-          class="text-white cursor-pointer text-4xl max-md:hidden"
-        />
+        <div v-else class="relative">
+          <Icon
+            @click="logout = !logout"
+            icon="bxs:user"
+            class="text-white cursor-pointer text-4xl"
+          />
+          <p
+            @click="clearStorage()"
+            :class="logout ? 'scale-100' : 'scale-0'"
+            class="px-3 py-2 rounded-md bg-gray-700 cursor-pointer duration-300 w-[130px] top-full left-1/2 -translate-x-1/2 text-white text-xl absolute"
+          >
+            Logout
+            <Icon
+              icon="material-symbols:logout"
+              class="text-red-500 ml-3 inline-block text-2xl"
+            />
+          </p>
+        </div>
         <Icon
           @click="isOpen = !isOpen"
           icon="solar:hamburger-menu-broken"
@@ -54,7 +66,7 @@
     ]"
     class="container bg-primary fixed z-20 duration-300 top-[65.5px] left-0 md:hidden py-10"
   >
-    <div class="flex flex-col items-center gap-5">
+    <div class="flex flex-col-reverse items-center gap-5">
       <p
         @click="navigate(index)"
         v-for="(item, index) in 2"
@@ -66,17 +78,29 @@
       </p>
       <button
         @click="router.push('/user')"
-        v-if="!token"
+        v-if="!store.token"
         class="text-lg shadowWhite cursor-pointer w-full text-white font-medium border px-4 py-1 rounded-md border-gray-300 hover:border-white duration-300 hover:shadow-white"
       >
         {{ $t("login") }}
       </button>
-      <Icon
-        v-else
-        @click="router.push('/user')"
-        icon="bxs:user"
-        class="text-white cursor-pointer text-4xl"
-      />
+      <div v-else class="relative">
+        <Icon
+          @click="logout = !logout"
+          icon="bxs:user"
+          class="text-white cursor-pointer text-6xl"
+        />
+        <p
+          @click="clearStorage()"
+          :class="logout ? 'scale-100' : 'scale-0'"
+          class="px-3 py-2 rounded-md bg-gray-700 cursor-pointer duration-300 w-[130px] top-full left-1/2 -translate-x-1/2 text-white text-xl absolute"
+        >
+          Logout
+          <Icon
+            icon="material-symbols:logout"
+            class="text-red-500 ml-3 inline-block text-2xl"
+          />
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -86,16 +110,26 @@ import { Icon } from "@iconify/vue";
 import FlagDropdown from "./FlagDropdown.vue"; // Adjust the path as necessary
 import { onMounted, onUnmounted, ref } from "vue";
 import { useRouter } from "vue-router";
+import { useStore } from "../store";
+
+const store = useStore();
 
 const isOpen = ref(false);
 
+const logout = ref(false)
+
 const router = useRouter();
 
-const token = ref(false);
+store.token = localStorage.getItem("access_token");
+
+const clearStorage = () => {
+  localStorage.removeItem("access_token");
+  store.token = localStorage.getItem("access_token");
+  logout.value = !logout.value; 
+  router.push({ name: "home" });
+};
 
 const isScrolled = ref(false);
-
-
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 0;
 };

@@ -77,6 +77,8 @@ const registerDriver = async () => {
       user_data.value
     );
     console.log("Registration successful:", response.data);
+    localStorage.setItem("access_token", response.data.access_token);
+    localStorage.setItem("refresh_token", response.data.refresh_token);
     router.push({ name: "passenger_veryfy" });
   } catch (error) {
     console.error("Error registering:", error);
@@ -96,13 +98,15 @@ const data = ref([
     label: "Parol",
     input: "Sizning parolingiz",
     key: "password",
-    type: "password",
+    // type: "password",
+    type: "text",
   },
   {
     label: "Parolni tasdiqlash",
     input: "Parolingizni tasdiqlang",
     key: "confirm_password",
-    type: "password",
+    // type: "password",
+    type: "text",
   },
 ]);
 </script>
