@@ -26,7 +26,7 @@
             {{ item.label }}
             <input
               v-model="login_data[item.key]"
-              class="block mt-1 w-[406px] p-[10px] text-sm placeholder:text-[#666] placeholder:font-normal rounded-md border-2 border-primary"
+              class="block mt-1 w-[406px] p-[10px] text-sm placeholder:text-[#666] placeholder:font-normal rounded-md border-2 border-primary focus:border-primary outline-none focus:ring-0"
               :type="item.type"
               :placeholder="item.input"
               :id="item.key"
@@ -95,3 +95,4 @@ const data = ref([
   },
 ]);
 </script>
+

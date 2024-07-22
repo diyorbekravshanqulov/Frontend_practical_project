@@ -26,7 +26,7 @@
             {{ item.label }}
             <input
               v-model="user_data[item.key]"
-              class="block mt-1 w-[406px] p-[10px] text-sm placeholder:text-[#666] placeholder:font-normal rounded-md border-2 border-primary"
+              class="block mt-1 w-[406px] p-[10px] text-sm placeholder:text-[#666] placeholder:font-normal rounded-md border-2 border-primary focus:border-primary outline-none focus:ring-0"
               :type="item.type"
               :placeholder="item.input"
               :id="item.key"
@@ -79,7 +79,7 @@ const registerDriver = async () => {
     console.log("Registration successful:", response.data);
     localStorage.setItem("access_token", response.data.access_token);
     localStorage.setItem("refresh_token", response.data.refresh_token);
-    router.push({ name: "passenger_veryfy" });
+    router.push({ name: "home" });
   } catch (error) {
     console.error("Error registering:", error);
     alert("Something went wrong. Please try again.");

@@ -58,6 +58,11 @@ const routes = [
             name: "passenger_regis",
             component: () => import("../components/auth/Pas_regis.vue"),
           },
+          {
+            path: "/passenger/verify",
+            name: "passenger_verify",
+            component: () => import("../pages/Verify.vue"),
+          },
         ],
       },
       {
@@ -74,6 +79,11 @@ const routes = [
             path: "/driver/regis",
             name: "driver_regis",
             component: () => import("../components/auth/Driver_regis.vue"),
+          },
+          {
+            path: "/driver/verify",
+            name: "driver_verify",
+            component: () => import("../pages/Verify.vue"),
           },
         ],
       },

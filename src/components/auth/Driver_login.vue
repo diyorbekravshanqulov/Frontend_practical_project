@@ -5,10 +5,11 @@
   >
     <div class="container">
       <p class="text-[42px] font-medium text-white">
-        {{ $t('driverLog') }}
+        {{ $t("driverLog") }}
       </p>
       <div class="flex justify-center items-center mt-16">
         <form
+          @submit.prevent="loginUser"
           class="backdrop-blur-sm rounded-md px-[42px] py-11"
           style="background: rgba(185, 185, 185, 0.37)"
           action=""
@@ -20,14 +21,15 @@
             class="my-5 text-white text-[17px] font-medium w-full block"
             v-for="(item, index) in data"
             :key="index"
-            for="name"
+            :for="item.key"
             >{{ item.label }}
             <input
-              class="block mt-1 w-[406px] p-[10px] text-sm placeholder:text-[#666] placeholder:font-normal rounded-md border-2 border-transparent focus:border-primary"
-              type="text"
+              v-model="login_data[item.key]"
+              class="block mt-1 w-[406px] p-[10px] text-black text-sm placeholder:text-[#666] placeholder:font-normal rounded-md border-2 border-transparent focus:border-primary"
+              :type="item.type"
               :placeholder="item.input"
-              name="name"
-              id=""
+              :name="item.key"
+              :id="item.key"
             />
           </label>
           <input
@@ -37,7 +39,10 @@
             value="Kirish"
             id=""
           />
-          <router-link :to="{ name: 'driver_regis' }" class="block mt-5 text-white group">
+          <router-link
+            :to="{ name: 'driver_regis' }"
+            class="block mt-5 text-white group"
+          >
             Ro‘yxatdan o‘tish
             <span class="group-hover:ml-2 m-1 text-lg duration-300"
               >&rarr;</span
@@ -50,19 +55,45 @@
 </template>
 
 <script setup>
+import axios from "axios";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 
+const login_data = ref({
+  phone: "",
+  password: "",
+});
+
+const loginUser = async () => {
+  try {
+    const response = await axios.post(
+      "http://95.130.227.176:3010/api/driver/signin",
+      login_data.value
+    );
+    console.log("Login successful:", response.data);
+    localStorage.setItem("access_token", response.data.access_token);
+    localStorage.setItem("refresh_token", response.data.refresh_token);
+    router.push({ name: "home" });
+  } catch (error) {
+    console.error("Error logging in:", error);
+    alert("Something went wrong. Please try again.");
+  }
+};
+
 const data = ref([
   {
     label: "Telfon raqam",
     input: "Sizning telfon raqamingiz",
+    key: "phone",
+    type: "text",
   },
   {
     label: "Parolingiz",
     input: "Sizning parolingiz",
+    key: "password",
+    type: "password",
   },
 ]);
 </script>
