@@ -27,24 +27,35 @@
               v-model="user_data[item.key]"
               :placeholder="item.input"
               class="block mt-1 w-[406px] p-[10px] text-sm placeholder-text-[#666] placeholder-font-normal rounded-md border-2 text-black border-transparent focus:border-primary"
-              type="text"
+              :type="item.type || 'text'"
               :id="'input_' + index"
             />
           </label>
 
           <!-- File inputs -->
           <label
-            v-for="(item, index) in fileInputs"
-            :key="'file_' + index"
-            :for="'file_' + index"
+            for="image"
             class="my-5 text-white text-[17px] font-medium w-full block"
           >
-            {{ item.label }}
+            Rasmingizni yuklang
             <input
-              :v-model="user_data[item.key]"
+              id="image"
               class="block mt-1 w-[406px] p-[10px] text-sm placeholder-text-[#666] placeholder-font-normal rounded-md border-2 border-transparent focus:border-primary"
               type="file"
-              :id="'file_' + index"
+              @change="getValue"
+            />
+          </label>
+          <!-- -- -->
+          <label
+            for="driver_image"
+            class="my-5 text-white text-[17px] font-medium w-full block"
+          >
+            Guvohnomangizni yuklang
+            <input
+              id="driver_image"
+              class="block mt-1 w-[406px] p-[10px] text-sm placeholder-text-[#666] placeholder-font-normal rounded-md border-2 border-transparent focus:border-primary"
+              type="file"
+              @change="getValueDriver"
             />
           </label>
 
@@ -75,6 +86,9 @@
 import axios from "axios";
 import { ref } from "vue";
 import { toast } from "vue3-toastify";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const user_data = ref({
   first_name: "",
@@ -86,38 +100,60 @@ const user_data = ref({
   driver_license: null,
 });
 
+const getValue = (event) => {
+  user_data.value.photo = event.target.files[0];
+};
+
+const getValueDriver = (event) => {
+  user_data.value.driver_license = event.target.files[0];
+};
+
 const registerDriver = async () => {
   try {
     const formData = new FormData();
     for (let key in user_data.value) {
       formData.append(key, user_data.value[key]);
     }
+
     const response = await axios.post(
       "http://95.130.227.176:3010/api/driver/signup",
-      formData
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
     );
     console.log("Registration successful:", response.data);
     toast.success("Registration successfully done!");
+    toast("Registration successfully done!", {
+      theme: "light",
+      type: "success",
+      transition: "bounce",
+      dangerouslyHTMLString: true,
+    });
+    router.push({ name: "home" });
   } catch (error) {
     console.error("Error registering:", error);
-    // toast.error("Something went wrong!");
+    toast("Something went wrong!", {
+      theme: "light",
+      type: "warning",
+      transition: "bounce",
+      dangerouslyHTMLString: true,
+    });
   }
 };
 
 const data = ref([
-  { label: "Ismi", input: "Ism", key: "name" },
+  { label: "Ismi", input: "Ism", key: "first_name" },
   { label: "Familya", input: "Familya", key: "last_name" },
   { label: "Telfon raqam", input: "Sizning telfon raqamingiz", key: "phone" },
-  { label: "Parol", input: "Sizning parolingiz", key: "password" },
-  { label: "Manzil", input: "Manzilingizni kiriting", key: "address" },
-]);
-
-const fileInputs = ref([
-  { label: "Rasm", input: "Rasmingizni yuklang", key: "photo" },
   {
-    label: "Guvohnoma",
-    input: "Guvohnomangizni yuklang",
-    key: "driver_license",
+    label: "Parol",
+    input: "Sizning parolingiz",
+    key: "password",
+    type: "password",
   },
+  { label: "Manzil", input: "Manzilingizni kiriting", key: "address" },
 ]);
 </script>
