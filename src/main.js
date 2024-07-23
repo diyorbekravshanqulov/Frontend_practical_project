@@ -13,7 +13,7 @@ import YmapPlugin from "vue-yandex-maps";
 
 const settings = {
   apiKey: "12091093-d99f-4896-9da2-665443cefca9", // Индивидуальный ключ API
-  lang: "ru_RU", // Используемый язык
+  lang: "uz_UZ", // Используемый язык
   coordorder: "latlong", // Порядок задания географических координат
   debug: false, // Режим отладки
   version: "2.1", // Версия Я.Карт
