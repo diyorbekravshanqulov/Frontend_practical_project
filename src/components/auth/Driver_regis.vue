@@ -132,6 +132,8 @@ const registerDriver = async () => {
       transition: "bounce",
       dangerouslyHTMLString: true,
     });
+    localStorage.setItem("access_token", response.data.tokens.access_token);
+    localStorage.setItem("refresh_token", response.data.tokens.refresh_token);
     router.push({ name: "home" });
   } catch (error) {
     console.error("Error registering:", error);
