@@ -8,7 +8,7 @@
       <div class="flex justify-center items-center mt-10">
         <form
           @submit.prevent="registerDriver"
-          class="backdrop-blur-sm rounded-md px-[42px] py-11"
+          class="backdrop-blur-sm rounded-md w-[600px] px-[42px] py-11"
           style="background: rgba(185, 185, 185, 0.37)"
         >
           <h2 class="text-white mb-10 text-2xl font-medium text-center">
@@ -16,53 +16,80 @@
           </h2>
 
           <!-- Input fields -->
-          <label
-            v-for="(item, index) in data"
-            :key="index"
-            :for="'input_' + index"
-            class="my-5 text-white text-[17px] font-medium w-full block"
-          >
-            {{ item.label }}
-            <input
-              v-model="user_data[item.key]"
-              :placeholder="item.input"
-              class="block mt-1 w-[406px] p-[10px] text-sm placeholder-text-[#666] placeholder-font-normal rounded-md border-2 text-black border-transparent focus:border-primary"
-              :type="item.type || 'text'"
-              :id="'input_' + index"
-            />
-          </label>
+          <div class="grid grid-cols-2 gap-x-5">
+            <label
+              v-for="(item, index) in data"
+              :key="index"
+              :class="
+                index == 0 || index == 1 || index == 2 || index == 3
+                  ? 'col-span-1 w-1/2'
+                  : 'col-span-2'
+              "
+              :for="'input_' + index"
+              class="mb-5 text-white text-[17px] font-medium block w-full"
+            >
+              {{ item.label }}
+              <input
+                v-model="user_data[item.key]"
+                :placeholder="item.input"
+                class="block mt-1 p-[10px] w-full text-sm placeholder-text-[#666] placeholder:font-normal rounded-md border-2 text-black border-transparent focus:border-primary"
+                :type="item.type || 'text'"
+                :id="'input_' + index"
+              />
+            </label>
+          </div>
 
           <!-- File inputs -->
-          <label
-            for="image"
-            class="my-5 text-white text-[17px] font-medium w-full block"
-          >
-            Rasmingizni yuklang
-            <input
-              id="image"
-              class="block mt-1 w-[406px] p-[10px] text-sm placeholder-text-[#666] placeholder-font-normal rounded-md border-2 border-transparent focus:border-primary"
-              type="file"
-              @change="getValue"
-            />
-          </label>
-          <!-- -- -->
-          <label
-            for="driver_image"
-            class="my-5 text-white text-[17px] font-medium w-full block"
-          >
-            Guvohnomangizni yuklang
-            <input
-              id="driver_image"
-              class="block mt-1 w-[406px] p-[10px] text-sm placeholder-text-[#666] placeholder-font-normal rounded-md border-2 border-transparent focus:border-primary"
-              type="file"
-              @change="getValueDriver"
-            />
-          </label>
+          <div class="grid grid-cols-2 gap-x-5">
+            <div>
+              <p class="text-white text-[17px] font-medium">Rasmingiz</p>
+              <div
+                @click="openFile1"
+                class="flex mt-1 cursor-pointer rounded-md gap-7 px-3 py-2 items-center bg-white"
+              >
+                <Icon
+                  icon="material-symbols:upload"
+                  class="text-3xl text-primary"
+                />
+                <span class="font-medium text-second line-clamp-1">{{ filename1 }}</span>
+              </div>
+              <input
+                ref="fileInput1"
+                id="image"
+                class="hidden mt-1 p-[10px] text-sm placeholder-text-[#666] placeholder-font-normal rounded-md border-2 border-transparent focus:border-primary"
+                type="file"
+                @change="getValue"
+              />
+            </div>
+            <!-- -- -->
+            <div>
+              <p class="text-white text-[17px] font-medium">
+                Guvohnomazgiz rasmi
+              </p>
+              <div
+                @click="openFile2"
+                class="flex mt-1 cursor-pointer rounded-md gap-7 px-3 py-2 items-center bg-white"
+              >
+                <Icon
+                  icon="material-symbols:upload"
+                  class="text-3xl text-primary"
+                />
+                <span class="font-medium text-second line-clamp-1">{{ filename2 }}</span>
+              </div>
+              <input
+                ref="fileInput2"
+                id="driver_image"
+                class="hidden mt-1 p-[10px] text-sm placeholder-text-[#666] placeholder-font-normal rounded-md border-2 border-transparent focus:border-primary"
+                type="file"
+                @change="getValueDriver"
+              />
+            </div>
+          </div>
 
           <!-- Submit button -->
           <input
             type="submit"
-            class="cursor-pointer mt-[10px] p-[10px] text-center text-white font-medium rounded-md bg-primary w-[406px]"
+            class="cursor-pointer p-[10px] w-full text-center text-white font-medium rounded-md bg-primary mt-10"
             value="Ro'yxatdan o'tish"
           />
 
@@ -84,6 +111,7 @@
 
 <script setup>
 import axios from "axios";
+import { Icon } from "@iconify/vue";
 import { ref } from "vue";
 import { toast } from "vue3-toastify";
 import { useRouter } from "vue-router";
@@ -100,11 +128,31 @@ const user_data = ref({
   driver_license: null,
 });
 
+const filename1 = ref("Choose a file ...");
+const filename2 = ref("Choose a file ...");
+
+const fileInput1 = ref(null);
+const fileInput2 = ref(null);
+
+const openFile1 = () => {
+  if (fileInput1.value) {
+    fileInput1.value.click();
+  }
+};
+
+const openFile2 = () => {
+  if (fileInput2.value) {
+    fileInput2.value.click();
+  }
+};
+
 const getValue = (event) => {
+  filename1.value = event.target.files[0].name;
   user_data.value.photo = event.target.files[0];
 };
 
 const getValueDriver = (event) => {
+  filename2.value = event.target.files[0].name;
   user_data.value.driver_license = event.target.files[0];
 };
 
@@ -126,12 +174,6 @@ const registerDriver = async () => {
     );
     console.log("Registration successful:", response.data);
     toast.success("Registration successfully done!");
-    toast("Registration successfully done!", {
-      theme: "light",
-      type: "success",
-      transition: "bounce",
-      dangerouslyHTMLString: true,
-    });
     localStorage.setItem("access_token", response.data.tokens.access_token);
     localStorage.setItem("refresh_token", response.data.tokens.refresh_token);
     router.push({ name: "home" });

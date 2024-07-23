@@ -10,27 +10,37 @@ import "v-calendar/style.css";
 // import "v-calendar/style.css";
 import Vue3Toastify from "vue3-toastify";
 import YmapPlugin from "vue-yandex-maps";
+import { useStore } from "./store";
+
+const app = createApp(App);
+
+
+const pinia = createPinia();
+
+app.use(Vue3Toastify, {
+  autoClose: 3000,
+});
+app.use(VCalendar, {});
+app.use(i18n);
+app.use(pinia);
+app.use(router);
+
+const store = useStore();
 
 const settings = {
   apiKey: "12091093-d99f-4896-9da2-665443cefca9", // Индивидуальный ключ API
-  lang: "uz_UZ", // Используемый язык
+  lang: store.lang == "uz" ? "uz_UZ" : "ru_RU", // Используемый язык
   coordorder: "latlong", // Порядок задания географических координат
   debug: false, // Режим отладки
   version: "2.1", // Версия Я.Карт
 };
 // Use plugin with optional defaults
 
-const app = createApp(App);
-const pinia = createPinia();
+
 app.use(YmapPlugin, settings);
-app.use(Vue3Toastify, {
-  autoClose: 3000,
-});
+
 // Use the components
 // app.component("VCalendar", Calendar);
 // app.component("VDatePicker", DatePicker);
-app.use(VCalendar, {});
-app.use(i18n);
-app.use(pinia);
-app.use(router);
+
 app.mount("#app");
