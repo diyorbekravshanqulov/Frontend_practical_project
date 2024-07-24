@@ -5,11 +5,10 @@
     class="h-screen bg-no-repeat bg-cover before:bg-black/25 before:backdrop-blur-sm relative before:absolute before:inset-0"
   >
     <div
-      class="container py-24 flexitems-center justify-center h-full gap-10 relative z-10"
+      class="container py-32 flexitems-center justify-center h-full gap-10 relative z-10"
     >
       <div
         class="bg-black/30 w-full h-full flex-col backdrop-blur-md rounded-xl flex justify-between pb-60 pt-40 items-center"
-        style="box-shadow: 0 0 10px 0 #f7931e"
       >
         <p
           class="text-7xl text-center text-primary font-bold"
