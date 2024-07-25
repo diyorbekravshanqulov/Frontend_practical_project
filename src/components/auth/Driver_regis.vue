@@ -26,15 +26,25 @@
                   : 'col-span-2'
               "
               :for="'input_' + index"
-              class="mb-5 text-white text-[17px] font-medium block w-full"
+              class="mb-5 relative text-white text-[17px] font-medium block w-full"
             >
               {{ item.label }}
               <input
                 v-model="user_data[item.key]"
                 :placeholder="item.input"
                 class="block mt-1 p-[10px] w-full text-sm placeholder-text-[#666] placeholder:font-normal rounded-md border-2 text-black border-transparent focus:border-primary"
-                :type="item.type || 'text'"
+                :type="switchPass ? item.type : 'text'"
                 :id="'input_' + index"
+              />
+              <Icon
+                @click.stop="switchPass = !switchPass"
+                :icon="
+                  !switchPass
+                    ? 'fluent:eye-24-regular'
+                    : 'fluent:eye-off-24-regular'
+                "
+                v-if="item.type == 'password'"
+                class="absolute z-10 top-1/2 right-0 -translate-x-3 cursor-pointer text-2xl text-black"
               />
             </label>
           </div>
@@ -51,7 +61,9 @@
                   icon="material-symbols:upload"
                   class="text-3xl text-primary"
                 />
-                <span class="font-medium text-second line-clamp-1">{{ filename1 }}</span>
+                <span class="font-medium text-second line-clamp-1">{{
+                  filename1
+                }}</span>
               </div>
               <input
                 ref="fileInput1"
@@ -74,7 +86,9 @@
                   icon="material-symbols:upload"
                   class="text-3xl text-primary"
                 />
-                <span class="font-medium text-second line-clamp-1">{{ filename2 }}</span>
+                <span class="font-medium text-second line-clamp-1">{{
+                  filename2
+                }}</span>
               </div>
               <input
                 ref="fileInput2"
@@ -115,6 +129,8 @@ import { Icon } from "@iconify/vue";
 import { ref } from "vue";
 import { toast } from "vue3-toastify";
 import { useRouter } from "vue-router";
+
+const switchPass = ref(true);
 
 const router = useRouter();
 
@@ -164,7 +180,7 @@ const registerDriver = async () => {
     }
 
     const response = await axios.post(
-      "http://95.130.227.176:3010/api/driver/signup",
+      "http://95.130.227.176:3003/api/driver/signup",
       formData,
       {
         headers: {
@@ -189,15 +205,25 @@ const registerDriver = async () => {
 };
 
 const data = ref([
-  { label: "Ismi", input: "Ism", key: "first_name" },
-  { label: "Familya", input: "Familya", key: "last_name" },
-  { label: "Telfon raqam", input: "Sizning telfon raqamingiz", key: "phone" },
+  { label: "Ismi", type: "text", input: "Ism", key: "first_name" },
+  { label: "Familya", type: "text", input: "Familya", key: "last_name" },
+  {
+    label: "Telfon raqam",
+    type: "text",
+    input: "Sizning telfon raqamingiz",
+    key: "phone",
+  },
   {
     label: "Parol",
     input: "Sizning parolingiz",
     key: "password",
     type: "password",
   },
-  { label: "Manzil", input: "Manzilingizni kiriting", key: "address" },
+  {
+    label: "Manzil",
+    input: "Manzilingizni kiriting",
+    type: "text",
+    key: "address",
+  },
 ]);
 </script>

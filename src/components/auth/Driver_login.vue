@@ -18,18 +18,31 @@
             Kirish
           </h2>
           <label
-            class="my-5 text-white text-[17px] font-medium w-full block"
+            class="my-5 text-white relative text-[17px] font-medium w-full block"
             v-for="(item, index) in data"
             :key="index"
             :for="item.key"
-            >{{ item.label }}
+          >
+            {{ item.label }}
             <input
               v-model="login_data[item.key]"
+              :class="item.type == 'password' ? 'pr-12' : ''"
               class="block mt-1 w-[406px] p-[10px] text-black text-sm placeholder:text-[#666] placeholder:font-normal rounded-md border-2 border-transparent focus:border-primary"
-              :type="item.type"
+              :type="switchPass ? item.type : 'text'"
               :placeholder="item.input"
               :name="item.key"
               :id="item.key"
+              @click.stop
+            />
+            <Icon
+              @click.stop="switchPass = !switchPass"
+              :icon="
+                !switchPass
+                  ? 'fluent:eye-24-regular'
+                  : 'fluent:eye-off-24-regular'
+              "
+              v-if="item.type == 'password'"
+              class="absolute z-10 top-1/2 right-0 -translate-x-3 cursor-pointer text-2xl text-black"
             />
           </label>
           <input
@@ -57,7 +70,10 @@
 <script setup>
 import axios from "axios";
 import { ref } from "vue";
+import { Icon } from "@iconify/vue";
 import { useRouter } from "vue-router";
+
+const switchPass = ref(true);
 
 const router = useRouter();
 
@@ -69,7 +85,7 @@ const login_data = ref({
 const loginUser = async () => {
   try {
     const response = await axios.post(
-      "http://95.130.227.176:3010/api/driver/signin",
+      "http://95.130.227.176:3003/api/driver/signin",
       login_data.value
     );
     console.log("Login successful:", response.data);
