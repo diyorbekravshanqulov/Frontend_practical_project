@@ -26,6 +26,7 @@
             {{ item.label }}
             <input
               v-model="user_data[item.key]"
+              :class="item.type == 'password' ? 'pr-12' : ''"
               class="block mt-1 w-[406px] p-[10px] text-sm placeholder:text-[#666] placeholder:font-normal rounded-md border-2 border-primary focus:border-primary outline-none focus:ring-0"
               :type="getInputType(item.key, item.type)"
               :placeholder="item.input"

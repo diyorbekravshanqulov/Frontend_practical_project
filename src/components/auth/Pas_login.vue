@@ -26,19 +26,30 @@
             {{ item.label }}
             <input
               v-model="login_data[item.key]"
-              class="block mt-1 w-[406px] p-[10px] text-sm placeholder:text-[#666] placeholder:font-normal rounded-md border-2 border-primary focus:border-primary outline-none focus:ring-0"
-              :type="switchPass ? item.type : 'text'"
+              class="block mt-1 w-[406px] p-[10px] text-sm placeholder:text-[#666] placeholder:font-normal rounded-md border-2 border-primary focus:border-primary outline-none focus:ring-0 transition-transform duration-300"
+              :type="
+                item.key === 'password'
+                  ? switchPass
+                    ? 'password'
+                    : 'text'
+                  : item.type
+              "
               :placeholder="item.input"
               :id="item.key"
+              :class="[
+                { 'scale-up': isScaling[item.key] },
+                { 'pr-12': item.type === 'password' },
+              ]"
+              @input="handleInputChange(item.key)"
             />
             <Icon
-              @click.stop="switchPass = !switchPass"
+              @click.stop="toggleSwitchPass"
               :icon="
                 !switchPass
                   ? 'fluent:eye-24-regular'
                   : 'fluent:eye-off-24-regular'
               "
-              v-if="item.type == 'password'"
+              v-if="item.key === 'password'"
               class="absolute z-10 top-1/2 right-0 -translate-x-3 cursor-pointer text-2xl text-black"
             />
           </label>
@@ -61,7 +72,6 @@
     </div>
   </div>
 </template>
-
 <script setup>
 import axios from "axios";
 import { Icon } from "@iconify/vue";
@@ -69,8 +79,11 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
-
 const switchPass = ref(true);
+const isScaling = ref({
+  phone: false,
+  password: false,
+});
 
 const login_data = ref({
   phone: "",
@@ -107,4 +120,25 @@ const data = ref([
     type: "password",
   },
 ]);
+
+const toggleSwitchPass = () => {
+  isScaling.value.password = true;
+  setTimeout(() => {
+    isScaling.value.password = false;
+  }, 300);
+  switchPass.value = !switchPass.value;
+};
+
+const handleInputChange = (key) => {
+  isScaling.value[key] = true;
+  setTimeout(() => {
+    isScaling.value[key] = false;
+  }, 300);
+};
 </script>
+<style scoped>
+.scale-up {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+</style>

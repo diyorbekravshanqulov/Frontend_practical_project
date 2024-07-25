@@ -32,6 +32,7 @@
               <input
                 v-model="user_data[item.key]"
                 :placeholder="item.input"
+                :class="item.type == 'password' ? 'pr-12' : ''"
                 class="block mt-1 p-[10px] w-full text-sm placeholder-text-[#666] placeholder:font-normal rounded-md border-2 text-black border-transparent focus:border-primary"
                 :type="switchPass ? item.type : 'text'"
                 :id="'input_' + index"
