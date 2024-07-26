@@ -8,8 +8,6 @@
           style="box-shadow: 0px 1px 3px 0px #00000040"
           action=""
         >
-
-
           <h2 class="text-black mb-10 text-2xl font-medium text-center">
             Ro‘yxatdan o‘tish
           </h2>
@@ -22,11 +20,15 @@
             {{ item.label }}
             <input
               v-model="user_data[item.key]"
-              :class="item.type == 'password' ? 'pr-12' : ''"
-              class="block mt-1 w-[406px] p-[10px] text-sm placeholder:text-[#666] placeholder:font-normal rounded-md border-2 border-primary focus:border-primary outline-none focus:ring-0"
+              class="block mt-1 w-[406px] p-[10px] text-sm duration-300 placeholder:text-[#666] placeholder:font-normal rounded-md border-2 border-primary focus:border-primary outline-none focus:ring-0"
               :type="getInputType(item.key, item.type)"
               :placeholder="item.input"
               :id="item.key"
+              :class="[
+                { 'scale-up': isScaling[item.key] },
+                { 'pr-12': item.type === 'password' },
+              ]"
+              @input="handleInputChange(item.key)"
             />
             <Icon
               @click.stop="toggleVisibility(item.key)"
@@ -65,6 +67,13 @@ const router = useRouter();
 
 const passwordVisible = ref(false);
 const confirmPasswordVisible = ref(false);
+
+const isScaling = ref({
+  name: false,
+  phone: false,
+  password: false,
+  confirm_password: false,
+});
 
 const user_data = ref({
   name: "",
@@ -116,6 +125,7 @@ const data = ref([
 ]);
 
 const toggleVisibility = (key) => {
+  toggleSwitchPass();
   if (key === "password") {
     passwordVisible.value = !passwordVisible.value;
   } else if (key === "confirm_password") {
@@ -140,4 +150,25 @@ const getIconType = (key) => {
       ? "fluent:eye-24-regular"
       : "fluent:eye-off-24-regular";
 };
+
+const toggleSwitchPass = () => {
+  isScaling.value.password = true;
+  setTimeout(() => {
+    isScaling.value.password = false;
+  }, 300);
+  switchPass.value = !switchPass.value;
+};
+
+const handleInputChange = (key) => {
+  isScaling.value[key] = true;
+  setTimeout(() => {
+    isScaling.value[key] = false;
+  }, 300);
+};
 </script>
+<style scoped>
+.scale-up {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+</style>

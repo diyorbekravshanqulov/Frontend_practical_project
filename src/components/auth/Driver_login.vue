@@ -26,16 +26,19 @@
             {{ item.label }}
             <input
               v-model="login_data[item.key]"
-              :class="item.type == 'password' ? 'pr-12' : ''"
-              class="block mt-1 w-[406px] p-[10px] text-black text-sm placeholder:text-[#666] placeholder:font-normal rounded-md border-2 border-transparent focus:border-primary"
+              class="block mt-1 w-[406px] p-[10px] duration-300 text-black text-sm placeholder:text-[#666] placeholder:font-normal rounded-md border-2 border-transparent focus:border-primary"
               :type="switchPass ? item.type : 'text'"
               :placeholder="item.input"
               :name="item.key"
               :id="item.key"
-              @click.stop
+              :class="[
+                { 'scale-up': isScaling[item.key] },
+                { 'pr-12': item.type === 'password' },
+              ]"
+              @input="handleInputChange(item.key)"
             />
             <Icon
-              @click.stop="switchPass = !switchPass"
+              @click.stop="toggleSwitchPass"
               :icon="
                 !switchPass
                   ? 'fluent:eye-24-regular'
@@ -76,6 +79,10 @@ import { useRouter } from "vue-router";
 const switchPass = ref(true);
 
 const router = useRouter();
+const isScaling = ref({
+  phone: false,
+  password: false,
+});
 
 const login_data = ref({
   phone: "",
@@ -112,4 +119,25 @@ const data = ref([
     type: "password",
   },
 ]);
+
+const toggleSwitchPass = () => {
+  isScaling.value.password = true;
+  setTimeout(() => {
+    isScaling.value.password = false;
+  }, 300);
+  switchPass.value = !switchPass.value;
+};
+
+const handleInputChange = (key) => {
+  isScaling.value[key] = true;
+  setTimeout(() => {
+    isScaling.value[key] = false;
+  }, 300);
+};
 </script>
+<style scoped>
+.scale-up {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+</style>
