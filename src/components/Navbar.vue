@@ -103,6 +103,11 @@
       </div>
     </div>
   </div>
+  <div
+    v-if="logout"
+    @click="logout = !logout"
+    class="fixed top-0 left-0 h-screen w-screen z-10"
+  ></div>
 </template>
 
 <script setup>
@@ -116,7 +121,7 @@ const store = useStore();
 
 const isOpen = ref(false);
 
-const logout = ref(false)
+const logout = ref(false);
 
 const router = useRouter();
 
@@ -125,7 +130,7 @@ store.token = localStorage.getItem("access_token");
 const clearStorage = () => {
   localStorage.removeItem("access_token");
   store.token = localStorage.getItem("access_token");
-  logout.value = !logout.value; 
+  logout.value = !logout.value;
   router.push({ name: "home" });
 };
 

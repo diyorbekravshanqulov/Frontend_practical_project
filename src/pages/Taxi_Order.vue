@@ -104,7 +104,9 @@ const router = useRouter();
 const count = ref(1);
 
 const incrementCount = () => {
-  count.value++;
+ if (count.value < 4) {
+    count.value++;
+  }
 };
 
 const decrementCount = () => {
