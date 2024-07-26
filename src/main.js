@@ -11,6 +11,7 @@ import "v-calendar/style.css";
 import Vue3Toastify from "vue3-toastify";
 import YmapPlugin from "vue-yandex-maps";
 import { useStore } from "./store";
+import "leaflet-geosearch/dist/geosearch.css";
 
 const app = createApp(App);
 
