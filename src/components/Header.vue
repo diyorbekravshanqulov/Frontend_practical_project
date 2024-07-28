@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-[168px] pb-[325px] max-md:py-[120px] mainBack">
+  <div class="mainBack">
     <div class="container">
       <div class="flex items-center justify-center">
         <button
@@ -23,13 +23,17 @@
           {{ $t("truck") }}
         </button>
       </div>
-      <h1 class="font-medium text-[42px] max-md:text-[22px] mt-16 max-md:mt-12 text-white">
+      <h1
+        class="font-medium text-[42px] max-md:text-[22px] mt-16 max-md:mt-12 text-white"
+      >
         {{ $t("service") }}
       </h1>
       <p class="mt-[30px] max-md:mt-4 text-[22px] max-md:text-lg text-white">
         {{ $t("ser_offer") }}
       </p>
-      <div class="flex w-full max-md:items-center max-md:gap-[30px] max-md:flex-col justify-between mt-[70px] max-md:mt-10">
+      <div
+        class="flex w-full max-md:items-center max-md:gap-[30px] max-md:flex-col justify-between mt-[70px] max-md:mt-10"
+      >
         <RegionsFrom />
         <RegionsTo />
         <Calendar />
@@ -41,7 +45,7 @@
               ? 'bg-primary text-white'
               : 'text-white bg-[#404040]'
           "
-          class="text-[30px] h-[101px] max-md:mt-[10px]  max-md:w-[219px] textShadow duration-500 relative md:py-2 py-[14px] rounded-md md:px-4"
+          class="text-[30px] h-[101px] max-md:mt-[10px] max-md:w-[219px] textShadow duration-500 relative md:py-2 py-[14px] rounded-md md:px-4"
         >
           {{ $t("search") }}
         </button>
@@ -73,8 +77,33 @@ const find = () => {
   background-repeat: no-repeat;
   background-image: url("/Main.png");
   background-size: cover;
+  padding-top: 168px;
+  padding-bottom: 325px;
 }
+
 .textShadow:hover {
   text-shadow: 0 0px 5px white;
+}
+
+@media screen and (max-height: 768px) {
+  .mainBack {
+    padding-top: 168px;
+    padding-bottom: 325px;
+  }
+}
+
+@media screen and (min-height: 769px) {
+  .mainBack {
+    height: 100vh;
+    /* padding-top: 0; Reset the padding */
+    padding-bottom: 0; /* Reset the padding */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .mainBack {
+    height: 100vh;
+    padding: 0;
+  }
 }
 </style>
