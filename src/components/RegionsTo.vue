@@ -26,7 +26,7 @@
     </button>
     <div
       :class="isDropdownOpen ? 'scale-100' : 'h-0 scale-0 w-0'"
-      class="absolute left-0 p-2 duration-300 mt-2 md:w-[600px] w-full bg-second/35 max-md:bg-second/60 rounded z-20"
+      class="absolute left-0 duration-300 mt-2 p-2 md:w-[600px] w-full bg-second/35 max-md:bg-second/60 rounded z-20"
       style="box-shadow: 0 0px 10px 0 white"
     >
       <div class="md:flex">
@@ -40,11 +40,11 @@
             @click="selectRegion(index)"
             :class="{
               'bg-primary text-white': selectedRegion === index,
-              'hover:bg-gray-200': selectedRegion !== index,
+              'hover:bg-gray-200 ': selectedRegion !== index,
             }"
             class="cursor-pointer p-2 text-sm rounded-md"
           >
-            {{ region.region }}
+            {{ region.name }}
           </p>
         </div>
         <!-- District List -->
@@ -54,60 +54,75 @@
         >
           <p
             @click="
-              setPlaceFromDistrict(regions[selectedRegion].region, district)
+              setPlaceFromDistrict(regions[selectedRegion].name, district.name)
             "
             v-for="(district, districtIndex) in regions[selectedRegion]
-              .district"
+              .districts"
             :key="districtIndex"
             class="p-2 text-sm hover:bg-gray-200 cursor-pointer rounded-md"
           >
-            {{ district }}
+            {{ district.name }}
           </p>
         </div>
       </div>
     </div>
   </div>
 </template>
-
 <script setup>
-import { ref, reactive, watch } from "vue";
+import { ref, watch } from "vue";
 import regionsDataJson from "../JSON/regions2.json";
 import { useStore } from "../store";
+import axios from "axios";
+import { useI18n } from "vue-i18n";
+const { locale, locales } = useI18n();
 
 const store = useStore();
 
-// Define reactive variables
 const regions = ref([]);
-const selectedRegion = ref(0);
+const selectedRegion = ref(null); // Initialize with null
 const isDropdownOpen = ref(false);
 
 // Load regions data based on store.lang
-const loadRegions = () => {
-  const data = store.lang === "uz" ? regionsDataJson.uz : regionsDataJson.ru;
-  regions.value = data.regions;
-  selectedRegion.value = 0; // Default to the first region
-  store.setPlacePinTo = ""; // Reset place pin in store
+// const loadRegions = () => {
+//   const data = store.lang === "uz" ? regionsDataJson.uz : regionsDataJson.ru;
+//   regions.value = data.regions;
+// };
+
+const GetRegions = async () => {
+  try {
+    const response = await axios.get("http://95.130.227.176:3003/api/region", {
+      headers: {
+        "Accept-Language": locale.value,
+      },
+    });
+    regions.value = response.data;
+    selectedRegion.value = 0; // Default to the first region
+    store.setPlacePinTo = "";
+    console.log("get successful:", response.data);
+  } catch (error) {
+    console.error("Error logging in:", error);
+    alert("Something went wrong. Please try again.");
+  }
 };
 
-// Toggle dropdown visibility
+watch(() => locale.value, GetRegions, { immediate: true });
+
+
+// Watch for changes in store.lang and reload regions accordingly
+// watch(() => store.lang, loadRegions, { immediate: true });
+
 const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value;
 };
 
-// Select a region
 const selectRegion = (index) => {
   selectedRegion.value = index;
 };
 
-// Set place from district
 const setPlaceFromDistrict = (region, district) => {
   store.setPlacePinTo = `${region}. ${district}`;
-  console.log("object", store.setPlacePinTo);
   isDropdownOpen.value = false;
 };
-
-// Watch for changes in store.lang and reload regions accordingly
-watch(() => store.lang, loadRegions, { immediate: true });
 </script>
 
 <style scoped>
@@ -116,21 +131,18 @@ watch(() => store.lang, loadRegions, { immediate: true });
   height: 5px;
 }
 
-/* Define the thumb style */
 .scrollable-element::-webkit-scrollbar-thumb {
   background: linear-gradient(to bottom right, #f7931e 0%, #f7931e 100%);
   border-radius: 5px;
 }
 
-/* Define the track style */
 .scrollable-element::-webkit-scrollbar-track {
   background-color: transparent;
   border: 1px solid transparent;
 }
 
-/* Define the button style */
 .scrollable-element::-webkit-scrollbar-button {
-  background-color: tr;
+  background-color: transparent;
   border-radius: 5px;
 }
 </style>

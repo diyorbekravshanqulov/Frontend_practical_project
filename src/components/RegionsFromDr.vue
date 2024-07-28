@@ -44,7 +44,7 @@
             }"
             class="cursor-pointer p-2 text-sm rounded-md"
           >
-            {{ region.region }}
+            {{ region.name }}
           </p>
         </div>
         <!-- District List -->
@@ -54,14 +54,14 @@
         >
           <p
             @click="
-              setPlaceFromDistrict(regions[selectedRegion].region, district)
+              setPlaceFromDistrict(regions[selectedRegion].name, district.name)
             "
             v-for="(district, districtIndex) in regions[selectedRegion]
-              .district"
+              .districts"
             :key="districtIndex"
             class="p-2 text-sm hover:bg-gray-200 cursor-pointer rounded-md"
           >
-            {{ district }}
+            {{ district.name }}
           </p>
         </div>
       </div>
@@ -73,6 +73,9 @@
 import { ref, reactive, watch } from "vue";
 import regionsDataJson from "../JSON/regions2.json";
 import { useStore } from "../store";
+import axios from "axios";
+import { useI18n } from "vue-i18n";
+const { locale, locales } = useI18n();
 
 const store = useStore();
 
@@ -82,14 +85,33 @@ const selectedRegion = ref(null); // Initialize with null
 const isDropdownOpen = ref(false);
 
 // Load regions data based on store.lang
-const loadRegions = () => {
-  const data = store.lang === "uz" ? regionsDataJson.uz : regionsDataJson.ru;
-  regions.value = data.regions;
-  selectedRegion.value = 0; // Default to the first region
-  store.setPlacePinFrom = ""; // Reset place pin in store
+// const loadRegions = () => {
+//   const data = store.lang === "uz" ? regionsDataJson.uz : regionsDataJson.ru;
+//   regions.value = data.regions;
+//   selectedRegion.value = 0; // Default to the first region
+//   store.setPlacePinFrom = ""; // Reset place pin in store
+// };
+
+const GetRegions = async () => {
+  try {
+    const response = await axios.get("http://95.130.227.176:3003/api/region", {
+      headers: {
+        "Accept-Language": locale.value,
+      },
+    });
+    regions.value = response.data;
+    selectedRegion.value = 0; // Default to the first region
+    store.setPlacePinFrom = "";
+    console.log("get successful:", response.data);
+  } catch (error) {
+    console.error("Error logging in:", error);
+    alert("Something went wrong. Please try again.");
+  }
 };
 
-watch(() => store.lang, loadRegions, { immediate: true });
+watch(() => locale.value, GetRegions, { immediate: true });
+
+// watch(() => store.lang, loadRegions, { immediate: true });
 
 // Toggle dropdown visibility
 const toggleDropdown = () => {

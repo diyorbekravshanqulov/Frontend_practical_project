@@ -105,7 +105,7 @@ const GetRegions = async () => {
   }
 };
 
-GetRegions();
+watch(() => locale.value, GetRegions, { immediate: true });
 
 // Watch for changes in store.lang and reload regions accordingly
 // watch(() => store.lang, loadRegions, { immediate: true });
