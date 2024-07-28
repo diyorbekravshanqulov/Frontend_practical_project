@@ -14,7 +14,7 @@ export default {
   from: "Qayerdan",
   to: "Qayerga",
   when: "Qachon",
-  search: "Qidirish",
+  search: "So'rov qoldirish",
   direction: "Yo‘nalishni tanlash",
   leave: "Ketish",
   direct_name: "Yo‘nalish nomi",

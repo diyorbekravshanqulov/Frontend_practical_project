@@ -41,7 +41,7 @@
               ? 'bg-primary text-white'
               : 'text-white bg-[#404040]'
           "
-          class="text-[30px] h-[101px] max-md:mt-[10px]  max-md:w-[219px] textShadow duration-500 relative md:py-7 py-[14px] rounded-md md:px-[50px]"
+          class="text-[30px] h-[101px] max-md:mt-[10px]  max-md:w-[219px] textShadow duration-500 relative md:py-2 py-[14px] rounded-md md:px-4"
         >
           {{ $t("search") }}
         </button>

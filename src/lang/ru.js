@@ -14,7 +14,7 @@ export default {
   from: "Где",
   to: "Куда",
   when: "Когда",
-  search: "Поиск",
+  search: "Оставить заявку",
   direction: "Выберите направление",
   leave: "Оставлять",
   direct_name: "Название маршрута",
