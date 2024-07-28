@@ -36,16 +36,16 @@ const data = reactive([
 
 <template>
   <div
-    class="container mt-[88px] max-md:mt-12 py-20 md:grid grid-cols-3 gap-[25px]"
+    class="container mt-[88px] max-md:mt-12 py-20 md:grid grid-cols-5 gap-[25px]"
   >
-    <div>
+    <div class="col-span-2">
       <h2
         class="text-blackBlue leading-[64px] max-md:text-center text-3xl md:text-5xl font-semibold"
       >
-        Frequently Asked Questions
+        {{ $t("faq") }}
       </h2>
     </div>
-    <div class="col-span-2 flex flex-wrap gap-2 max-md:mt-4">
+    <div class="col-span-3 flex flex-wrap gap-2 max-md:mt-4">
       <div
         v-for="(item, index) in data"
         :key="index"

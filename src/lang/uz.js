@@ -20,4 +20,5 @@ export default {
   direct_name: "Yo‘nalish nomi",
   price: "Narxi(so‘m)",
   driverLog: "Viloyatlar bo‘ylab taksi haydovchisi sifatida ishlash",
+  faq: "Tez-tez so'raladigan savollar",
 };
