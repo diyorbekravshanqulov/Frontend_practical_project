@@ -125,7 +125,7 @@ const logout = ref(false);
 
 const router = useRouter();
 
-// store.token = localStorage.getItem("access_token");
+store.token = localStorage.getItem("access_token");
 
 const clearStorage = () => {
   localStorage.removeItem("access_token");

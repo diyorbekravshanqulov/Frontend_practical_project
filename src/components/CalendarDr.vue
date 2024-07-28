@@ -75,7 +75,7 @@ const func = () => {
     toast("Please select today or a future date!", {
       theme: "light",
       type: "warning",
-      transition: "slide",
+      transition: "bounce",
       dangerouslyHTMLString: true,
     });
   }

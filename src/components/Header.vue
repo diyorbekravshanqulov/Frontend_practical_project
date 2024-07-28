@@ -59,14 +59,30 @@ import RegionsFrom from "./RegionsFrom.vue";
 import RegionsTo from "./RegionsTo.vue";
 import Calendar from "./Calendar.vue";
 import { useStore } from "../store";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 
 const store = useStore();
 
 const find = () => {
-  if (store.setPlacePinFrom && store.setPlacePinTo && store.setDatePin) {
+  if (!store.token) {
+    toast("Please register or login!", {
+      theme: "light",
+      type: "warning",
+      transition: "bounce",
+      dangerouslyHTMLString: true,
+    });
+  } else if (store.setPlacePinFrom && store.setPlacePinTo && store.setDatePin) {
     window.scrollTo({
       top: 900,
       behavior: "smooth",
+    });
+  } else {
+    toast("Please fill all details!", {
+      theme: "light",
+      type: "warning",
+      transition: "bounce",
+      dangerouslyHTMLString: true,
     });
   }
 };
