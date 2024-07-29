@@ -1,16 +1,16 @@
 <template>
   <div
-    class="bg-no-repeat bg-cover"
+    class="bg-no-repeat bg-cover max-md:h-screen"
     style="background-image: url('/register.png')"
   >
     <div class="container py-10">
-      <p class="text-[42px] font-medium text-white">
+      <p class="text-[42px] max-md:text-[20px] font-medium text-white">
         {{ $t("driverLog") }}
       </p>
       <div class="flex justify-center items-center mt-16">
         <form
           @submit.prevent="loginUser"
-          class="backdrop-blur-sm rounded-md px-[42px] py-11"
+          class="backdrop-blur-sm rounded-md md:px-[42px] md:py-11 px-[11px] py-[15px] max-md:w-full"
           style="background: rgba(185, 185, 185, 0.37)"
           action=""
         >
@@ -26,7 +26,7 @@
             {{ item.label }}
             <input
               v-model="login_data[item.key]"
-              class="block mt-1 w-[406px] p-[10px] duration-300 text-black text-sm placeholder:text-[#666] placeholder:font-normal rounded-md border-2 border-transparent focus:border-primary"
+              class="block mt-1 w-full md:w-[406px] p-[10px] duration-300 text-black text-sm placeholder:text-[#666] placeholder:font-normal rounded-md border-2 border-transparent focus:border-primary"
               :type="switchPass ? item.type : 'text'"
               :placeholder="item.input"
               :name="item.key"
@@ -51,7 +51,7 @@
           <input
             type="submit"
             name=""
-            class="cursor-pointer mt-5 p-[10px] text-center border-2 border-primary text-white font-medium rounded-md bg-primary w-[406px]"
+            class="cursor-pointer mt-5 p-[10px] text-center border-2 border-primary text-white font-medium rounded-md bg-primary w-full md:w-[406px]"
             value="Kirish"
             id=""
           />

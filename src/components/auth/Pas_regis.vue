@@ -1,10 +1,10 @@
 <template>
-  <div class=" bg-gray-50 bg-no-repeat bg-cover">
+  <div class="bg-gray-50 bg-no-repeat bg-cover">
     <div class="container py-10">
       <div class="flex justify-center items-center mt-10">
         <form
+          class="bg-white max-md:w-full max-md:rounded-[10px] border max-md:border-primary rounded-md md:px-9 py-8 px-4 relative"
           @submit.prevent="registerDriver"
-          class="bg-white rounded-md px-9 py-8 relative"
           style="box-shadow: 0px 1px 3px 0px #00000040"
           action=""
         >
@@ -20,7 +20,7 @@
             {{ item.label }}
             <input
               v-model="user_data[item.key]"
-              class="block mt-1 w-[406px] p-[10px] text-sm duration-300 placeholder:text-[#666] placeholder:font-normal rounded-md border-2 border-primary focus:border-primary outline-none focus:ring-0"
+              class="block mt-1 w-full md:w-[406px] p-[10px] text-sm duration-300 placeholder:text-[#666] placeholder:font-normal rounded-md border-2 border-primary focus:border-primary outline-none focus:ring-0"
               :type="getInputType(item.key, item.type)"
               :placeholder="item.input"
               :id="item.key"
@@ -39,7 +39,7 @@
           </label>
           <input
             type="submit"
-            class="cursor-pointer mt-[10px] p-[10px] text-center text-black font-medium rounded-md bg-primary w-[406px]"
+            class="cursor-pointer mt-[10px] p-[10px] text-center text-black font-medium rounded-md bg-primary w-full md:w-[406px]"
             value="Ro’yxatdan o’tish"
           />
           <router-link

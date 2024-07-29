@@ -1,14 +1,14 @@
 <template>
   <div
-    class="bg-no-repeat bg-cover"
+    class="bg-no-repeat bg-cover max-md:h-full"
     style="background-image: url('/register.png')"
   >
     <div class="container py-10">
-      <p class="text-[42px] font-medium text-white">{{ $t("driverLog") }}</p>
+      <p class="text-[42px] font-medium text-white max-md:text-[20px]">{{ $t("driverLog") }}</p>
       <div class="flex justify-center items-center mt-10">
         <form
           @submit.prevent="registerDriver"
-          class="backdrop-blur-sm rounded-md w-[600px] px-[42px] py-11"
+          class="backdrop-blur-sm rounded-md w-[600px] max-md:w-full md:px-[42px] md:py-11 px-[11px] py-[15px]"
           style="background: rgba(185, 185, 185, 0.37)"
         >
           <h2 class="text-white mb-10 text-2xl font-medium text-center">
@@ -16,14 +16,14 @@
           </h2>
 
           <!-- Input fields -->
-          <div class="grid grid-cols-2 gap-x-5">
+          <div class="grid md:grid-cols-2 gap-x-5">
             <label
               v-for="(item, index) in data"
               :key="index"
               :class="
                 index == 0 || index == 1 || index == 2 || index == 3
-                  ? 'col-span-1 w-1/2'
-                  : 'col-span-2'
+                  ? 'md:col-span-1 w-1/2'
+                  : 'md:col-span-2'
               "
               :for="'input_' + index"
               class="mb-5 relative text-white text-[17px] font-medium block w-full"
@@ -55,7 +55,7 @@
           </div>
 
           <!-- File inputs -->
-          <div class="grid grid-cols-2 gap-x-5">
+          <div class="grid md:grid-cols-2 gap-5">
             <div>
               <p class="text-white text-[17px] font-medium">Rasmingiz</p>
               <div
