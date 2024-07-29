@@ -1,20 +1,18 @@
 <template>
   <Navbar />
 
-  <div
-    class="h-screen bg-no-repeat bg-cover before:bg-black/25 before:backdrop-blur-sm relative before:absolute before:inset-0"
-  >
+  <div class="bg-black/5">
     <div
-      class="container py-32 flexitems-center justify-center h-full gap-10 relative z-10"
+      class="container flex items-center justify-center w-full h-screen  gap-10 relative"
     >
       <div
-        class="bg-black/30 w-full h-full flex-col backdrop-blur-md rounded-xl flex justify-between pb-60 pt-40 items-center"
+        class="w-full h-full flex-col rounded-xl gap-10 flex justify-center items-center"
       >
         <p
           class="text-7xl text-center text-primary font-bold"
-          style="text-shadow: 0 0 5px  #F7931E"
+          style="text-shadow: 0 0 5px #f7931e"
         >
-          {{ $t('loginsys') }}
+          {{ $t("loginsys") }}
         </p>
         <div class="text-center flex justify-center items-center gap-20">
           <button
@@ -22,14 +20,14 @@
             style="box-shadow: 0 0 10px 0 white"
             @click="router.push('/passenger/login')"
           >
-            {{ $t('passen') }}
+            {{ $t("passen") }}
           </button>
           <button
             class="text-3xl cursor-pointer hover:bg-white/70 hover:text-primary duration-300 border text-white font-medium border-primary w-[300px] rounded-md py-6 bg-primary"
             style="box-shadow: 0 0 10px 0 white"
             @click="router.push('/driver/login')"
           >
-            {{ $t('driver') }}
+            {{ $t("driver") }}
           </button>
         </div>
       </div>

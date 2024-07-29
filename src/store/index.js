@@ -11,6 +11,7 @@ export const useStore = defineStore("store", {
       regClick: false,
       location: false,
       token: localStorage.getItem("access_token"),
+      calen: false,
     };
   },
 });

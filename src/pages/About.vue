@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-[88px] max-md:mt-12 py-20">
+  <div class="container py-10 ">
     <p
       class="font-medium text-5xl max-md:text-2xl text-[#313131] mb-20 max-md:mb-[30px] text-center"
     >

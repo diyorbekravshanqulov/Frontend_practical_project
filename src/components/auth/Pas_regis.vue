@@ -1,6 +1,6 @@
 <template>
-  <div class="h-[950px] bg-gray-50 bg-no-repeat bg-cover py-[168px]">
-    <div class="container">
+  <div class=" bg-gray-50 bg-no-repeat bg-cover">
+    <div class="container py-10">
       <div class="flex justify-center items-center mt-10">
         <form
           @submit.prevent="registerDriver"

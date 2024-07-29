@@ -53,6 +53,8 @@ const store = useStore();
 const date = ref(new Date());
 const isDropdownOpen = ref(false);
 
+store.calen = isDropdownOpen.value;
+
 const func = () => {
   const selectedDate = date.value;
   const today = new Date();
@@ -80,5 +82,6 @@ const func = () => {
 
 const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value;
+  store.calen = isDropdownOpen.value;
 };
 </script>

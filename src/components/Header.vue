@@ -1,5 +1,5 @@
 <template>
-  <div class="mainBack">
+  <div class="mainBack" :class="store.calen ? 'pb-[325px] max-md:pb-[200px]':'max-md:pb-[150px] pb-[168px]'">
     <div class="container">
       <div class="flex items-center justify-center">
         <button
@@ -64,7 +64,6 @@ import "vue3-toastify/dist/index.css";
 
 const store = useStore();
 
-
 const find = () => {
   if (!store.token) {
     toast("Please register or login!", {
@@ -94,21 +93,12 @@ const find = () => {
   background-repeat: no-repeat;
   background-image: url("/Main.png");
   background-size: cover;
-  padding-top: 168px;
-  padding-bottom: 325px;
-
+  padding-top: 150px;
+  /* padding-bottom: 325px; */
 }
 
 .textShadow:hover {
   text-shadow: 0 0px 5px white;
-}
-
-@media screen and (max-width: 900px) {
-  .mainBack {
-    /* height: 100vh; */
-    /* padding-top: 168px; */
-    padding-bottom: 180px;
-  }
 }
 
 @media screen and (max-height: 768px) {
@@ -116,18 +106,16 @@ const find = () => {
     padding-top: 100px;
   }
 }
-/* 
-@media screen and (min-width: 769px) {
+@media screen and (max-width: 500px) {
   .mainBack {
-    padding-top: 158px;
+    padding-top: 50px;
   }
-} */
+}
 
-/* @media screen and (min-height: 901px) {
+@media screen and (min-height: 901px) {
   .mainBack {
     height: 100vh;
-    padding-top: 0; Reset the padding
-    padding-bottom: 0; Reset the padding
   }
-} */
+}
+
 </style>

@@ -82,6 +82,8 @@ const regions = ref([]);
 const selectedRegion = ref(null); // Initialize with null
 const isDropdownOpen = ref(false);
 
+store.calen = isDropdownOpen.value;
+
 // Load regions data based on store.lang
 // const loadRegions = () => {
 //   const data = store.lang === "uz" ? regionsDataJson.uz : regionsDataJson.ru;
@@ -112,6 +114,7 @@ watch(() => locale.value, GetRegions, { immediate: true });
 
 const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value;
+  store.calen = isDropdownOpen.value;
 };
 
 const selectRegion = (index) => {
@@ -121,6 +124,7 @@ const selectRegion = (index) => {
 const setPlaceFromDistrict = (region, district) => {
   store.setPlacePinFrom = `${region}. ${district}`;
   isDropdownOpen.value = false;
+  store.calen = isDropdownOpen.value;
 };
 </script>
 

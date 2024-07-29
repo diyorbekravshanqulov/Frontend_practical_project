@@ -1,9 +1,9 @@
 <template>
   <div
-    class="h-[950px] bg-no-repeat bg-cover py-[168px]"
+    class="bg-no-repeat bg-cover"
     style="background-image: url('/register.png')"
   >
-    <div class="container">
+    <div class="container py-10">
       <p class="text-[42px] font-medium text-white">{{ $t("driverLog") }}</p>
       <div class="flex justify-center items-center mt-10">
         <form

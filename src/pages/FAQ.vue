@@ -36,11 +36,11 @@ const data = reactive([
 
 <template>
   <div
-    class="container mt-[88px] max-md:mt-12 py-20 md:grid grid-cols-5 gap-[25px]"
+    class="container py-10 md:grid grid-cols-5 gap-[25px]"
   >
     <div class="col-span-2">
       <h2
-        class="text-blackBlue leading-[64px] max-md:text-center text-3xl md:text-5xl font-semibold"
+        class="text-blackBlue leading-[64px] max-md:leading-[40px] max-md:text-center text-3xl md:text-5xl font-semibold"
       >
         {{ $t("faq") }}
       </h2>
