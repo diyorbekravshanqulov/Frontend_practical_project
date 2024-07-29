@@ -1,5 +1,5 @@
 <template>
-  <div class="mainBack">
+  <div class="mainBack" :class="calen ? '':''">
     <div class="container">
       <div class="flex items-center justify-center">
         <button
@@ -36,7 +36,7 @@
       >
         <RegionsFrom />
         <RegionsTo />
-        <Calendar />
+        <Calendar @click="calen = !calen" />
 
         <button
           @click="find()"
@@ -63,6 +63,8 @@ import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
 
 const store = useStore();
+
+const calen = ref(false)
 
 const find = () => {
   if (!store.token) {
@@ -95,31 +97,38 @@ const find = () => {
   background-size: cover;
   padding-top: 168px;
   padding-bottom: 325px;
+
 }
 
 .textShadow:hover {
   text-shadow: 0 0px 5px white;
 }
 
-@media screen and (max-height: 900px) {
-  .mainBack {
-    padding-top: 168px;
-    padding-bottom: 325px;
-  }
-}
-
-@media screen and (min-height: 901px) {
-  .mainBack {
-    height: 100vh;
-    /* padding-top: 0; Reset the padding */
-    /* padding-bottom: 0; Reset the padding */
-  }
-}
-
 @media screen and (max-width: 900px) {
   .mainBack {
-    height: 100vh;
-    padding: 0;
+    /* height: 100vh; */
+    /* padding-top: 168px; */
+    padding-bottom: 180px;
   }
 }
+
+@media screen and (max-height: 768px) {
+  .mainBack {
+    padding-top: 100px;
+  }
+}
+/* 
+@media screen and (min-width: 769px) {
+  .mainBack {
+    padding-top: 158px;
+  }
+} */
+
+/* @media screen and (min-height: 901px) {
+  .mainBack {
+    height: 100vh;
+    padding-top: 0; Reset the padding
+    padding-bottom: 0; Reset the padding
+  }
+} */
 </style>
