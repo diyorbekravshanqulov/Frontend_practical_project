@@ -1,5 +1,5 @@
 <template>
-  <div class="mainBack" :class="calen ? '':''">
+  <div class="mainBack">
     <div class="container">
       <div class="flex items-center justify-center">
         <button
@@ -36,7 +36,7 @@
       >
         <RegionsFrom />
         <RegionsTo />
-        <Calendar @click="calen = !calen" />
+        <Calendar />
 
         <button
           @click="find()"
@@ -64,7 +64,6 @@ import "vue3-toastify/dist/index.css";
 
 const store = useStore();
 
-const calen = ref(false)
 
 const find = () => {
   if (!store.token) {
