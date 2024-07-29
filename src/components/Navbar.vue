@@ -8,7 +8,9 @@
     class="fixed top-0 left-0 z-40 w-full bg-primary"
     :class="isScrolled ? 'shadow-md shadow-black/30' : ''"
   >
-    <div class="container py-3.5 flex items-center justify-between w-full">
+    <div
+      class="container duration-500 py-3.5 flex items-center justify-between w-full"
+    >
       <p
         id="taxi"
         @click="router.push('/')"
@@ -176,5 +178,17 @@ const navigate = (index) => {
 
 .shadowWhite:hover {
   box-shadow: 0 0 7px 0 white;
+}
+
+@media screen and (max-height: 768px) {
+  .container {
+    padding: 6px 16px;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .MainNav {
+    padding: 14px 16px;
+  }
 }
 </style>
