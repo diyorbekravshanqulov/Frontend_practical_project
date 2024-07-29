@@ -18,6 +18,16 @@ const routes = [
         component: () => import("../pages/Home.vue"),
       },
       {
+        path: "/driver-profile/:id",
+        name: "driver-profile",
+        component: () => import("../pages/profil.vue"),
+      },
+      {
+        path: "/passenger-home",
+        name: "passenger-home",
+        component: () => import("../pages/Passenger-Home.vue"),
+      },
+      {
         path: "/about",
         name: "about",
         component: () => import("../pages/About.vue"),

@@ -13,6 +13,7 @@
     "axios": "^1.7.2",
     "flowbite": "^2.4.1",
     "flowbite-vue": "^0.1.5",
+    "jwt-decode": "^4.0.0",
     "leaflet-geosearch": "^4.0.0",
     "pinia": "^2.1.7",
     "swiper": "^11.1.5",

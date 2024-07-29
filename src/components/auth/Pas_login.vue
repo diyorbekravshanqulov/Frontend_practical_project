@@ -94,7 +94,7 @@ const loginUser = async () => {
     console.log("Login successful:", response.data);
     localStorage.setItem("access_token", response.data.access_token);
     localStorage.setItem("refresh_token", response.data.refresh_token);
-    router.push({ name: "home" });
+    router.push({ name: "passenger-home" });
   } catch (error) {
     console.error("Error logging in:", error);
     alert("Something went wrong. Please try again.");

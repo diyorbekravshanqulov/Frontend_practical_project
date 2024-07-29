@@ -4,7 +4,9 @@
     style="background-image: url('/register.png')"
   >
     <div class="container py-10">
-      <p class="text-[42px] font-medium text-white max-md:text-[20px]">{{ $t("driverLog") }}</p>
+      <p class="text-[42px] font-medium text-white max-md:text-[20px]">
+        {{ $t("driverLog") }}
+      </p>
       <div class="flex justify-center items-center mt-10">
         <form
           @submit.prevent="registerDriver"
@@ -205,7 +207,7 @@ const registerDriver = async () => {
     toast.success("Registration successfully done!");
     localStorage.setItem("access_token", response.data.tokens.access_token);
     localStorage.setItem("refresh_token", response.data.tokens.refresh_token);
-    router.push({ name: "home" });
+    router.push({ name: "driver-profile" });
   } catch (error) {
     console.error("Error registering:", error);
     toast("Something went wrong!", {
