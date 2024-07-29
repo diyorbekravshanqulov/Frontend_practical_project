@@ -101,7 +101,7 @@ const loginUser = async () => {
     console.log("driver id", response.data.driver.id);
 
     await router.push({ name: "home" });
-    jrouter.push(`driver-profile/${response.data.driver.id}`);
+    router.push(`driver-profile/${response.data.driver.id}`);
   } catch (error) {
     console.error("Error logging in:", error);
     alert("Something went wrong. Please try again.");
