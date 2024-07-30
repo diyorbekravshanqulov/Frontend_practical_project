@@ -136,6 +136,8 @@ import { Icon } from "@iconify/vue";
 import { ref } from "vue";
 import { toast } from "vue3-toastify";
 import { useRouter } from "vue-router";
+import "vue3-toastify/dist/index.css";
+
 
 const switchPass = ref(true);
 

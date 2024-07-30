@@ -95,6 +95,8 @@ const registerDriver = async () => {
     console.log("Registration successful:", response.data);
     localStorage.setItem("access_token", response.data.access_token);
     localStorage.setItem("refresh_token", response.data.refresh_token);
+    // localStorage.setItem("driver_id", response.data.newDriver.id);
+
     localStorage.setItem("role", "passenger");
     router.push({ name: "passenger-home" });
   } catch (error) {

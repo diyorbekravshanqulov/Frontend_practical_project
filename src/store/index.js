@@ -12,6 +12,7 @@ export const useStore = defineStore("store", {
       location: false,
       token: localStorage.getItem("access_token"),
       calen: false,
+      confirm: false,
     };
   },
 });

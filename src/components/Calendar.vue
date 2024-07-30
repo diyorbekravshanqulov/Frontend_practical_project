@@ -69,7 +69,8 @@ const func = () => {
     const year = String(selectedDate.getFullYear());
     const month = String(selectedDate.getMonth() + 1).padStart(2, "0");
     const day = String(selectedDate.getDate()).padStart(2, "0");
-    store.setDatePin = `${year}.${month}.${day}`;
+    localStorage.setItem("date", `${year}.${month}.${day}`)
+    store.setDatePin = `${year}-${month}-${day}`;
   } else {
     toast("Please select today or a future date!", {
       theme: "dark",

@@ -1,10 +1,12 @@
 <template>
-  <div class="bg-slate-50 md:h-screen py-[168px] max-md:pb-[220px] max-md:pt-[100px]">
+  <div class="bg-slate-50 md:h-full py-10 max-md:pb-[220px] max-md:pt-[100px]">
     <div class="md:container pb-40">
       <div
         class="flex max-md:flex-col px-4 max-md:gap-[8px] items-center md:justify-between"
       >
-        <div class="flex items-center gap-2 max-md:justify-between max-md:w-full md:gap-14">
+        <div
+          class="flex items-center gap-2 max-md:justify-between max-md:w-full md:gap-14"
+        >
           <button
             @click="router.push('/')"
             class="text-primary px-[30px] max-md:text-sm py-[17px] max-md:py-[9px] max-md:px-[7px] rounded-md border border-primary bg-white flex md:gap-4 gap-2 items-center text-lg"
@@ -66,7 +68,7 @@
           {{ item.label }}
           <input
             type="text"
-            class="p-2 block mt-[5px] md:w-[270px] w-full  font-normal border border-primary rounded-md"
+            class="p-2 block mt-[5px] md:w-[270px] w-full font-normal border border-primary rounded-md"
             name=""
             :placeholder="item.input"
           />
@@ -97,14 +99,54 @@ import { useRouter } from "vue-router";
 import Confirm from "../components/Confirm.vue";
 import location from "../components/location.vue";
 import { useStore } from "../store";
+import { toast } from "vue3-toastify";
+import axios from "axios";
+import "vue3-toastify/dist/index.css";
 
 const store = useStore();
+
+const u_data = ref({
+  userId: 13,
+  from_district: localStorage.getItem("from"),
+  to_district: localStorage.getItem("to"),
+  date: localStorage.getItem("date"),
+  description: "Need a ride to the airport",
+});
 
 const router = useRouter();
 const count = ref(1);
 
+const createOrder = async () => {
+  try {
+    console.log("udata", u_data.value);
+    const response = await axios.post(
+      "http://95.130.227.176:3003/api/order-taxi",
+      u_data.value
+    );
+    console.log("Registration successful:", response.data);
+    toast.success("Registration successfully done!");
+    router.push("/passenger-home");
+    alert("success");
+    store.confirm = false;
+  } catch (error) {
+    console.error("Error registering:", error);
+    toast("Something went wrong!", {
+      theme: "light",
+      type: "warning",
+      transition: "bounce",
+      dangerouslyHTMLString: true,
+    });
+  }
+};
+
+console.log("storess", store.confirm);
+
+if (store.confirm) {
+  createOrder();
+}
+
 const incrementCount = () => {
- if (count.value < 4) {
+  if (count.value < 4) {
     count.value++;
   }
 };
