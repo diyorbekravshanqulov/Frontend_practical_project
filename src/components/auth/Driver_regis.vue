@@ -207,9 +207,11 @@ const registerDriver = async () => {
     toast.success("Registration successfully done!");
     localStorage.setItem("access_token", response.data.tokens.access_token);
     localStorage.setItem("refresh_token", response.data.tokens.refresh_token);
+    localStorage.setItem("role", "driver");
+    localStorage.setItem("driver_id", response.data.newDriver.id);
 
-    await router.push({ name: "home" });
-    router.push(`driver-profile/${response.data.newDriver.id}`);
+    // await router.push({ name: "home" });
+    router.push("/driver-profile");
   } catch (error) {
     console.error("Error registering:", error);
     toast("Something went wrong!", {

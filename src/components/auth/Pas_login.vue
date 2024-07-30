@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-50 bg-no-repeat bg-cover ">
+  <div class="bg-gray-50 bg-no-repeat bg-cover">
     <div class="container py-10">
       <div class="flex justify-center items-center mt-16">
         <form
@@ -8,7 +8,6 @@
           style="box-shadow: 0px 1px 3px 0px #00000040"
           action=""
         >
-
           <h2 class="text-black mb-10 text-2xl font-medium text-center">
             Kirish
           </h2>
@@ -94,6 +93,8 @@ const loginUser = async () => {
     console.log("Login successful:", response.data);
     localStorage.setItem("access_token", response.data.access_token);
     localStorage.setItem("refresh_token", response.data.refresh_token);
+    localStorage.setItem("role", "passenger");
+
     router.push({ name: "passenger-home" });
   } catch (error) {
     console.error("Error logging in:", error);

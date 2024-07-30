@@ -21,4 +21,5 @@ export default {
   price: "Narxi(so‘m)",
   driverLog: "Viloyatlar bo‘ylab taksi haydovchisi sifatida ishlash",
   faq: "Tez-tez so'raladigan savollar",
+  orders: "Mening buyurtmalarim",
 };

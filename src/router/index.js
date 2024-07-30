@@ -18,7 +18,7 @@ const routes = [
         component: () => import("../pages/Home.vue"),
       },
       {
-        path: "/driver-profile/:id",
+        path: "/driver-profile",
         name: "driver-profile",
         component: () => import("../pages/profil.vue"),
       },
@@ -110,6 +110,29 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
   scrollBehavior,
+});
+
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem("access_token");
+  const role = localStorage.getItem("role");
+
+  if (to.name == "home" && Boolean(token)) {
+    if (role === "driver") {
+      next({ name: "driver-profile" });
+    } else {
+      next({ name: "passenger-home" });
+    }
+  } else if (
+    to.name !== "home" &&
+    to.name !== "passenger_login" &&
+    to.name !== "driver_login" &&
+    to.name !== "user" &&
+    !token
+  ) {
+    next({ name: "home" });
+  } else {
+    next();
+  }
 });
 
 export default router;
