@@ -125,7 +125,13 @@ router.beforeEach((to, from, next) => {
   } else if (
     to.name !== "home" &&
     to.name !== "passenger_login" &&
+    to.name !== "driver_regis" &&
+    to.name !== "passenger_regis" &&
+    to.name !== "driver_verify" &&
+    to.name !== "FAQ" &&
+    to.name !== "about" &&
     to.name !== "driver_login" &&
+    to.name !== "passenger_verify" &&
     to.name !== "user" &&
     !token
   ) {
