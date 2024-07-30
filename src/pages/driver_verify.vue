@@ -68,12 +68,12 @@ const digits = ref(Array(4).fill(""));
 const submitButton = ref(null);
 const user_data = ref(null);
 
-const storedUserData = localStorage.getItem("user_data");
+const storedUserData = localStorage.getItem("driver_data");
 if (storedUserData) {
   user_data.value = JSON.parse(storedUserData);
 }
 
-console.log("user_data", user_data.value);
+console.log("driver_data", user_data.value);
 
 onMounted(() => {
   submitButton.value = document.querySelector("button[type=submit]");
@@ -134,7 +134,7 @@ const handleSubmit = async () => {
 
     try {
       const response = await axios.post(
-        "http://95.130.227.176:3003/api/users/signUp",
+        "http://95.130.227.176:3003/api/driver/signup",
         user_data.value
       );
       console.log("Registration successful:", response.data);
