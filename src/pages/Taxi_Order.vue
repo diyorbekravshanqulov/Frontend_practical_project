@@ -93,7 +93,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { Icon } from "@iconify/vue";
 import { useRouter } from "vue-router";
 import Confirm from "../components/Confirm.vue";
@@ -109,7 +109,7 @@ const u_data = ref({
   userId: 13,
   from_district: localStorage.getItem("from"),
   to_district: localStorage.getItem("to"),
-  date: localStorage.getItem("date"),
+  date: localStorage.getItem("date").split('.').join("-"),
   description: "Need a ride to the airport",
 });
 
@@ -139,11 +139,12 @@ const createOrder = async () => {
   }
 };
 
-console.log("storess", store.confirm);
-
-if (store.confirm) {
-  createOrder();
-}
+watch(
+  () => store.confirm,
+  (newValue) => {
+    if (newValue) createOrder();
+  }
+);
 
 const incrementCount = () => {
   if (count.value < 4) {
