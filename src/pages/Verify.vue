@@ -11,7 +11,7 @@
             <header class="mb-8">
               <h1 class="text-2xl font-bold mb-1">Mobile Phone Verification</h1>
               <p class="text-[15px] text-slate-500">
-                Enter the 6-digit verification code that was sent to your phone
+                Enter the 4-digit verification code that was sent to your phone
                 number.
               </p>
             </header>
@@ -42,7 +42,8 @@
               </div>
             </form>
             <div class="text-sm text-slate-500 mt-4">
-              Didn't receive code?
+              <!-- Didn't receive code? -->
+              Clear inputs
               <a
                 @click="clearAllInputs"
                 class="font-medium text-primary/80 hover:text-primary/90"
@@ -61,19 +62,14 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
+import { useStore } from "../store";
+
+const store = useStore();
 
 const router = useRouter();
 
 const digits = ref(Array(4).fill(""));
 const submitButton = ref(null);
-const user_data = ref(null);
-
-const storedUserData = localStorage.getItem("user_data");
-if (storedUserData) {
-  user_data.value = JSON.parse(storedUserData);
-}
-
-console.log("user_data", user_data.value);
 
 onMounted(() => {
   submitButton.value = document.querySelector("button[type=submit]");
@@ -130,12 +126,12 @@ const handlePaste = (e) => {
 
 const handleSubmit = async () => {
   if (digits.value.join("") == "1111") {
-    alert(`OTP: ${digits.value.join("")}`);
+    // alert(`OTP: ${digits.value.join("")}`);
 
     try {
       const response = await axios.post(
         "http://95.130.227.176:3003/api/users/signUp",
-        user_data.value
+        store.user_datas
       );
       console.log("Registration successful:", response.data);
       localStorage.setItem("access_token", response.data.access_token);

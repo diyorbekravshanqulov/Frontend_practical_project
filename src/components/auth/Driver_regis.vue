@@ -136,6 +136,9 @@ import { Icon } from "@iconify/vue";
 import { ref } from "vue";
 import { toast } from "vue3-toastify";
 import { useRouter } from "vue-router";
+import { useStore } from "../../store";
+
+const store = useStore();
 
 const switchPass = ref(true);
 
@@ -198,23 +201,8 @@ const registerDriver = async () => {
       "http://95.130.227.176:3003/api/driver/newOtp",
       { phone: user_data.value.phone }
     );
-    // const response = await axios.post(
-    //   "http://95.130.227.176:3003/api/driver/signup",
-    //   formData,
-    //   {
-    //     headers: {
-    //       "Content-Type": "multipart/form-data",
-    //     },
-    //   }
-    // );
-    localStorage.setItem("driver_data", JSON.stringify(user_data.value));
-    console.log("Registration successful:", response.data);
-    toast.success("Registration successfully done!");
-    // localStorage.setItem("access_token", response.data.tokens.access_token);
-    // localStorage.setItem("refresh_token", response.data.tokens.refresh_token);
-    localStorage.setItem("role", "driver");
-    // localStorage.setItem("driver_id", response.data.newDriver.id);
-
+    store.driver_data =  formData
+    console.log("OTP sended successfully:", response.data);
     router.push({ name: "driver_verify" });
   } catch (error) {
     console.error("Error registering:", error);

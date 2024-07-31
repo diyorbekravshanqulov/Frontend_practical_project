@@ -99,7 +99,6 @@ const loginUser = async () => {
     localStorage.setItem("access_token", response.data.tokens.access_token);
     localStorage.setItem("refresh_token", response.data.tokens.refresh_token);
     localStorage.setItem("role", "driver");
-    console.log("driver id", response.data.driver.id);
     localStorage.setItem("driver_id", response.data.driver.id);
 
     // await router.push({ name: "home" });
