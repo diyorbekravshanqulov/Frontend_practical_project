@@ -62,6 +62,9 @@ import axios from "axios";
 import { ref } from "vue";
 import { Icon } from "@iconify/vue";
 import { useRouter } from "vue-router";
+import { useStore } from "../../store";
+
+const store = useStore();
 
 const router = useRouter();
 
@@ -88,15 +91,14 @@ const registerDriver = async () => {
     return;
   }
   try {
-    console.log(user_data.value.phone);
     const response = await axios.post(
       "http://95.130.227.176:3003/api/users/newOtp",
       { phone: user_data.value.phone }
     );
+
+    store.user_datas =  user_data.value
+    console.log("user_data", response.data);
     router.push({ name: "passenger_verify" });
-    console.log(response.data);
-    localStorage.setItem("details", response.data.details);
-    localStorage.setItem("user_data", JSON.stringify(user_data.value));
   } catch (error) {
     console.error("Error registering:", error);
     alert("Something went wrong. Please try again.");
