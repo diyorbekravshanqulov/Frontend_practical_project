@@ -12,13 +12,17 @@
           />
           <!-- <p>{{ data }}</p> -->
           <div>
+            <p class="text-[#E7E4E4] mt-2 text-center text-xl max-md:text-sm">
+              ID: {{ data?.id }}
+            </p>
             <p
               class="text-2xl max-md:text-lg text-center text-white font-medium"
             >
               {{ data?.first_name }} {{ data?.last_name }}
             </p>
+
             <p class="text-[#E7E4E4] mt-2 text-center text-xl max-md:text-sm">
-              ID: {{ data?.id }}
+              Balance: {{ dataBalance ? filterBalance() : '0'}} so'm
             </p>
           </div>
         </div>
@@ -26,7 +30,7 @@
     </div>
   </div>
 
-  <div class="container">
+  <div class="container pb-20 pt-10">
     <div v-if="loading" class="text-white">Loading...</div>
     <div v-if="error" class="text-white">{{ error }}</div>
     <div v-else>
@@ -79,14 +83,17 @@
         </div>
       </div>
     </div>
+    <Direction />
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
+import Direction from "../components/Direction.vue";
 import axios from "axios";
 
 const data = ref(null);
+const dataBalance = ref(null);
 const loading = ref(true);
 const error = ref(null);
 
@@ -101,6 +108,10 @@ const getDriverById = async () => {
     const response = await axios.get(
       `http://95.130.227.176:3003/api/driver/${driver_id.value}`
     );
+    const responseBalance = await axios.get(
+      `http://95.130.227.176:3003/api/balance`
+    );
+    dataBalance.value = responseBalance.data;
     data.value = response.data;
   } catch (err) {
     console.error("Error:", err);
@@ -108,6 +119,10 @@ const getDriverById = async () => {
   } finally {
     loading.value = false;
   }
+};
+
+const filterBalance = () => {
+  return dataBalance.value.filter((item) => item.driverId == driver_id.value)[0].amount;
 };
 
 const day = ref([
