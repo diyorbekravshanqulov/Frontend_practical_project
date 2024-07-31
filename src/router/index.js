@@ -98,7 +98,7 @@ const routes = [
           {
             path: "/driver/verify",
             name: "driver_verify",
-            component: () => import("../pages/Verify.vue"),
+            component: () => import("../pages/driver_verify.vue"),
           },
         ],
       },
@@ -136,6 +136,8 @@ router.beforeEach((to, from, next) => {
     !token
   ) {
     next({ name: "home" });
+  } else if (from.name == to.name) {
+    next({ name: "driver_regis" });
   } else {
     next();
   }

@@ -43,7 +43,7 @@
             </form>
             <div class="text-sm text-slate-500 mt-4">
               <!-- Didn't receive code? -->
-              Clear inputs
+               Clear inputs
               <a
                 @click="clearAllInputs"
                 class="font-medium text-primary/80 hover:text-primary/90"
@@ -124,20 +124,26 @@ const handlePaste = (e) => {
   submitButton.value.focus();
 };
 
+console.log("pinia", store.driver_data);
+
 const handleSubmit = async () => {
   if (digits.value.join("") == "1111") {
-    // alert(`OTP: ${digits.value.join("")}`);
-
     try {
       const response = await axios.post(
-        "http://95.130.227.176:3003/api/users/signUp",
-        store.user_datas
+        "http://95.130.227.176:3003/api/driver/signup",
+        store.driver_data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
       console.log("Registration successful:", response.data);
       localStorage.setItem("access_token", response.data.access_token);
       localStorage.setItem("refresh_token", response.data.refresh_token);
-      localStorage.setItem("role", "passenger");
-      router.push({ name: "passenger-home" });
+      localStorage.setItem("role", "driver");
+      localStorage.setItem("driver_id", response.data.newDriver.id);
+      router.push("/driver-profile");
     } catch (error) {
       console.error("Error registering:", error);
       alert("Something went wrong. Please try again.");

@@ -40,7 +40,7 @@
           <input
             type="submit"
             class="cursor-pointer mt-[10px] p-[10px] text-center text-black font-medium rounded-md bg-primary w-full md:w-[406px]"
-            value="Ro’yxatdan o’tish"
+            value="Davom etish"
           />
           <router-link
             :to="{ name: 'passenger_login' }"
@@ -62,6 +62,9 @@ import axios from "axios";
 import { ref } from "vue";
 import { Icon } from "@iconify/vue";
 import { useRouter } from "vue-router";
+import { useStore } from "../../store";
+
+const store = useStore();
 
 const router = useRouter();
 
@@ -89,16 +92,13 @@ const registerDriver = async () => {
   }
   try {
     const response = await axios.post(
-      "http://95.130.227.176:3003/api/users/signUp",
-      user_data.value
+      "http://95.130.227.176:3003/api/users/newOtp",
+      { phone: user_data.value.phone }
     );
-    console.log("Registration successful:", response.data);
-    localStorage.setItem("access_token", response.data.access_token);
-    localStorage.setItem("refresh_token", response.data.refresh_token);
-    // localStorage.setItem("driver_id", response.data.newDriver.id);
 
-    localStorage.setItem("role", "passenger");
-    router.push({ name: "passenger-home" });
+    store.user_datas =  user_data.value
+    console.log("user_data", response.data);
+    router.push({ name: "passenger_verify" });
   } catch (error) {
     console.error("Error registering:", error);
     alert("Something went wrong. Please try again.");
