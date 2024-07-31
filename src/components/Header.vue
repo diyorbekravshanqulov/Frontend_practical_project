@@ -1,5 +1,12 @@
 <template>
-  <div class="mainBack" :class="store.calen ? 'pb-[325px] max-md:pb-[200px]':'max-md:pb-[150px] pb-[168px]'">
+  <div
+    class="mainBack duration-300"
+    :class="
+      store.calen
+        ? 'pb-[370px] max-md:pb-[200px]'
+        : 'max-md:pb-[150px] pb-[168px]'
+    "
+  >
     <div class="container">
       <div class="flex items-center justify-center">
         <button
@@ -60,9 +67,12 @@ import RegionsTo from "./RegionsTo.vue";
 import Calendar from "./Calendar.vue";
 import { useStore } from "../store";
 import { toast } from "vue3-toastify";
+import { useRouter } from "vue-router";
 import "vue3-toastify/dist/index.css";
 
 const store = useStore();
+
+const router = useRouter();
 
 const find = () => {
   if (!store.token) {
@@ -73,10 +83,11 @@ const find = () => {
       dangerouslyHTMLString: true,
     });
   } else if (store.setPlacePinFrom && store.setPlacePinTo && store.setDatePin) {
-    window.scrollTo({
-      top: 900,
-      behavior: "smooth",
-    });
+    if (store.carType == 1) {
+      router.push("/truck-order");
+    } else {
+      router.push("/taxi-order");
+    }
   } else {
     toast("Please fill all details!", {
       theme: "light",
@@ -117,5 +128,4 @@ const find = () => {
     height: 100vh;
   }
 }
-
 </style>

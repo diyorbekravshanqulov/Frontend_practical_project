@@ -31,6 +31,53 @@
     <div v-if="error" class="text-white">{{ error }}</div>
     <div v-else>
       <p class="font-medium text-3xl my-10">{{ $t("orders") }}</p>
+      <p class="mt-[100px] text-[42px] max-md:hidden">{{ $t("direction") }}</p>
+      <div class="md:hidden">
+        <swiper
+          :slidesPerView="2"
+          :centeredSlides="true"
+          :pagination="{
+            clickable: true,
+          }"
+          :modules="modules"
+          class="md:hidden mt-[58px]"
+        >
+          <swiper-slide v-for="(item, index) in day" :key="index">
+            <button
+              @click="selectButton(index)"
+              :class="
+                index === selectedButtonIndex
+                  ? 'bg-primary duration-300 text-white'
+                  : 'bg-white text-black'
+              "
+              class="py-7 rounded-md max-md:shadow-lg md:w-1/6 shrink-0 px-[35px] whitespace-nowrap"
+            >
+              {{ item }}
+            </button>
+          </swiper-slide>
+        </swiper>
+      </div>
+      <div
+        class="flex md:w-full max-md:hidden mt-[52px] max-md:-mx-4 overflow-hidden max-md:overflow-auto scrollable-element gap-0 rounded-md shadow-lg"
+      >
+        <div
+          class="flex max-md:w-screen md:divide-x max-md:gap-[6px] divide-[#313131] md:w-full"
+        >
+          <button
+            v-for="(item, index) in day"
+            :key="index"
+            @click="selectButton(index)"
+            :class="
+              index === selectedButtonIndex
+                ? 'bg-primary duration-300 text-white'
+                : 'bg-white text-black'
+            "
+            class="py-7 text-[20px] max-md:shadow-lg md:w-1/6 shrink-0 px-[35px] whitespace-nowrap"
+          >
+            {{ item }}
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -42,6 +89,8 @@ import axios from "axios";
 const data = ref(null);
 const loading = ref(true);
 const error = ref(null);
+
+const selectedButtonIndex = ref(0);
 
 const driver_id = ref(null);
 
@@ -61,9 +110,28 @@ const getDriverById = async () => {
   }
 };
 
+const day = ref([
+  "10-Aprel.2021y",
+  "10-Aprel.2021y",
+  "10-Aprel.2021y",
+  "31-Aprel.2021y",
+  "31-Aprel.2021y",
+  "31-Aprel.2021y",
+  "10-Aprel.2021y",
+  "10-Aprel.2021y",
+  "10-Aprel.2021y",
+  "31-Aprel.2021y",
+  "31-Aprel.2021y",
+  "31-Aprel.2021y",
+]);
+
 onMounted(() => {
   getDriverById();
 });
+
+const selectButton = (index) => {
+  selectedButtonIndex.value = index;
+};
 </script>
 
 <style lang="scss" scoped></style>

@@ -30,11 +30,12 @@
     </button>
     <VDatePicker
       :class="
-        isDropdownOpen ? 'scale-100 !h-[300px] !w-full' : '!h-0 scale-0 !w-0'
+        isDropdownOpen ? 'scale-100 !h-[350px] !w-full' : '!h-0 scale-0 !w-0'
       "
       @click="func"
       v-model="date"
-      mode="date"
+      mode="dateTime"
+      hide-time-header
       class="!absolute top-[105px] !text-gray-300 duration-300 !p-5 left-0 !z-20 cursor-pointer !w-full !bg-second/35 max-md:!bg-second/60 !border-none opacity-1"
       style="box-shadow: 0 0px 10px 0 white"
     />
@@ -69,7 +70,8 @@ const func = () => {
     const year = String(selectedDate.getFullYear());
     const month = String(selectedDate.getMonth() + 1).padStart(2, "0");
     const day = String(selectedDate.getDate()).padStart(2, "0");
-    store.setDatePin = `${year}.${month}.${day}`;
+    localStorage.setItem("date", `${year}.${month}.${day}`)
+    store.setDatePin = `${year}-${month}-${day}`;
   } else {
     toast("Please select today or a future date!", {
       theme: "dark",

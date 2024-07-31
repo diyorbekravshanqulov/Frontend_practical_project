@@ -121,6 +121,7 @@ const selectRegion = (index) => {
 };
 
 const setPlaceFromDistrict = (region, district) => {
+  localStorage.setItem("to", district)
   store.setPlacePinTo = `${region}. ${district}`;
   isDropdownOpen.value = false;
   store.calen = isDropdownOpen.value;

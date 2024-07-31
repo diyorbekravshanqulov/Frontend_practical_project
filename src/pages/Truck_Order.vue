@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-slate-50 md:h-screen py-[168px] max-md:pb-[220px] max-md:pt-[100px]">
+  <div class="bg-slate-50 md:h-full py-10 max-md:pb-[220px] max-md:pt-[100px]">
     <div class="md:container pb-40">
       <div class="flex max-md:flex-col px-4 max-md:gap-[8px] items-center md:justify-between">
         <div class="flex items-center gap-2 max-md:justify-between max-md:w-full md:gap-14">
