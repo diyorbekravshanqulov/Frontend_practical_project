@@ -6,11 +6,12 @@
       <div v-else>
         <div class="flex flex-col gap-6 items-center">
           <img
-            :src="data?.photo"
+            v-if="data && data.photo"
+            :src="data.photo"
             alt="driver_photo"
             class="w-[160px] object-cover h-[160px] rounded-[10px] bg-cover"
           />
-          <!-- <p>{{ data }}</p> -->
+          <div v-else class="w-[160px] h-[160px] bg-gray-300 rounded-[10px]"></div>
           <div>
             <p class="text-[#E7E4E4] mt-2 text-center text-xl max-md:text-sm">
               ID: {{ data?.id }}
@@ -22,7 +23,7 @@
             </p>
 
             <p class="text-[#E7E4E4] mt-2 text-center text-xl max-md:text-sm">
-              Balance: {{ dataBalance ? filterBalance() : '0'}} so'm
+              Balance: {{ dataBalance ? filterBalance() : '0' }} so'm
             </p>
           </div>
         </div>
@@ -122,7 +123,10 @@ const getDriverById = async () => {
 };
 
 const filterBalance = () => {
-  return dataBalance.value.filter((item) => item.driverId == driver_id.value)[0].amount;
+  const balance = dataBalance.value.find(
+    (item) => item.driverId == driver_id.value
+  );
+  return balance ? balance.amount : "0";
 };
 
 const day = ref([
