@@ -91,9 +91,9 @@ const loginUser = async () => {
       login_data.value
     );
     console.log("Login successful:", response.data);
-    localStorage.setItem("access_token", response.data.access_token);
-    localStorage.setItem("refresh_token", response.data.refresh_token);
-    // localStorage.setItem("driver_id", response.data.newDriver.id);
+    localStorage.setItem("access_token", response.data.tokens.access_token);
+    localStorage.setItem("refresh_token", response.data.tokens.refresh_token);
+    localStorage.setItem("user_id", response.data.newUser.id);
     
     localStorage.setItem("role", "passenger");
 

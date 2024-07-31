@@ -131,6 +131,10 @@ store.token = localStorage.getItem("access_token");
 
 const clearStorage = () => {
   localStorage.removeItem("access_token");
+  localStorage.removeItem("refresh_token");
+  localStorage.removeItem("user_id");
+  localStorage.removeItem("role");
+  localStorage.removeItem("driver_id");
   store.token = localStorage.getItem("access_token");
   logout.value = !logout.value;
   router.push({ name: "home" });
