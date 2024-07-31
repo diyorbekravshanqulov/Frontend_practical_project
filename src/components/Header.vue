@@ -1,9 +1,9 @@
 <template>
   <div
-    class="mainBack"
+    class="mainBack duration-300"
     :class="
       store.calen
-        ? 'pb-[325px] max-md:pb-[200px]'
+        ? 'pb-[370px] max-md:pb-[200px]'
         : 'max-md:pb-[150px] pb-[168px]'
     "
   >

@@ -4,7 +4,9 @@
   <div v-else class="bg-gray-50">
     <div class="container">
       <!-- options leave / direction / price -->
-      <div class="grid grid-cols-3 max-md:-mr-4 gap-y-3 max-md:overflow-scroll scrollable-element">
+      <div
+        class="grid grid-cols-3 max-md:-mr-4 gap-y-3 max-md:overflow-scroll scrollable-element"
+      >
         <div class="col-span-3 flex justify-between max-md:w-[650px]">
           <p
             v-for="(item, index) in option_name"
@@ -20,13 +22,18 @@
           class="col-span-3 cursor-pointer mb-6 w-full max-md:w-[650px] grid grid-cols-3 py-[26px] rounded-md shadow-lg bg-white"
         >
           <p class="font-medium text-center text-2xl max-md:text-lg">
-            <span class="text-center md:text-[22px]">{{ item.date ? format(item.date) : "" }}</span>
+            {{ item.date ? formatHours(item.date) : "" }}
+            <span class="text-center font-normal md:text-[22px]">{{
+              item.date ? formatDate(item.date) : ""
+            }}</span>
           </p>
           <p class="text-center font-medium text-2xl max-md:text-lg">
             {{ item.from_district }} - {{ item.to_district }}
           </p>
           <p class="font-medium text-center text-2xl max-md:text-lg">
-            500.000<span class="md:text-[20px] text-[#999] font-normal">(so‘m)</span>
+            500.000<span class="md:text-[20px] text-[#999] font-normal"
+              >(so‘m)</span
+            >
           </p>
         </div>
       </div>
@@ -35,29 +42,38 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
+import { ref, onMounted } from "vue";
+import axios from "axios";
 
 const loading = ref(true);
 const error = ref(null);
 const option_name = ref(["Ketish", "Yo‘nalish nomi", "Narxi(so‘m)"]);
 const options_all_data = ref([]);
 
-const format = (dateString) => {
+const formatDate = (dateString) => {
   const date = new Date(dateString);
-  const year = String(date.getFullYear());
+  const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
   return `${year}.${month}.${day}`;
 };
 
+const formatHours = (dateString) => {
+  const date = new Date(dateString);
+  const hour = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  return `${hour}.${minutes}`;
+};
+
 const GetAllOrder = async () => {
   try {
-    const response = await axios.get('http://95.130.227.176:3003/api/order-taxi');
+    const response = await axios.get(
+      "http://95.130.227.176:3003/api/order-taxi"
+    );
     options_all_data.value = response.data;
   } catch (err) {
-    console.error('Error:', err);
-    error.value = 'Something went wrong. Please try again.';
+    console.error("Error:", err);
+    error.value = "Something went wrong. Please try again.";
   } finally {
     loading.value = false;
   }
@@ -74,19 +90,16 @@ onMounted(() => {
   height: 5px;
 }
 
-/* Define the thumb style */
 .scrollable-element::-webkit-scrollbar-thumb {
   background: linear-gradient(to bottom right, #f7931e 0%, #f7931e 100%);
   border-radius: 5px;
 }
 
-/* Define the track style */
 .scrollable-element::-webkit-scrollbar-track {
   background-color: transparent;
   border: 1px solid transparent;
 }
 
-/* Define the button style */
 .scrollable-element::-webkit-scrollbar-button {
   background-color: tr;
   border-radius: 5px;
