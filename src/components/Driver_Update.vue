@@ -207,6 +207,7 @@ const registerDriver = async () => {
     // );
     console.log("updated data", response.data);
     // console.log("updated img", responseImg.data);
+    store.dr_update = !store.dr_update
     router.push({ name: "driver-profile" });
   } catch (error) {
     console.error("Error updated:", error);

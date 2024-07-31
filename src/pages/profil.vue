@@ -101,7 +101,7 @@
 
 <script setup>
 import { Icon } from "@iconify/vue";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import Direction from "../components/Direction.vue";
 import DriverUpdate from "../components/Driver_Update.vue";
 import axios from "axios";
@@ -137,6 +137,10 @@ const getDriverById = async () => {
     loading.value = false;
   }
 };
+
+watch(() => store.dr_update, getDriverById, { immediate: true });
+
+
 
 const filterBalance = () => {
   const balance = dataBalance.value.find(
