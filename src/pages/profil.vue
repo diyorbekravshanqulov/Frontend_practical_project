@@ -4,14 +4,24 @@
       <div v-if="loading" class="text-white">Loading...</div>
       <div v-if="error" class="text-white">{{ error }}</div>
       <div v-else>
-        <div class="flex flex-col gap-6 items-center">
+        <div class="flex flex-col gap-6 items-center relative">
+          <div class="absolute w-full flex justify-end items-center">
+            <Icon
+              @click="store.dr_update = !store.dr_update"
+              icon="lucide:edit"
+              class="text-3xl text-white font-medium cursor-pointer "
+            />
+          </div>
           <img
             v-if="data && data.photo"
             :src="data.photo"
             alt="driver_photo"
             class="w-[160px] object-cover h-[160px] rounded-[10px] bg-cover"
           />
-          <div v-else class="w-[160px] h-[160px] bg-gray-300 rounded-[10px]"></div>
+          <div
+            v-else
+            class="w-[160px] h-[160px] bg-gray-300 rounded-[10px]"
+          ></div>
           <div>
             <p class="text-[#E7E4E4] mt-2 text-center text-xl max-md:text-sm">
               ID: {{ data?.id }}
@@ -23,7 +33,7 @@
             </p>
 
             <p class="text-[#E7E4E4] mt-2 text-center text-xl max-md:text-sm">
-              Balance: {{ dataBalance ? filterBalance() : '0' }} so'm
+              Balance: {{ dataBalance ? filterBalance() : "0" }} so'm
             </p>
           </div>
         </div>
@@ -86,12 +96,18 @@
     </div>
     <Direction />
   </div>
+  <DriverUpdate />
 </template>
 
 <script setup>
+import { Icon } from "@iconify/vue";
 import { ref, onMounted } from "vue";
 import Direction from "../components/Direction.vue";
+import DriverUpdate from "../components/Driver_Update.vue";
 import axios from "axios";
+import { useStore } from "../store";
+
+const store = useStore();
 
 const data = ref(null);
 const dataBalance = ref(null);

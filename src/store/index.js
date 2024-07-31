@@ -15,6 +15,7 @@ export const useStore = defineStore("store", {
       confirm: false,
       driver_data: null,
       user_datas: null,
+      dr_update: false,
     };
   },
 });
