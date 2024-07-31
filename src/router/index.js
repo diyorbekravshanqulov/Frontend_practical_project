@@ -98,7 +98,7 @@ const routes = [
           {
             path: "/driver/verify",
             name: "driver_verify",
-            component: () => import("../pages/Verify.vue"),
+            component: () => import("../pages/driver_verify.vue"),
           },
         ],
       },

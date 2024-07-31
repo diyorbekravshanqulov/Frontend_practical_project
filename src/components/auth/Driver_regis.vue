@@ -195,23 +195,27 @@ const registerDriver = async () => {
     }
 
     const response = await axios.post(
-      "http://95.130.227.176:3003/api/driver/signup",
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
+      "http://95.130.227.176:3003/api/driver/newOtp",
+      { phone: user_data.value.phone }
     );
+    // const response = await axios.post(
+    //   "http://95.130.227.176:3003/api/driver/signup",
+    //   formData,
+    //   {
+    //     headers: {
+    //       "Content-Type": "multipart/form-data",
+    //     },
+    //   }
+    // );
+    localStorage.setItem("driver_data", JSON.stringify(user_data.value));
     console.log("Registration successful:", response.data);
     toast.success("Registration successfully done!");
-    localStorage.setItem("access_token", response.data.tokens.access_token);
-    localStorage.setItem("refresh_token", response.data.tokens.refresh_token);
+    // localStorage.setItem("access_token", response.data.tokens.access_token);
+    // localStorage.setItem("refresh_token", response.data.tokens.refresh_token);
     localStorage.setItem("role", "driver");
-    localStorage.setItem("driver_id", response.data.newDriver.id);
+    // localStorage.setItem("driver_id", response.data.newDriver.id);
 
-    // await router.push({ name: "home" });
-    router.push("/driver-profile");
+    router.push({ name: "driver_verify" });
   } catch (error) {
     console.error("Error registering:", error);
     toast("Something went wrong!", {

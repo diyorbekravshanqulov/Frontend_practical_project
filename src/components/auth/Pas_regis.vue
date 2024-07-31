@@ -40,7 +40,7 @@
           <input
             type="submit"
             class="cursor-pointer mt-[10px] p-[10px] text-center text-black font-medium rounded-md bg-primary w-full md:w-[406px]"
-            value="Ro’yxatdan o’tish"
+            value="Davom etish"
           />
           <router-link
             :to="{ name: 'passenger_login' }"
@@ -88,15 +88,15 @@ const registerDriver = async () => {
     return;
   }
   try {
+    console.log(user_data.value.phone);
     const response = await axios.post(
-      "http://95.130.227.176:3003/api/users/signUp",
-      user_data.value
+      "http://95.130.227.176:3003/api/users/newOtp",
+      { phone: user_data.value.phone }
     );
-    console.log("Registration successful:", response.data);
-    localStorage.setItem("access_token", response.data.access_token);
-    localStorage.setItem("refresh_token", response.data.refresh_token);
-    localStorage.setItem("role", "passenger");
-    router.push({ name: "passenger-home" });
+    router.push({ name: "passenger_verify" });
+    console.log(response.data);
+    localStorage.setItem("details", response.data.details);
+    localStorage.setItem("user_data", JSON.stringify(user_data.value));
   } catch (error) {
     console.error("Error registering:", error);
     alert("Something went wrong. Please try again.");
