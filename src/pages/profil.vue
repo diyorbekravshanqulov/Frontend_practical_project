@@ -7,17 +7,30 @@
         <div class="flex flex-col gap-6 items-center relative">
           <div class="absolute w-full flex justify-end items-center">
             <Icon
-              @click="store.dr_update = !store.dr_update"
+              @click="isEditModal = !isEditModal"
               icon="lucide:edit"
-              class="text-3xl text-white font-medium cursor-pointer "
+              class="text-3xl text-white font-medium cursor-pointer"
             />
           </div>
-          <img
-            v-if="data && data.photo"
-            :src="data.photo"
-            alt="driver_photo"
-            class="w-[160px] object-cover h-[160px] rounded-[10px] bg-cover"
-          />
+          <div v-if="data && data.photo" class="relative">
+            <img
+              :src="data.photo"
+              alt="driver_photo"
+              class="w-[160px] object-cover h-[160px] rounded-[10px] bg-cover"
+            />
+            <Icon
+              @click="openFile1"
+              icon="ic:outline-photo-camera"
+              class="absolute duration-300 text-transparent cursor-pointer hover:backdrop-blur-sm hover:text-white top-1/2 left-1/2 -translate-x-1/2 p-10 -translate-y-1/2 hover:bg-white/30 w-full h-full rounded-[10px]"
+            />
+            <input
+              ref="fileInput1"
+              id="image"
+              class="hidden mt-1 p-[10px] text-sm placeholder-text-[#666] placeholder-font-normal rounded-md border-2 border-transparent focus:border-primary"
+              type="file"
+              @change="getValue"
+            />
+          </div>
           <div
             v-else
             class="w-[160px] h-[160px] bg-gray-300 rounded-[10px]"
@@ -46,8 +59,9 @@
     <div v-if="error" class="text-white">{{ error }}</div>
     <div v-else>
       <p class="font-medium text-3xl my-10">{{ $t("orders") }}</p>
-      <p class="mt-[100px] text-[42px] max-md:hidden">{{ $t("direction") }}</p>
-      <div class="md:hidden">
+      <button class="font-medium text-3xl">Mashina qo'shish</button>
+      <!-- <p class="mt-[100px] text-[42px] max-md:hidden">{{ $t("direction") }}</p> -->
+      <!-- <div class="md:hidden">
         <swiper
           :slidesPerView="2"
           :centeredSlides="true"
@@ -71,7 +85,7 @@
             </button>
           </swiper-slide>
         </swiper>
-      </div>
+      </div> -->
       <div
         class="flex md:w-full max-md:hidden mt-[52px] max-md:-mx-4 overflow-hidden max-md:overflow-auto scrollable-element gap-0 rounded-md shadow-lg"
       >
@@ -96,7 +110,16 @@
     </div>
     <DirectionAll />
   </div>
-  <DriverUpdate />
+  <!--  -->
+  <div v-if="data">
+    <DriverUpdate
+      :class="isEditModal ? 'scale-100' : 'scale-0'"
+      class="duration-300"
+      :user_data="data"
+      @clicked="isEditModal = !isEditModal"
+    />
+    <Back v-if="isEditModal" @close-driver="isEditModal = !isEditModal" />
+  </div>
 </template>
 
 <script setup>
@@ -104,32 +127,90 @@ import { Icon } from "@iconify/vue";
 import { ref, onMounted, watch } from "vue";
 import DirectionAll from "../components/DirectionAll.vue";
 import DriverUpdate from "../components/Driver_Update.vue";
+import Back from "../components/back.vue";
 import axios from "axios";
 import { useStore } from "../store";
 
 const store = useStore();
+const fileInput1 = ref(null);
 
 const data = ref(null);
 const dataBalance = ref(null);
 const loading = ref(true);
 const error = ref(null);
+const isEditModal = ref(false);
 
 const selectedButtonIndex = ref(0);
 
 const driver_id = ref(null);
 
+const user_data = ref({
+  photo: null,
+});
+
+const openFile1 = () => {
+  if (fileInput1.value) {
+    fileInput1.value.click();
+  }
+};
+
+const getValue = (event) => {
+  user_data.value.photo = event.target.files[0];
+};
+
 driver_id.value = localStorage.getItem("driver_id");
+
+const response = ref(null);
+const GetDriver = async () => {
+  response.value = await axios.get(
+    `http://95.130.227.176:3003/api/driver/${driver_id.value}`
+  );
+};
+
+const responseBalance = ref(null);
+const GetBalance = async () => {
+  responseBalance.value = await axios.get(
+    `http://95.130.227.176:3003/api/balance`
+  );
+};
+
+const responseImg = ref(null)
+
+const UpdatePhoto = async () => {
+  try {
+    const formData = new FormData();
+    for (let key in user_data.value) {
+      console.log(key);
+      if (key == "photo") {
+        formData.append(key, user_data.value[key]);
+      }
+    }
+    responseImg.value = await axios.patch(
+      `http://95.130.227.176:3003/api/driver/image/${localStorage.getItem(
+        "driver_id"
+      )}`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    console.log("response", responseImg.value.data);
+  } catch (error) {
+    console.error("Error:", error);
+    error.value = "Something went wrong. Please try again.";
+  }
+};
+
+watch(() => user_data.value.photo, UpdatePhoto);
 
 const getDriverById = async () => {
   try {
-    const response = await axios.get(
-      `http://95.130.227.176:3003/api/driver/${driver_id.value}`
-    );
-    const responseBalance = await axios.get(
-      `http://95.130.227.176:3003/api/balance`
-    );
-    dataBalance.value = responseBalance.data;
-    data.value = response.data;
+    await GetDriver();
+    await GetBalance();
+    data.value = response.value.data;
+    dataBalance.value = responseBalance.value.data;
   } catch (err) {
     console.error("Error:", err);
     error.value = "Something went wrong. Please try again.";
@@ -138,9 +219,7 @@ const getDriverById = async () => {
   }
 };
 
-watch(() => store.dr_update, getDriverById, { immediate: true });
-
-
+watch(() => isEditModal.value || responseImg?.value?.data, getDriverById, { immediate: true });
 
 const filterBalance = () => {
   const balance = dataBalance.value.find(
