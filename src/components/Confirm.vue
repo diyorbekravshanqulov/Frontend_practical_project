@@ -64,7 +64,7 @@
           </button>
         </div>
         <button
-          @click="changing()"
+          @click="store.confirm = !store.confirm"
           class="py-[29px] max-md:py-[14px] px-[37px] rounded-md bg-primary text-[30px] text-white"
         >
           Tasdiqlash
@@ -81,10 +81,6 @@ import { useStore } from "../store";
 
 const store = useStore();
 
-const changing = () => {
-  store.confirm = true;
-  console.log("storesss", store.confirm);
-};
 
 const to = ref(localStorage.getItem("to"));
 const from = ref(localStorage.getItem("from"));

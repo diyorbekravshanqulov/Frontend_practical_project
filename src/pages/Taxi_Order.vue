@@ -109,7 +109,7 @@ const u_data = ref({
   userId: 13,
   from_district: localStorage.getItem("from"),
   to_district: localStorage.getItem("to"),
-  date: localStorage.getItem("date").split('.').join("-"),
+  date: localStorage.getItem("date").split(".").join("-"),
   description: "Need a ride to the airport",
 });
 
@@ -127,7 +127,6 @@ const createOrder = async () => {
     toast.success("Registration successfully done!");
     router.push("/passenger-home");
     alert("success");
-    store.confirm = false;
   } catch (error) {
     console.error("Error registering:", error);
     toast("Something went wrong!", {
@@ -136,13 +135,18 @@ const createOrder = async () => {
       transition: "bounce",
       dangerouslyHTMLString: true,
     });
+  } finally {
+    store.confirm = !store.confirm;
   }
 };
 
 watch(
   () => store.confirm,
   (newValue) => {
-    if (newValue) createOrder();
+    if (newValue) {
+      console.log("object newValue", newValue);
+      createOrder();
+    }
   }
 );
 
