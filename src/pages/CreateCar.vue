@@ -137,7 +137,7 @@ import { ref } from "vue";
 import { toast } from "vue3-toastify";
 import { useRouter } from "vue-router";
 import "vue3-toastify/dist/index.css";
-import { useStore } from "../../store";
+import { useStore } from "../store";
 
 const store = useStore();
 
