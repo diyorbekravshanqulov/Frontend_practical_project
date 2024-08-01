@@ -41,10 +41,10 @@ jobs:
         PASSWORD: ${{ secrets.PASSWORD }}
       run: |
         sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no $USER@$SERVER "
-          pm2 stop front-taxii || true && \
+          pm2 stop font-taxii || true && \
           cd .. && cd front_taxi \
           git pull && \
           npm install && \
           npm run build && \
-          pm2 start npx --name front-taxii -- serve -s dist -l  5000
+          pm2 start npx --name font-taxii -- serve -s dist -l  5000
         "
