@@ -5,9 +5,9 @@
     <div class="container py-16">
       <!-- options leave / direction / price -->
       <div
-        class="grid grid-cols-3 max-md:-mr-4 gap-y-3 max-md:overflow-scroll scrollable-element"
+        class="grid grid-cols-4 max-md:-mr-4 gap-y-3 max-md:overflow-scroll scrollable-element"
       >
-        <div class="col-span-3 flex justify-between max-md:w-[650px]">
+        <div class="col-span-4 flex justify-between max-md:w-[650px]">
           <p
             v-for="(item, index) in option_name"
             :key="index"
@@ -19,8 +19,22 @@
         <div
           v-for="(item, index) in options_all_data ? filteredOptions : null"
           :key="index"
-          class="col-span-3 cursor-pointer mb-6 w-full max-md:w-[650px] grid grid-cols-3 py-[26px] rounded-md shadow-lg bg-white"
+          class="col-span-4 cursor-pointer mb-6 w-full max-md:w-[650px] grid grid-cols-4 py-[26px] rounded-md shadow-lg bg-white"
         >
+          <p
+            :class="{
+              'text-blue-500': returnStatus(item.status) === 'Yangi',
+              'text-yellow-400': returnStatus(item.status) === 'Kutish',
+              'text-green-500': returnStatus(item.status) === 'Yo\'lda',
+              'text-red-500': returnStatus(item.status) === 'Tugallangan',
+              'font-medium': true,
+              'text-center': true,
+              'text-2xl': true,
+              'max-md:text-lg': true,
+            }"
+          >
+            {{ item.status ? returnStatus(item.status) : "" }}
+          </p>
           <p class="font-medium text-center text-2xl max-md:text-lg">
             {{ item.date ? formatHours(item.date) : "" }}
             <span class="text-center font-normal md:text-[22px]">{{
@@ -47,7 +61,7 @@ import axios from "axios";
 
 const loading = ref(true);
 const error = ref(null);
-const option_name = ref(["Ketish", "Yo‘nalish nomi", "Narxi(so‘m)"]);
+const option_name = ref(["Holat", "Ketish", "Yo‘nalish nomi", "Narxi(so‘m)"]);
 const options_all_data = ref([]);
 
 const formatDate = (dateString) => {
@@ -63,6 +77,17 @@ const formatHours = (dateString) => {
   const hour = String(date.getHours()).padStart(2, "0");
   const minutes = String(date.getMinutes()).padStart(2, "0");
   return `${hour}.${minutes}`;
+};
+
+const returnStatus = (status) => {
+  if (status == "new") {
+    return "Yangi";
+  } else if (status == "waiting") {
+    return "Kutish";
+  } else if (status == "onroad") {
+    return "Yo'lda";
+  }
+  return "Tugallangan";
 };
 
 const GetAllOrder = async () => {
@@ -84,14 +109,15 @@ const GetAllOrder = async () => {
 
 const user_id = ref(localStorage.getItem("user_id"));
 const filteredOptions = computed(() => {
-  return options_all_data.value.filter((item) => item.userId === +user_id.value);
+  return options_all_data.value.filter(
+    (item) => item.userId === +user_id.value
+  );
 });
 
 onMounted(() => {
   GetAllOrder();
 });
 </script>
-
 
 <style>
 .scrollable-element::-webkit-scrollbar {
@@ -117,5 +143,4 @@ onMounted(() => {
 .textShadow:hover {
   text-shadow: 0 0px 5px white;
 }
-
 </style>
