@@ -83,10 +83,19 @@ const find = () => {
       dangerouslyHTMLString: true,
     });
   } else if (store.setPlacePinFrom && store.setPlacePinTo && store.setDatePin) {
-    if (store.carType == 1) {
-      router.push("/truck-order");
+    if (store.setPlacePinFrom == store.setPlacePinTo) {
+      toast("Please select another place!", {
+        theme: "light",
+        type: "warning",
+        transition: "bounce",
+        dangerouslyHTMLString: true,
+      });
     } else {
-      router.push("/taxi-order");
+      if (store.carType == 1) {
+        router.push("/truck-order");
+      } else {
+        router.push("/taxi-order");
+      }
     }
   } else {
     toast("Please fill all details!", {
