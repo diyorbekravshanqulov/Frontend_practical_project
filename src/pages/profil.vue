@@ -94,7 +94,7 @@
         </div>
       </div>
     </div>
-    <Direction />
+    <DirectionAll />
   </div>
   <DriverUpdate />
 </template>
@@ -102,7 +102,7 @@
 <script setup>
 import { Icon } from "@iconify/vue";
 import { ref, onMounted, watch } from "vue";
-import Direction from "../components/Direction.vue";
+import DirectionAll from "../components/DirectionAll.vue";
 import DriverUpdate from "../components/Driver_Update.vue";
 import axios from "axios";
 import { useStore } from "../store";

@@ -1,8 +1,8 @@
 <template>
   <div v-if="loading" class="text-white">Loading...</div>
   <div v-if="error" class="text-white">{{ error }}</div>
-  <div v-else class="bg-gray-50">
-    <div class="container py-16">
+  <div v-else class="">
+    <div class="container mt-10">
       <!-- options leave / direction / price -->
       <div
         class="grid grid-cols-3 max-md:-mr-4 gap-y-3 max-md:overflow-scroll scrollable-element"
@@ -17,7 +17,7 @@
           </p>
         </div>
         <div
-          v-for="(item, index) in options_all_data ? filteredOptions : null"
+          v-for="(item, index) in options_all_data"
           :key="index"
           class="col-span-3 cursor-pointer mb-6 w-full max-md:w-[650px] grid grid-cols-3 py-[26px] rounded-md shadow-lg bg-white"
         >
@@ -82,10 +82,6 @@ const GetAllOrder = async () => {
   }
 };
 
-const user_id = ref(localStorage.getItem("user_id"));
-const filteredOptions = computed(() => {
-  return options_all_data.value.filter((item) => item.userId === +user_id.value);
-});
 
 onMounted(() => {
   GetAllOrder();

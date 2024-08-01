@@ -10,7 +10,7 @@
   >
     <form
       @submit.prevent="registerDriver"
-      class="container backdrop-blur-sm bg-black/70 rounded-2xl w-[600px] max-md:w-full md:px-[42px] md:py-14 px-[11px] py-[15px]"
+      class="container backdrop-blur-sm bg-black/70 rounded-2xl w-[600px] max-md:w-full md:px-[42px] md:py-16 px-[11px] py-[15px]"
     >
       <!-- Input fields -->
       <div class="grid md:grid-cols-2 gap-x-5">
@@ -18,9 +18,7 @@
           v-for="(item, index) in data"
           :key="index"
           :class="
-            index == 0 || index == 1 || index == 2 || index == 3
-              ? 'md:col-span-1 w-1/2'
-              : 'md:col-span-2'
+            index == 0 || index == 1 ? 'md:col-span-1 w-1/2' : 'md:col-span-2'
           "
           :for="'input_' + index"
           class="mb-5 relative text-white text-[17px] font-medium block w-full"
@@ -127,19 +125,16 @@ const router = useRouter();
 const isScaling = ref({
   first_name: false,
   last_name: false,
-  phone: false,
-  password: false,
   address: false,
 });
 
 const user_data = ref({
   first_name: "",
   last_name: "",
-  phone: "",
-  password: "",
+
   address: "",
-  //   photo: null,
-  //   driver_license: null,
+  photo: null,
+  driver_license: null,
 });
 
 const filename1 = ref("Choose a file ...");
@@ -184,30 +179,28 @@ const registerDriver = async () => {
       `http://95.130.227.176:3003/api/driver/${localStorage.getItem(
         "driver_id"
       )}`,
-      user_data.value
-      //   {
-      //     first_name: user_data.first_name,
-      //     last_name: user_data.last_name,
-      //     phone: user_data.phone,
-      //     password: user_data.password,
-      //     address: user_data.address,
-      //   }
+      // user_data.value
+      {
+        first_name: user_data.value.first_name,
+        last_name: user_data.value.last_name,
+        address: user_data.value.address,
+      }
     );
 
-    // const responseImg = await axios.patch(
-    //   `http://95.130.227.176:3003/api/driver/image/${localStorage.getItem(
-    //     "driver_id"
-    //   )}`,
-    //   formData,
-    //   {
-    //     headers: {
-    //       "Content-Type": "multipart/form-data",
-    //     },
-    //   }
-    // );
+    const responseImg = await axios.patch(
+      `http://95.130.227.176:3003/api/driver/image/${localStorage.getItem(
+        "driver_id"
+      )}`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
     console.log("updated data", response.data);
-    // console.log("updated img", responseImg.data);
-    store.dr_update = !store.dr_update
+    console.log("updated img", responseImg.data);
+    store.dr_update = !store.dr_update;
     router.push({ name: "driver-profile" });
   } catch (error) {
     console.error("Error updated:", error);
@@ -223,18 +216,6 @@ const registerDriver = async () => {
 const data = ref([
   { label: "Ismi", type: "text", input: "Ism", key: "first_name" },
   { label: "Familya", type: "text", input: "Familya", key: "last_name" },
-  {
-    label: "Telfon raqam",
-    type: "text",
-    input: "Sizning telfon raqamingiz",
-    key: "phone",
-  },
-  {
-    label: "Parol",
-    input: "Sizning parolingiz",
-    key: "password",
-    type: "password",
-  },
   {
     label: "Manzil",
     input: "Manzilingizni kiriting",
