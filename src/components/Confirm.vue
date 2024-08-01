@@ -39,9 +39,9 @@
               <p
                 class="text-2xl max-md:text-[20px] text-start mb-[10px] mt-[17px]"
               >
-                100 km 
+                100 km <Icon icon="mingcute:right-fill" class="text-primary inline" />
                 <span
-                  class="text-[#707070] ml-4 text-[20px] max-md:text-[17px] font-medium"
+                  class="text-[#707070] ml-1 text-[20px] max-md:text-[17px] font-medium"
                   >5 000 (so‘m)</span
                 >
               </p>

@@ -45,8 +45,11 @@
             {{ item.from_district }} - {{ item.to_district }}
           </p>
           <p class="font-medium text-center text-2xl max-md:text-lg">
-            500.000<span class="md:text-[20px] text-[#999] font-normal"
-              >(so‘m)</span
+            100 km
+            <Icon icon="mingcute:right-fill" class="text-primary inline" />
+            <span
+              class="text-[#707070] ml-1 text-[20px] max-md:text-[17px] font-medium"
+              >5 000 (so‘m)</span
             >
           </p>
         </div>
@@ -61,7 +64,7 @@ import axios from "axios";
 
 const loading = ref(true);
 const error = ref(null);
-const option_name = ref(["Holat", "Ketish", "Yo‘nalish nomi", "Narxi(so‘m)"]);
+const option_name = ref(["Holat", "Ketish", "Yo‘nalish nomi", "Xizmat uchun to‘lov"]);
 const options_all_data = ref([]);
 
 const formatDate = (dateString) => {

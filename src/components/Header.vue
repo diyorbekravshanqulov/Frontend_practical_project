@@ -113,6 +113,7 @@ const find = () => {
   background-repeat: no-repeat;
   background-image: url("/Main.png");
   background-size: cover;
+  background-attachment: fixed;
   padding-top: 150px;
   /* padding-bottom: 325px; */
 }
