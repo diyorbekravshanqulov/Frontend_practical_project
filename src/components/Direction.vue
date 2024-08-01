@@ -67,10 +67,15 @@ const formatHours = (dateString) => {
 
 const GetAllOrder = async () => {
   try {
-    const response = await axios.get(
+    const responseTaxi = await axios.get(
       "http://95.130.227.176:3003/api/order-taxi"
     );
-    options_all_data.value = response.data;
+    const responseTruck = await axios.get(
+      "http://95.130.227.176:3003/api/order-truck"
+    );
+    // options_all_data.value = responseTaxi.data;
+    console.log("truc", responseTruck.data);
+    options_all_data.value = [...responseTaxi.data, ...responseTruck.data];
   } catch (err) {
     console.error("Error:", err);
     error.value = "Something went wrong. Please try again.";
@@ -78,6 +83,13 @@ const GetAllOrder = async () => {
     loading.value = false;
   }
 };
+
+// const filterUser  = () => {
+//   const balance = dataBalance.value.find(
+//     (item) => item.driverId == driver_id.value
+//   );
+//   return balance ? balance.amount : "0";
+// };
 
 onMounted(() => {
   GetAllOrder();

@@ -106,7 +106,7 @@ import "vue3-toastify/dist/index.css";
 const store = useStore();
 
 const u_data = ref({
-  userId: 13,
+  userId: +localStorage.getItem("user_id"),
   from_district: localStorage.getItem("from"),
   to_district: localStorage.getItem("to"),
   date: localStorage.getItem("date").split(".").join("-"),
@@ -123,10 +123,9 @@ const createOrder = async () => {
       "http://95.130.227.176:3003/api/order-taxi",
       u_data.value
     );
-    console.log("Registration successful:", response.data);
-    toast.success("Registration successfully done!");
+    console.log("successful:", response.data);
+    toast.success("successfully done!");
     router.push("/passenger-home");
-    alert("success");
   } catch (error) {
     console.error("Error registering:", error);
     toast("Something went wrong!", {
@@ -136,7 +135,7 @@ const createOrder = async () => {
       dangerouslyHTMLString: true,
     });
   } finally {
-    store.confirm = !store.confirm;
+    store.confirm = !store.confirm; 
   }
 };
 
@@ -144,7 +143,6 @@ watch(
   () => store.confirm,
   (newValue) => {
     if (newValue) {
-      console.log("object newValue", newValue);
       createOrder();
     }
   }
