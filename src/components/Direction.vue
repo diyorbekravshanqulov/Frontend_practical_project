@@ -5,9 +5,9 @@
     <div class="container py-16">
       <!-- options leave / direction / price -->
       <div
-        class="grid grid-cols-4 max-md:-mr-4 gap-y-3 max-md:overflow-scroll scrollable-element"
+        class="grid grid-cols-3 max-md:-mr-4 gap-y-3 max-md:overflow-scroll scrollable-element"
       >
-        <div class="col-span-4 flex justify-between max-md:w-[650px]">
+        <div class="col-span-3 flex justify-between max-md:w-[650px]">
           <p
             v-for="(item, index) in option_name"
             :key="index"
@@ -19,7 +19,7 @@
         <div
           v-for="(item, index) in options_all_data ? filteredOptions : null"
           :key="index"
-          class="col-span-4 cursor-pointer mb-6 w-full max-md:w-[650px] grid grid-cols-4 py-[26px] rounded-md shadow-lg bg-white"
+          class="col-span-4 cursor-pointer mb-6 w-full max-md:w-[650px] grid grid-cols-3 py-[26px] rounded-md shadow-lg bg-white"
         >
           <p
             :class="{
@@ -44,14 +44,14 @@
           <p class="text-center font-medium text-2xl max-md:text-lg">
             {{ item.from_district }} - {{ item.to_district }}
           </p>
-          <p class="font-medium text-center text-2xl max-md:text-lg">
+          <!-- <p class="font-medium text-center text-2xl max-md:text-lg">
             100 km
             <Icon icon="mingcute:right-fill" class="text-primary inline" />
             <span
               class="text-[#707070] ml-1 text-[20px] max-md:text-[17px] font-medium"
               >5 000 (so‘m)</span
             >
-          </p>
+          </p> -->
         </div>
       </div>
     </div>
@@ -64,7 +64,7 @@ import axios from "axios";
 
 const loading = ref(true);
 const error = ref(null);
-const option_name = ref(["Holat", "Ketish", "Yo‘nalish nomi", "Xizmat uchun to‘lov"]);
+const option_name = ref(["Holat", "Ketish", "Yo‘nalish nomi", ]);
 const options_all_data = ref([]);
 
 const formatDate = (dateString) => {
