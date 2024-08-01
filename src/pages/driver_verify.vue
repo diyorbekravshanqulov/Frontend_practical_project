@@ -59,7 +59,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 import { useStore } from "../store";
@@ -67,6 +67,12 @@ import { useStore } from "../store";
 const store = useStore();
 
 const router = useRouter();
+
+watch(() => store.driver_data, (datas) => {
+  if (!datas) {
+    router.push({ name: 'driver_regis' });
+  }
+}, { immediate: true});
 
 const digits = ref(Array(4).fill(""));
 const submitButton = ref(null);

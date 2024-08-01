@@ -141,8 +141,6 @@ router.beforeEach((to, from, next) => {
     !token
   ) {
     next({ name: "home" });
-  } else if (from.name == to.name) {
-    next({ name: "driver_regis" });
   } else {
     next();
   }

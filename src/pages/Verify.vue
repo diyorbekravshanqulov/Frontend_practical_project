@@ -59,14 +59,24 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 import { useStore } from "../store";
 
 const store = useStore();
 
+
+console.log("object--------");
 const router = useRouter();
+watch(() => store.user_datas, (datas) => {
+  console.log("object--------1");
+  if (!datas) {
+    console.log("object--------2");
+    router.push({ name: 'passenger_regis' });
+  }
+} , { immediate: true});
+
 
 const digits = ref(Array(4).fill(""));
 const submitButton = ref(null);
@@ -123,6 +133,7 @@ const handlePaste = (e) => {
   chars.forEach((char, i) => (digits.value[i] = char));
   submitButton.value.focus();
 };
+
 
 const handleSubmit = async () => {
   if (digits.value.join("") == "1111") {
