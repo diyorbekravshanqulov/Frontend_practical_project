@@ -11,7 +11,7 @@
           class="inline-grid md:grid-cols-4 max-md:gap-y-[30px] md:gap-[30px] max-md:gap-x-4 md:w-[75%]"
         >
           <button
-            class="p-[10px] grid grid-cols-2 md:gap-12 gap-5 justify-between items-center shadow-lg col-span-2 w-full rounded-md"
+            class="p-[10px] cursor-default grid grid-cols-2 md:gap-12 gap-5 justify-between items-center shadow-lg col-span-2 w-full rounded-md"
           >
             <div class="w-full flex items-center gap-5 justify-between">
               <div>
@@ -30,34 +30,19 @@
               <p class="text-2xl text-start mb-[10px] mt-[17px]">{{ to }}</p>
             </div>
           </button>
+          
           <button
-            class="py-[10px] px-5 max-md:-[13px] shadow-md w-full rounded-md"
-          >
-            <div>
-              <p class="text-sm text-start text-primary">Narxi</p>
-              <p
-                class="text-2xl text-start max-md:text-[20px] mb-[10px] mt-[17px]"
-              >
-                500
-                <span
-                  class="text-[#707070] max-md:text-[17px] text-[20px] font-medium"
-                  >(so‘m)</span
-                >
-              </p>
-            </div>
-          </button>
-          <button
-            class="py-[10px] px-5 max-md:-[13px] shadow-md w-full rounded-md"
+            class="py-[10px] cursor-default col-span-2 px-5 max-md:-[13px] shadow-md w-3/4 rounded-md"
           >
             <div>
               <p class="text-sm text-start text-primary">Xizmat uchun to‘lov</p>
               <p
                 class="text-2xl max-md:text-[20px] text-start mb-[10px] mt-[17px]"
               >
-                0
+                100 km 
                 <span
-                  class="text-[#707070] text-[20px] max-md:text-[17px] font-medium"
-                  >(so‘m)</span
+                  class="text-[#707070] ml-4 text-[20px] max-md:text-[17px] font-medium"
+                  >5 000 (so‘m)</span
                 >
               </p>
             </div>
