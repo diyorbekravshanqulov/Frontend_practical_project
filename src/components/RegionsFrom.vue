@@ -92,7 +92,7 @@ store.calen = isDropdownOpen.value;
 
 const GetRegions = async () => {
   try {
-    const response = await axios.get("http://95.130.227.176:3003/api/region", {
+    const response = await axios.get("http://95.130.227.176:3015/api/region", {
       headers: {
         "Accept-Language": locale.value,
       },
@@ -122,7 +122,7 @@ const selectRegion = (index) => {
 };
 
 const setPlaceFromDistrict = (region, district) => {
-  localStorage.setItem("from", district)
+  localStorage.setItem("from", district);
   store.setPlacePinFrom = `${region}. ${district}`;
   isDropdownOpen.value = false;
   store.calen = isDropdownOpen.value;

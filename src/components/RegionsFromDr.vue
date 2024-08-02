@@ -94,7 +94,7 @@ const isDropdownOpen = ref(false);
 
 const GetRegions = async () => {
   try {
-    const response = await axios.get("http://95.130.227.176:3003/api/region", {
+    const response = await axios.get("http://95.130.227.176:3015/api/region", {
       headers: {
         "Accept-Language": locale.value,
       },

@@ -199,10 +199,10 @@ const registerDriver = async () => {
     }
 
     const response = await axios.post(
-      "http://95.130.227.176:3003/api/driver/newOtp",
+      "http://95.130.227.176:3015/api/driver/newOtp",
       { phone: user_data.value.phone }
     );
-    store.driver_data =  formData
+    store.driver_data = formData;
     console.log("OTP sended successfully:", response.data);
     router.push({ name: "driver_verify" });
   } catch (error) {

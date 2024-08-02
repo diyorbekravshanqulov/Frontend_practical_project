@@ -95,7 +95,7 @@ const user_data = ref({
 const registerDriver = async () => {
   try {
     const response = await axios.patch(
-      `http://95.130.227.176:3003/api/driver/${localStorage.getItem(
+      `http://95.130.227.176:3015/api/driver/${localStorage.getItem(
         "driver_id"
       )}`,
       user_data.value
@@ -142,11 +142,11 @@ const handleInputChange = (key) => {
 };
 
 onMounted(() => {
-  window.addEventListener('keydown', handleKeyPress);
+  window.addEventListener("keydown", handleKeyPress);
 });
 
 onUnmounted(() => {
-  window.removeEventListener('keydown', handleKeyPress);
+  window.removeEventListener("keydown", handleKeyPress);
 });
 </script>
 <style scoped>

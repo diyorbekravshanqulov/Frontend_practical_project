@@ -66,17 +66,19 @@ import { useStore } from "../store";
 
 const store = useStore();
 
-
 console.log("object--------");
 const router = useRouter();
-watch(() => store.user_datas, (datas) => {
-  console.log("object--------1");
-  if (!datas) {
-    console.log("object--------2");
-    router.push({ name: 'passenger_regis' });
-  }
-} , { immediate: true});
-
+watch(
+  () => store.user_datas,
+  (datas) => {
+    console.log("object--------1");
+    if (!datas) {
+      console.log("object--------2");
+      router.push({ name: "passenger_regis" });
+    }
+  },
+  { immediate: true }
+);
 
 const digits = ref(Array(4).fill(""));
 const submitButton = ref(null);
@@ -134,14 +136,13 @@ const handlePaste = (e) => {
   submitButton.value.focus();
 };
 
-
 const handleSubmit = async () => {
   if (digits.value.join("") == "1111") {
     // alert(`OTP: ${digits.value.join("")}`);
 
     try {
       const response = await axios.post(
-        "http://95.130.227.176:3003/api/users/signUp",
+        "http://95.130.227.176:3015/api/users/signUp",
         store.user_datas
       );
       console.log("Registration successful:", response.data);

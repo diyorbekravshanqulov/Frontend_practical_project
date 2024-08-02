@@ -64,7 +64,7 @@ import axios from "axios";
 
 const loading = ref(true);
 const error = ref(null);
-const option_name = ref(["Holat", "Ketish", "Yo‘nalish nomi", ]);
+const option_name = ref(["Holat", "Ketish", "Yo‘nalish nomi"]);
 const options_all_data = ref([]);
 
 const formatDate = (dateString) => {
@@ -96,10 +96,10 @@ const returnStatus = (status) => {
 const GetAllOrder = async () => {
   try {
     const responseTaxi = await axios.get(
-      "http://95.130.227.176:3003/api/order-taxi"
+      "http://95.130.227.176:3015/api/order-taxi"
     );
     const responseTruck = await axios.get(
-      "http://95.130.227.176:3003/api/order-truck"
+      "http://95.130.227.176:3015/api/order-truck"
     );
     options_all_data.value = [...responseTaxi.data, ...responseTruck.data];
   } catch (err) {

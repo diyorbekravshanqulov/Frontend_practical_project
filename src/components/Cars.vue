@@ -2,7 +2,10 @@
   <div>
     <Loading v-if="loading" class="w-full" />
     <div v-else-if="error" class="text-white w-full">{{ error }}</div>
-    <div v-if="!data?.driver_car?.length" class="flex items-center justify-center">
+    <div
+      v-if="!data?.driver_car?.length"
+      class="flex items-center justify-center"
+    >
       <p class="text-4xl text-gray-500 my-10">Mashina qo'shilmagan</p>
     </div>
     <div v-else>
@@ -38,7 +41,7 @@ const error = ref(null);
 const getCars = async () => {
   try {
     const response = await axios.get(
-      `http://95.130.227.176:3003/api/driver/${localStorage.getItem(
+      `http://95.130.227.176:3015/api/driver/${localStorage.getItem(
         "driver_id"
       )}`
     );

@@ -43,7 +43,7 @@
             </form>
             <div class="text-sm text-slate-500 mt-4">
               <!-- Didn't receive code? -->
-               Clear inputs
+              Clear inputs
               <a
                 @click="clearAllInputs"
                 class="font-medium text-primary/80 hover:text-primary/90"
@@ -68,11 +68,15 @@ const store = useStore();
 
 const router = useRouter();
 
-watch(() => store.driver_data, (datas) => {
-  if (!datas) {
-    router.push({ name: 'driver_regis' });
-  }
-}, { immediate: true});
+watch(
+  () => store.driver_data,
+  (datas) => {
+    if (!datas) {
+      router.push({ name: "driver_regis" });
+    }
+  },
+  { immediate: true }
+);
 
 const digits = ref(Array(4).fill(""));
 const submitButton = ref(null);
@@ -136,7 +140,7 @@ const handleSubmit = async () => {
   if (digits.value.join("") == "1111") {
     try {
       const response = await axios.post(
-        "http://95.130.227.176:3003/api/driver/signup",
+        "http://95.130.227.176:3015/api/driver/signup",
         store.driver_data,
         {
           headers: {

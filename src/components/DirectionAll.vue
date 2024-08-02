@@ -3,7 +3,10 @@
     <LoadingB />
   </div>
   <div v-if="error" class="text-white">{{ error }}</div>
-  <div v-if="options_all_data.length == 0" class="flex items-center justify-center">
+  <div
+    v-if="options_all_data.length == 0"
+    class="flex items-center justify-center"
+  >
     <p class="text-4xl text-gray-500 my-10">Faol buyurtmalar yo'q</p>
   </div>
   <div v-else class="">
@@ -54,7 +57,7 @@
             <Icon icon="mingcute:right-fill" class="text-primary inline" />
             <span
               class="text-[#707070] ml-1 text-[20px] max-md:text-[17px] font-medium"
-              >{{ item.distance ? calc(item.distance): '0' }} so'm</span
+              >{{ item.distance ? calc(item.distance) : "0" }} so'm</span
             >
           </p>
         </div>
@@ -64,7 +67,7 @@
 </template>
 
 <script setup>
-import LoadingB from './LoadingB.vue'
+import LoadingB from "./LoadingB.vue";
 import { ref, onMounted, computed } from "vue";
 import axios from "axios";
 import { Icon } from "@iconify/vue";
@@ -81,7 +84,7 @@ const options_all_data = ref([]);
 
 const calc = (dis) => {
   return Math.ceil(dis.split(" ")[0] / 100) * 5 + " " + "000";
-}
+};
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -112,10 +115,10 @@ const returnStatus = (status) => {
 const GetAllOrder = async () => {
   try {
     const responseTaxi = await axios.get(
-      "http://95.130.227.176:3003/api/order-taxi"
+      "http://95.130.227.176:3015/api/order-taxi"
     );
     const responseTruck = await axios.get(
-      "http://95.130.227.176:3003/api/order-truck"
+      "http://95.130.227.176:3015/api/order-truck"
     );
     options_all_data.value = [...responseTaxi.data, ...responseTruck.data];
   } catch (err) {
@@ -155,5 +158,4 @@ onMounted(() => {
 .textShadow:hover {
   text-shadow: 0 0px 5px white;
 }
-
 </style>

@@ -92,11 +92,11 @@ const registerDriver = async () => {
   }
   try {
     const response = await axios.post(
-      "http://95.130.227.176:3003/api/users/newOtp",
+      "http://95.130.227.176:3015/api/users/newOtp",
       { phone: user_data.value.phone }
     );
 
-    store.user_datas =  user_data.value
+    store.user_datas = user_data.value;
     console.log("user_data", response.data);
     router.push({ name: "passenger_verify" });
   } catch (error) {

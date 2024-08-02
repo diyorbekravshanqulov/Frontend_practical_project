@@ -176,7 +176,7 @@ const createCar = async () => {
     }
 
     const response = await axios.post(
-      "http://95.130.227.176:3003/api/car",
+      "http://95.130.227.176:3015/api/car",
       formData,
       {
         headers: {
@@ -185,10 +185,10 @@ const createCar = async () => {
       }
     );
     const responseCon = await axios.post(
-      "http://95.130.227.176:3003/api/driver-car",
+      "http://95.130.227.176:3015/api/driver-car",
       {
         carId: response.data.id,
-        driverId: +localStorage.getItem("driver_id")
+        driverId: +localStorage.getItem("driver_id"),
       }
     );
     console.log("response", response.data);

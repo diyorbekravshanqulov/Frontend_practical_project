@@ -109,7 +109,7 @@
 
     <DirectionAll v-if="activeButton == 'activeBtn3'" />
     <History v-if="activeButton == 'activeBtn1'" />
-    <Cars v-if="activeButton == 'activeBtn2'"  />
+    <Cars v-if="activeButton == 'activeBtn2'" />
   </div>
   <!--  -->
   <div v-if="data">
@@ -174,14 +174,14 @@ driver_id.value = localStorage.getItem("driver_id");
 const response = ref(null);
 const GetDriver = async () => {
   response.value = await axios.get(
-    `http://95.130.227.176:3003/api/driver/${driver_id.value}`
+    `http://95.130.227.176:3015/api/driver/${driver_id.value}`
   );
 };
 
 const responseBalance = ref(null);
 const GetBalance = async () => {
   responseBalance.value = await axios.get(
-    `http://95.130.227.176:3003/api/balance`
+    `http://95.130.227.176:3015/api/balance`
   );
 };
 
@@ -198,7 +198,7 @@ const UpdatePhoto = async () => {
       }
     }
     responseImg.value = await axios.patch(
-      `http://95.130.227.176:3003/api/driver/image/${localStorage.getItem(
+      `http://95.130.227.176:3015/api/driver/image/${localStorage.getItem(
         "driver_id"
       )}`,
       formData,
