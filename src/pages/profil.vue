@@ -1,9 +1,9 @@
 <template>
   <div class="bg-[#252831] w-full py-10">
-    <div class="container">
-      <div v-if="loading" class="text-white">Loading...</div>
-      <div v-if="error" class="text-white">{{ error }}</div>
-      <div v-else>
+    <div class="container flex justify-center h-full items-center w-full">
+      <Loading v-if="loading" class="w-full" />
+      <div v-else-if="error" class="text-white w-full">{{ error }}</div>
+      <div v-else class="w-full">
         <div class="flex flex-col gap-6 items-center relative">
           <div class="absolute w-full flex justify-end items-center">
             <Icon
@@ -12,24 +12,30 @@
               class="text-3xl text-white font-medium cursor-pointer"
             />
           </div>
-          <div v-if="data && data.photo" class="relative">
-            <img
-              :src="data.photo"
-              alt="driver_photo"
-              class="w-[160px] object-cover h-[160px] rounded-[10px] bg-cover"
+          <div v-if="data && data.photo" class="relative w-[160px] h-[160px]">
+            <Loading
+              v-if="loadingImg"
+              class="!absolute !top-1/2 !left-1/2 !-translate-x-1/2 !-translate-y-1/2  !rounded-[10px]"
             />
-            <Icon
-              @click="openFile1"
-              icon="ic:outline-photo-camera"
-              class="absolute duration-300 text-transparent cursor-pointer hover:backdrop-blur-sm hover:text-white top-1/2 left-1/2 -translate-x-1/2 p-10 -translate-y-1/2 hover:bg-white/30 w-full h-full rounded-[10px]"
-            />
-            <input
-              ref="fileInput1"
-              id="image"
-              class="hidden mt-1 p-[10px] text-sm placeholder-text-[#666] placeholder-font-normal rounded-md border-2 border-transparent focus:border-primary"
-              type="file"
-              @change="getValue"
-            />
+            <div v-else>
+              <img
+                :src="data.photo"
+                alt="driver_photo"
+                class="w-[160px] h-[160px] object-cover rounded-[10px] bg-cover"
+              />
+              <Icon
+                @click="openFile1"
+                icon="ic:outline-photo-camera"
+                class="absolute duration-300 text-transparent cursor-pointer hover:backdrop-blur-sm hover:text-white top-1/2 left-1/2 -translate-x-1/2 p-10 -translate-y-1/2 hover:bg-white/30 w-full h-full rounded-[10px]"
+              />
+              <input
+                ref="fileInput1"
+                id="image"
+                class="hidden mt-1 p-[10px] text-sm placeholder-text-[#666] placeholder-font-normal rounded-md border-2 border-transparent focus:border-primary"
+                type="file"
+                @change="getValue"
+              />
+            </div>
           </div>
           <div
             v-else
@@ -61,7 +67,7 @@
       <p class="font-medium text-3xl my-10">{{ $t("orders") }}</p>
       <button class="font-medium text-3xl">Mashina qo'shish</button>
       <!-- <p class="mt-[100px] text-[42px] max-md:hidden">{{ $t("direction") }}</p> -->
-      <!-- <div class="md:hidden">
+      <div class="md:hidden">
         <swiper
           :slidesPerView="2"
           :centeredSlides="true"
@@ -85,7 +91,7 @@
             </button>
           </swiper-slide>
         </swiper>
-      </div> -->
+      </div>
       <div
         class="flex md:w-full max-md:hidden mt-[52px] max-md:-mx-4 overflow-hidden max-md:overflow-auto scrollable-element gap-0 rounded-md shadow-lg"
       >
@@ -123,6 +129,7 @@
 </template>
 
 <script setup>
+import Loading from "../components/Loading.vue";
 import { Icon } from "@iconify/vue";
 import { ref, onMounted, watch } from "vue";
 import DirectionAll from "../components/DirectionAll.vue";
@@ -130,6 +137,13 @@ import DriverUpdate from "../components/Driver_Update.vue";
 import Back from "../components/back.vue";
 import axios from "axios";
 import { useStore } from "../store";
+import { Swiper, SwiperSlide } from "swiper/vue";
+import "swiper/css/navigation";
+import "swiper/css"; // Import Swiper styles
+import "swiper/css/pagination"; // Import Swiper pagination styles
+import { Autoplay, Pagination, Navigation } from "swiper/modules"; // Import Swiper pagination module
+
+const modules = [Autoplay, Pagination, Navigation];
 
 const store = useStore();
 const fileInput1 = ref(null);
@@ -137,6 +151,7 @@ const fileInput1 = ref(null);
 const data = ref(null);
 const dataBalance = ref(null);
 const loading = ref(true);
+const loadingImg = ref(false);
 const error = ref(null);
 const isEditModal = ref(false);
 
@@ -174,9 +189,10 @@ const GetBalance = async () => {
   );
 };
 
-const responseImg = ref(null)
+const responseImg = ref(null);
 
 const UpdatePhoto = async () => {
+  loadingImg.value = true
   try {
     const formData = new FormData();
     for (let key in user_data.value) {
@@ -200,6 +216,8 @@ const UpdatePhoto = async () => {
   } catch (error) {
     console.error("Error:", error);
     error.value = "Something went wrong. Please try again.";
+  } finally {
+    loadingImg.value = false;
   }
 };
 
@@ -219,7 +237,9 @@ const getDriverById = async () => {
   }
 };
 
-watch(() => isEditModal.value || responseImg?.value?.data, getDriverById, { immediate: true });
+watch(() => isEditModal.value || responseImg?.value?.data, getDriverById, {
+  immediate: true,
+});
 
 const filterBalance = () => {
   const balance = dataBalance.value.find(

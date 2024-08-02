@@ -1,5 +1,7 @@
 <template>
-  <div v-if="loading" class="text-white">Loading...</div>
+  <div v-if="loading" class="flex items-center justify-center h-[200px]">
+    <LoadingB />
+  </div>
   <div v-if="error" class="text-white">{{ error }}</div>
   <div v-else class="">
     <div class="container py-16">
@@ -45,11 +47,11 @@
             {{ item.from_district }} - {{ item.to_district }}
           </p>
           <p class="font-medium text-center text-2xl max-md:text-lg">
-            100 km
+            {{ item.distance }}
             <Icon icon="mingcute:right-fill" class="text-primary inline" />
             <span
               class="text-[#707070] ml-1 text-[20px] max-md:text-[17px] font-medium"
-              >5 000 (so‘m)</span
+              >{{ item.distance ? calc(item.distance): '0' }} so'm</span
             >
           </p>
         </div>
@@ -59,8 +61,10 @@
 </template>
 
 <script setup>
+import LoadingB from './LoadingB.vue'
 import { ref, onMounted, computed } from "vue";
 import axios from "axios";
+import { Icon } from "@iconify/vue";
 
 const loading = ref(true);
 const error = ref(null);
@@ -71,6 +75,10 @@ const option_name = ref([
   "Xizmat uchun to‘lov",
 ]);
 const options_all_data = ref([]);
+
+const calc = (dis) => {
+  return Math.ceil(dis.split(" ")[0] / 100) * 5 + " " + "000";
+}
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -144,4 +152,5 @@ onMounted(() => {
 .textShadow:hover {
   text-shadow: 0 0px 5px white;
 }
+
 </style>

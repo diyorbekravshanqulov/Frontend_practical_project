@@ -4,7 +4,7 @@
     :class="
       store.calen
         ? 'pb-[370px] max-md:pb-[200px]'
-        : 'max-md:pb-[150px] pb-[168px]'
+        : 'max-md:pb-[150px] pb-[200px]'
     "
   >
     <div class="container">

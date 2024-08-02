@@ -9,6 +9,11 @@ const scrollBehavior = () => {
 
 const routes = [
   {
+    path: "/:pathMatch(.*)*",
+    name: "not-found",
+    component: () => import("../pages/not-found.vue"),
+  },
+  {
     path: "/",
     component: () => import("../layouts/default.vue"),
     children: [
