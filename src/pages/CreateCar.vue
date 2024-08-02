@@ -49,7 +49,7 @@ w
           <!-- File inputs -->
           <div class="grid md:grid-cols-2 gap-5">
             <div>
-              <p class="text-white text-[17px] font-medium">Rasmingiz</p>
+              <p class="text-white text-[17px] font-medium">Mashina rasmi</p>
               <div
                 @click="openFile1"
                 class="flex mt-1 cursor-pointer rounded-md gap-7 px-3 py-2 items-center bg-white"
@@ -73,7 +73,7 @@ w
             <!-- -- -->
             <div>
               <p class="text-white text-[17px] font-medium">
-                Guvohnomazgiz rasmi
+                Tex passport
               </p>
               <div
                 @click="openFile2"
