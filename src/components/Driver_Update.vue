@@ -55,7 +55,7 @@
 <script setup>
 import axios from "axios";
 import { Icon } from "@iconify/vue";
-import { ref } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { toast } from "vue3-toastify";
 import { useRouter } from "vue-router";
 import "vue3-toastify/dist/index.css";
@@ -78,7 +78,13 @@ const isScaling = ref({
   last_name: false,
   address: false,
 });
-console.log("props", props.user_data);
+// console.log("props", props.user_data);
+
+const handleKeyPress = (event) => {
+  if (event.key === "Escape") {
+    emit("clicked");
+  }
+};
 
 const user_data = ref({
   first_name: props?.user_data?.first_name,
@@ -134,6 +140,14 @@ const handleInputChange = (key) => {
     isScaling.value[key] = false;
   }, 300);
 };
+
+onMounted(() => {
+  window.addEventListener('keydown', handleKeyPress);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeyPress);
+});
 </script>
 <style scoped>
 .scale-up {

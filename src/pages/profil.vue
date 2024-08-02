@@ -15,7 +15,7 @@
           <div v-if="data && data.photo" class="relative w-[160px] h-[160px]">
             <Loading
               v-if="loadingImg"
-              class="!absolute !top-1/2 !left-1/2 !-translate-x-1/2 !-translate-y-1/2  !rounded-[10px]"
+              class="!absolute !top-1/2 !left-1/2 !-translate-x-1/2 !-translate-y-1/2 !rounded-[10px]"
             />
             <div v-else>
               <img
@@ -63,57 +63,48 @@
   <div class="container pb-20 pt-10">
     <div v-if="loading" class="text-white">Loading...</div>
     <div v-if="error" class="text-white">{{ error }}</div>
-    <div v-else>
-      <p class="font-medium text-3xl my-10">{{ $t("orders") }}</p>
-      <button class="font-medium text-3xl">Mashina qo'shish</button>
-      <!-- <p class="mt-[100px] text-[42px] max-md:hidden">{{ $t("direction") }}</p> -->
-      <div class="md:hidden">
-        <swiper
-          :slidesPerView="2"
-          :centeredSlides="true"
-          :pagination="{
-            clickable: true,
+    <div v-else class="flex w-full justify-between items-center  my-10">
+      <div class="flex gap-10 items-center">
+        <button
+          class="font-medium border text-2xl border-l-transparent border-r-transparent border-t-transparent duration-300"
+          :class="{
+            ' border-b-2 border-gray-600':
+              activeButton === 'activeBtn1',
+            'text-gray-500  border-b-2 border-transparent hover:text-gray-900': activeButton !== 'activeBtn1',
           }"
-          :modules="modules"
-          class="md:hidden mt-[58px]"
+          @click="setActive('activeBtn1')"
         >
-          <swiper-slide v-for="(item, index) in day" :key="index">
-            <button
-              @click="selectButton(index)"
-              :class="
-                index === selectedButtonIndex
-                  ? 'bg-primary duration-300 text-white'
-                  : 'bg-white text-black'
-              "
-              class="py-7 rounded-md max-md:shadow-lg md:w-1/6 shrink-0 px-[35px] whitespace-nowrap"
-            >
-              {{ item }}
-            </button>
-          </swiper-slide>
-        </swiper>
-      </div>
-      <div
-        class="flex md:w-full max-md:hidden mt-[52px] max-md:-mx-4 overflow-hidden max-md:overflow-auto scrollable-element gap-0 rounded-md shadow-lg"
-      >
-        <div
-          class="flex max-md:w-screen md:divide-x max-md:gap-[6px] divide-[#313131] md:w-full"
+          Mening buyurtmalarim
+        </button>
+        <button
+          class="font-medium border text-2xl border-l-transparent border-r-transparent border-t-transparent duration-300"
+          :class="{
+            ' border-b-2 border-gray-600':
+              activeButton === 'activeBtn2',
+            'text-gray-500  border-b-2 border-transparent hover:text-gray-900': activeButton !== 'activeBtn2',
+          }"
+          @click="setActive('activeBtn2')"
         >
-          <button
-            v-for="(item, index) in day"
-            :key="index"
-            @click="selectButton(index)"
-            :class="
-              index === selectedButtonIndex
-                ? 'bg-primary duration-300 text-white'
-                : 'bg-white text-black'
-            "
-            class="py-7 text-[20px] max-md:shadow-lg md:w-1/6 shrink-0 px-[35px] whitespace-nowrap"
-          >
-            {{ item }}
-          </button>
-        </div>
+          Mening Mashinalarim
+        </button>
+        <button
+          class="font-medium border text-2xl border-l-transparent border-r-transparent border-t-transparent duration-300"
+          :class="{
+            ' border-b-2 border-gray-600':
+              activeButton === 'activeBtn3',
+            'text-gray-500  border-b-2 border-transparent hover:text-gray-900': activeButton !== 'activeBtn3',
+          }"
+          @click="setActive('activeBtn3')"
+        >
+          Faol buyurtmalar
+        </button>
       </div>
+      <button class="border px-4 py-1.5 border-gray-500 rounded-md text-lg duration-300 hover:bg-gray-500 hover:text-white">
+        Mashina qo'shish
+      </button>
     </div>
+    <!-- <button class="font-medium text-2xl">{{ $t("orders") }}</button> -->
+
     <DirectionAll />
   </div>
   <!--  -->
@@ -137,13 +128,6 @@ import DriverUpdate from "../components/Driver_Update.vue";
 import Back from "../components/back.vue";
 import axios from "axios";
 import { useStore } from "../store";
-import { Swiper, SwiperSlide } from "swiper/vue";
-import "swiper/css/navigation";
-import "swiper/css"; // Import Swiper styles
-import "swiper/css/pagination"; // Import Swiper pagination styles
-import { Autoplay, Pagination, Navigation } from "swiper/modules"; // Import Swiper pagination module
-
-const modules = [Autoplay, Pagination, Navigation];
 
 const store = useStore();
 const fileInput1 = ref(null);
@@ -155,13 +139,17 @@ const loadingImg = ref(false);
 const error = ref(null);
 const isEditModal = ref(false);
 
-const selectedButtonIndex = ref(0);
-
 const driver_id = ref(null);
 
 const user_data = ref({
   photo: null,
 });
+
+const activeButton = ref('activeBtn1'); // Default active button
+
+function setActive(buttonClass) {
+  activeButton.value = buttonClass;
+}
 
 const openFile1 = () => {
   if (fileInput1.value) {
@@ -192,7 +180,7 @@ const GetBalance = async () => {
 const responseImg = ref(null);
 
 const UpdatePhoto = async () => {
-  loadingImg.value = true
+  loadingImg.value = true;
   try {
     const formData = new FormData();
     for (let key in user_data.value) {
@@ -248,28 +236,9 @@ const filterBalance = () => {
   return balance ? balance.amount : "0";
 };
 
-const day = ref([
-  "10-Aprel.2021y",
-  "10-Aprel.2021y",
-  "10-Aprel.2021y",
-  "31-Aprel.2021y",
-  "31-Aprel.2021y",
-  "31-Aprel.2021y",
-  "10-Aprel.2021y",
-  "10-Aprel.2021y",
-  "10-Aprel.2021y",
-  "31-Aprel.2021y",
-  "31-Aprel.2021y",
-  "31-Aprel.2021y",
-]);
-
 onMounted(() => {
   getDriverById();
 });
-
-const selectButton = (index) => {
-  selectedButtonIndex.value = index;
-};
 </script>
 
 <style lang="scss" scoped></style>

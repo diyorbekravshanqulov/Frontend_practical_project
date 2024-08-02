@@ -21,14 +21,16 @@
       />
     </YandexMap>
     <div class="py-5 flex justify-center items-center">
-      <p class="px-5 py-2 border border-primary text-primary rounded-md">{{ info }} </p>
+      <p class="px-5 py-2 border border-primary text-primary rounded-md">
+        {{ info }}
+      </p>
       <p></p>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
 import { YandexMap, YandexMarker } from "vue-yandex-maps";
 import { useStore } from "../store";
 
@@ -42,7 +44,9 @@ const onClick = (e) => {
 };
 
 const info = computed(() => {
-  return `Latitude: ${coordinates.value[0].toFixed(2)}, Longitude: ${coordinates.value[1].toFixed(2)}`;
+  return `Latitude: ${coordinates.value[0].toFixed(
+    2
+  )}, Longitude: ${coordinates.value[1].toFixed(2)}`;
 });
 
 const lat = ref(0);
@@ -54,12 +58,26 @@ const getLocation = () => {
       lat.value = position.coords.latitude;
       lng.value = position.coords.longitude;
       console.log(lat.value, lng.value);
-      coordinates.value[0] = lat.value
-      coordinates.value[1] = lng.value
+      coordinates.value[0] = lat.value;
+      coordinates.value[1] = lng.value;
     });
   }
 };
-getLocation()
+getLocation();
+
+const handleKeyPress = (event) => {
+  if (event.key === "Escape") {
+    store.location = !store.location;
+  }
+};
+
+onMounted(() => {
+  window.addEventListener("keydown", handleKeyPress);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("keydown", handleKeyPress);
+});
 </script>
 
 <style>

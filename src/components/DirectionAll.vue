@@ -4,7 +4,7 @@
   </div>
   <div v-if="error" class="text-white">{{ error }}</div>
   <div v-else class="">
-    <div class="container py-16">
+    <div class="pt-16">
       <!-- options leave / direction / price -->
       <div
         class="grid grid-cols-4 max-md:-mr-4 gap-y-3 max-md:overflow-scroll scrollable-element"
