@@ -14,7 +14,9 @@
         :key="index"
         class="col-span-4 cursor-pointer mb-6 w-full max-md:w-[650px] grid grid-cols-4 py-[26px] rounded-md shadow-lg bg-white"
       >
-        <p>{{ item.car?.model }}</p>
+        <p class="font-medium text-center text-2xl max-md:text-lg">
+          {{ item.car?.model }}
+        </p>
         <p class="font-medium text-center text-2xl max-md:text-lg">
           {{ item.car?.color }}
         </p>
