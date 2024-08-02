@@ -3,7 +3,7 @@
     <div
       class="flex items-center justify-center"
     >
-      <p class="text-4xl text-gray-500 my-10">Faol buyurtmalar yo'q</p>
+      <p class="text-4xl text-gray-500 my-10">Buyurtmalar tarixi mavjud emas</p>
     </div>
   </div>
 </template>

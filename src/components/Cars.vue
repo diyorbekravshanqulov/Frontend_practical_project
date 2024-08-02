@@ -9,23 +9,41 @@
       <p class="text-4xl text-gray-500 my-10">Mashina qo'shilmagan</p>
     </div>
     <div v-else>
+      <div class="w-full max-md:w-[650px] gap-x-5 grid grid-cols-6 items-center">
+          <p
+            v-for="(item, index) in option_name"
+            :key="index"
+            class="text-[20px] text-center w-full"
+          >
+            {{ item }}
+          </p>
+        </div>
       <div
         v-for="(item, index) in data.driver_car"
         :key="index"
-        class="cursor-pointer my-3 w-full max-md:w-[650px] grid grid-cols-5 items-center p-3 rounded-md bg-white"
-        style="box-shadow: 0 0 5px 0 gray;"
+        class="cursor-pointer my-6 w-full max-md:w-[650px] gap-x-5 grid grid-cols-6 items-center p-3 rounded-md bg-white"
+        style="box-shadow: 0 0 5px 0 gray"
       >
-        <img :src="item.car?.photo" alt="car_image" class="rounded-md" />
-        <p class="font-medium text-center text-2xl max-md:text-lg">
+        <img
+          :src="item.car?.photo"
+          alt="car_image"
+          class="rounded-md h-[100px]"
+        />
+        <img
+          :src="item.car?.text_passport"
+          alt="car_image"
+          class="rounded-md h-[100px]"
+        />
+        <p class="line-clamp-1 font-medium text-center text-2xl max-md:text-lg">
           {{ item.car?.model }}
         </p>
-        <p class="font-medium text-center text-2xl max-md:text-lg">
+        <p class="line-clamp-1 font-medium text-center text-2xl max-md:text-lg">
           {{ item.car?.color }}
         </p>
-        <p class="text-center font-medium text-2xl max-md:text-lg">
+        <p class="line-clamp-1 text-center font-medium text-2xl max-md:text-lg">
           {{ item.car?.number }}
         </p>
-        <p class="font-medium text-center text-2xl max-md:text-lg">
+        <p class="line-clamp-1 font-medium text-center text-2xl max-md:text-lg">
           {{ item.car?.capacity }}
         </p>
       </div>
@@ -41,6 +59,15 @@ import Loading from "./Loading.vue";
 const data = ref(null);
 const loading = ref(true);
 const error = ref(null);
+
+const option_name = ref([
+  "Mashina rasmi",
+  "Tex passport",
+  "Model",
+  "Rangi",
+  "Raqami",
+  "Sig'imi",
+]);
 
 const getCars = async () => {
   try {
