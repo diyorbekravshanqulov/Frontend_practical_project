@@ -12,9 +12,10 @@
       <div
         v-for="(item, index) in data.driver_car"
         :key="index"
-        class="cursor-pointer mb-6 w-full max-md:w-[650px] grid grid-cols-5 items-center py-[26px] rounded-md shadow-lg bg-white"
+        class="cursor-pointer my-3 w-full max-md:w-[650px] grid grid-cols-5 items-center p-3 rounded-md bg-white"
+        style="box-shadow: 0 0 5px 0 gray;"
       >
-        <img :src="item.car?.photo" alt="car_image" />
+        <img :src="item.car?.photo" alt="car_image" class="rounded-md" />
         <p class="font-medium text-center text-2xl max-md:text-lg">
           {{ item.car?.model }}
         </p>
