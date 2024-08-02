@@ -1,22 +1,12 @@
-w<template>
-  <div
-    class="bg-no-repeat bg-cover max-md:h-full"
-    style="background-image: url('/register.png')"
-  >
-    <div class="container py-10">
-      <p class="text-[42px] font-medium text-white max-md:text-[20px]">
-        {{ $t("driverLog") }}
-      </p>
-      <div class="flex justify-center items-center mt-10">
+w
+<template>
+  <div class="py-5">
+    <div class="container relative">
+      <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <form
-          @submit.prevent="registerDriver"
-          class="backdrop-blur-sm rounded-md w-[600px] max-md:w-full md:px-[42px] md:py-11 px-[11px] py-[15px]"
-          style="background: rgba(185, 185, 185, 0.37)"
+          @submit.prevent="createCar"
+          class="bg-gray-800 rounded-[10px] w-[600px] max-md:w-full md:px-[42px] md:py-11 px-[11px] py-[15px]"
         >
-          <h2 class="text-white mb-10 text-2xl font-medium text-center">
-            Ro‘yxatdan o‘tish
-          </h2>
-
           <!-- Input fields -->
           <div class="grid md:grid-cols-2 gap-x-5">
             <label
@@ -111,19 +101,8 @@ w<template>
           <input
             type="submit"
             class="cursor-pointer p-[10px] w-full text-center text-white font-medium rounded-md bg-primary mt-10"
-            value="Ro'yxatdan o'tish"
+            value="Yaratish"
           />
-
-          <!-- Router link -->
-          <router-link
-            :to="{ name: 'driver_login' }"
-            class="block mt-5 text-white group"
-          >
-            Kirish
-            <span class="group-hover:ml-2 m-1 text-lg duration-300"
-              >&rarr;</span
-            >
-          </router-link>
         </form>
       </div>
     </div>
@@ -146,21 +125,19 @@ const switchPass = ref(true);
 const router = useRouter();
 
 const isScaling = ref({
-  first_name: false,
-  last_name: false,
-  phone: false,
-  password: false,
-  address: false,
+  model: false,
+  color: false,
+  number: false,
+  capacity: false,
 });
 
 const user_data = ref({
-  first_name: "",
-  last_name: "",
-  phone: "",
-  password: "",
-  address: "",
+  model: "",
+  color: "",
+  number: "",
   photo: null,
-  driver_license: null,
+  text_passport: null,
+  capacity: "",
 });
 
 const filename1 = ref("Choose a file ...");
@@ -188,10 +165,10 @@ const getValue = (event) => {
 
 const getValueDriver = (event) => {
   filename2.value = event.target.files[0].name;
-  user_data.value.driver_license = event.target.files[0];
+  user_data.value.text_passport = event.target.files[0];
 };
 
-const registerDriver = async () => {
+const createCar = async () => {
   try {
     const formData = new FormData();
     for (let key in user_data.value) {
@@ -199,12 +176,24 @@ const registerDriver = async () => {
     }
 
     const response = await axios.post(
-      "http://95.130.227.176:3003/api/driver/newOtp",
-      { phone: user_data.value.phone }
+      "http://95.130.227.176:3003/api/car",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
     );
-    store.driver_data =  formData
-    console.log("OTP sended successfully:", response.data);
-    router.push({ name: "driver_verify" });
+    const responseCon = await axios.post(
+      "http://95.130.227.176:3003/api/driver-car",
+      {
+        carId: response.data.id,
+        driverId: +localStorage.getItem("driver_id")
+      }
+    );
+    console.log("response", response.data);
+    console.log("responseCon", responseCon.data);
+    router.push({ name: "driver-profile" });
   } catch (error) {
     console.error("Error registering:", error);
     toast("Something went wrong!", {
@@ -217,25 +206,19 @@ const registerDriver = async () => {
 };
 
 const data = ref([
-  { label: "Ismi", type: "text", input: "Ism", key: "first_name" },
-  { label: "Familya", type: "text", input: "Familya", key: "last_name" },
+  { label: "Modeli", type: "text", input: "Model", key: "model" },
+  { label: "Rangi", type: "text", input: "Rangi", key: "color" },
   {
-    label: "Telfon raqam",
+    label: "Mashina raqami",
     type: "text",
-    input: "Sizning telfon raqamingiz",
-    key: "phone",
+    input: "Mashina raqami",
+    key: "number",
   },
   {
-    label: "Parol",
-    input: "Sizning parolingiz",
-    key: "password",
-    type: "password",
-  },
-  {
-    label: "Manzil",
-    input: "Manzilingizni kiriting",
+    label: "Mashina sig'imi",
+    input: "Mashina sig'imi",
+    key: "capacity",
     type: "text",
-    key: "address",
   },
 ]);
 

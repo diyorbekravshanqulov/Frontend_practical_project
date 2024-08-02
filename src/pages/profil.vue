@@ -63,14 +63,25 @@
   <div class="container pb-20 pt-10">
     <div v-if="loading" class="text-white">Loading...</div>
     <div v-if="error" class="text-white">{{ error }}</div>
-    <div v-else class="flex w-full justify-between items-center  my-10">
+    <div v-else class="flex w-full justify-between items-center my-10">
       <div class="flex gap-10 items-center">
         <button
           class="font-medium border text-2xl border-l-transparent border-r-transparent border-t-transparent duration-300"
           :class="{
-            ' border-b-2 border-gray-600':
-              activeButton === 'activeBtn1',
-            'text-gray-500  border-b-2 border-transparent hover:text-gray-900': activeButton !== 'activeBtn1',
+            ' border-b-2 border-gray-600': activeButton === 'activeBtn3',
+            'text-gray-500  border-b-2 border-transparent hover:text-gray-900':
+              activeButton !== 'activeBtn3',
+          }"
+          @click="setActive('activeBtn3')"
+        >
+          Faol buyurtmalar
+        </button>
+        <button
+          class="font-medium border text-2xl border-l-transparent border-r-transparent border-t-transparent duration-300"
+          :class="{
+            ' border-b-2 border-gray-600': activeButton === 'activeBtn1',
+            'text-gray-500  border-b-2 border-transparent hover:text-gray-900':
+              activeButton !== 'activeBtn1',
           }"
           @click="setActive('activeBtn1')"
         >
@@ -79,33 +90,29 @@
         <button
           class="font-medium border text-2xl border-l-transparent border-r-transparent border-t-transparent duration-300"
           :class="{
-            ' border-b-2 border-gray-600':
-              activeButton === 'activeBtn2',
-            'text-gray-500  border-b-2 border-transparent hover:text-gray-900': activeButton !== 'activeBtn2',
+            ' border-b-2 border-gray-600': activeButton === 'activeBtn2',
+            'text-gray-500  border-b-2 border-transparent hover:text-gray-900':
+              activeButton !== 'activeBtn2',
           }"
           @click="setActive('activeBtn2')"
         >
           Mening Mashinalarim
         </button>
-        <button
-          class="font-medium border text-2xl border-l-transparent border-r-transparent border-t-transparent duration-300"
-          :class="{
-            ' border-b-2 border-gray-600':
-              activeButton === 'activeBtn3',
-            'text-gray-500  border-b-2 border-transparent hover:text-gray-900': activeButton !== 'activeBtn3',
-          }"
-          @click="setActive('activeBtn3')"
-        >
-          Faol buyurtmalar
-        </button>
       </div>
-      <button class="border px-4 py-1.5 border-gray-500 rounded-md text-lg duration-300 hover:bg-gray-500 hover:text-white">
+      <button
+        @click="router.push('/create-car')"
+        class="border px-4 py-1.5 border-gray-500 rounded-md text-lg duration-300 hover:bg-gray-500 hover:text-white"
+      >
         Mashina qo'shish
       </button>
     </div>
-    <!-- <button class="font-medium text-2xl">{{ $t("orders") }}</button> -->
 
-    <DirectionAll />
+    <div
+      :class="activeButton == 'activeBtn3' ? 'scale-100' : 'scale-0'"
+      class="duration-300"
+    >
+      <DirectionAll />
+    </div>
   </div>
   <!--  -->
   <div v-if="data">
@@ -128,9 +135,11 @@ import DriverUpdate from "../components/Driver_Update.vue";
 import Back from "../components/back.vue";
 import axios from "axios";
 import { useStore } from "../store";
+import { useRouter } from "vue-router";
 
 const store = useStore();
 const fileInput1 = ref(null);
+const router = useRouter();
 
 const data = ref(null);
 const dataBalance = ref(null);
@@ -145,7 +154,7 @@ const user_data = ref({
   photo: null,
 });
 
-const activeButton = ref('activeBtn1'); // Default active button
+const activeButton = ref("activeBtn3"); // Default active button
 
 function setActive(buttonClass) {
   activeButton.value = buttonClass;

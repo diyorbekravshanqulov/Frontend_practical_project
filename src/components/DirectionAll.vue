@@ -3,6 +3,9 @@
     <LoadingB />
   </div>
   <div v-if="error" class="text-white">{{ error }}</div>
+  <div v-if="options_all_data.length == 0" class="flex items-center justify-center">
+    <p class="text-4xl text-gray-500 my-10">Faol buyurtmalar yo'q</p>
+  </div>
   <div v-else class="">
     <div class="pt-16">
       <!-- options leave / direction / price -->
