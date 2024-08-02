@@ -107,12 +107,9 @@
       </button>
     </div>
 
-    <div
-      :class="activeButton == 'activeBtn3' ? 'scale-100' : 'scale-0'"
-      class="duration-300"
-    >
-      <DirectionAll />
-    </div>
+    <DirectionAll v-if="activeButton == 'activeBtn3'" />
+    <History v-if="activeButton == 'activeBtn1'" />
+    <Cars v-if="activeButton == 'activeBtn2'"  />
   </div>
   <!--  -->
   <div v-if="data">
@@ -131,6 +128,8 @@ import Loading from "../components/Loading.vue";
 import { Icon } from "@iconify/vue";
 import { ref, onMounted, watch } from "vue";
 import DirectionAll from "../components/DirectionAll.vue";
+import History from "../components/History.vue";
+import Cars from "../components/Cars.vue";
 import DriverUpdate from "../components/Driver_Update.vue";
 import Back from "../components/back.vue";
 import axios from "axios";
