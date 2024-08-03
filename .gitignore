@@ -12,6 +12,8 @@ dist
 dist-ssr
 *.local
 sms.txt
+district_uz.js
+district_ru.js
 
 # Editor directories and files
 .vscode/*

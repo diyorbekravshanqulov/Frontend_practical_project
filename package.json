@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
+    "@vue/compiler-sfc": "^3.4.35",
     "axios": "^1.7.2",
     "flowbite": "^2.4.1",
     "flowbite-vue": "^0.1.5",
