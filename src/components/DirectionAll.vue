@@ -40,19 +40,20 @@
               'text-2xl': true,
               'max-md:text-lg': true,
             }"
+            class="border-b"
           >
             {{ item.status ? returnStatus(item.status) : "" }}
           </p>
-          <p class="font-medium text-center text-2xl max-md:text-lg">
+          <p class="font-medium border-b text-center text-2xl max-md:text-lg">
             {{ item.date ? formatHours(item.date) : "" }}
             <span class="text-center font-normal md:text-[22px]">{{
               item.date ? formatDate(item.date) : ""
             }}</span>
           </p>
-          <p class="text-center font-medium text-2xl max-md:text-lg">
+          <p class="text-center border-b font-medium text-2xl max-md:text-lg">
             {{ item.from_district }} - {{ item.to_district }}
           </p>
-          <p class="font-medium text-center text-2xl max-md:text-lg">
+          <p class="font-medium border-b text-center text-2xl max-md:text-lg">
             {{ item.distance }}
             <Icon icon="mingcute:right-fill" class="text-primary inline" />
             <span
@@ -60,6 +61,12 @@
               >{{ item.distance ? calc(item.distance) : "0" }} so'm</span
             >
           </p>
+          <div class="col-span-4 w-full max-md:w-[650px] grid grid-cols-4 py-[26px] rounded-md  bg-white" >
+            <p>{{ item?.User?.phone }}</p>
+            <p>{{ item?.User?.name }}</p>
+            <p>{{ item?.User?.phone }}</p>
+            <p>{{ item?.User?.phone }}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -68,7 +75,7 @@
 
 <script setup>
 import LoadingB from "./LoadingB.vue";
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted } from "vue";
 import axios from "axios";
 import { Icon } from "@iconify/vue";
 

@@ -58,6 +58,7 @@ store.calen = isDropdownOpen.value;
 
 const func = () => {
   const selectedDate = date.value;
+  const isoString = selectedDate.toISOString();
   const today = new Date();
 
   // Reset time to compare only date parts
@@ -70,7 +71,7 @@ const func = () => {
     const year = String(selectedDate.getFullYear());
     const month = String(selectedDate.getMonth() + 1).padStart(2, "0");
     const day = String(selectedDate.getDate()).padStart(2, "0");
-    localStorage.setItem("date", `${year}-${month}-${day}`)
+    localStorage.setItem("date", isoString)
     store.setDatePin = `${year}-${month}-${day}`;
   } else {
     toast("Please select today or a future date!", {
