@@ -50,11 +50,33 @@
             >
               {{ data?.first_name }} {{ data?.last_name }}
             </p>
+            <p :class="data?.phone? '': 'hidden'" class="text-[#E7E4E4] mt-2 text-center text-xl max-md:text-sm">
+              {{ data ? phoneFormat(data?.phone): "" }}
+            </p>
 
             <p class="text-[#E7E4E4] mt-2 text-center text-xl max-md:text-sm">
               Balance: {{ dataBalance ? filterBalance() : "0" }} so'm
             </p>
           </div>
+          <form
+            @submit.prevent="updateBalance"
+            class="absolute bottom-0 left-0"
+          >
+            <label
+              class="text-white flex flex-col gap-5 items-start justify-center text-lg"
+              >Balance qo'shish
+              <input
+                v-model="updateedB"
+                type="number"
+                class="rounded-md focus:ring-0 outline-transparent border-none bg-white/30 p-2 px-3"
+              />
+              <input
+                type="submit"
+                value="Qo'shish"
+                class="rounded-md px-6 py-2 bg-white/30 cursor-pointer hover:bg-white/15 duration-300"
+              />
+            </label>
+          </form>
         </div>
       </div>
     </div>
@@ -148,10 +170,25 @@ const error = ref(null);
 const isEditModal = ref(false);
 
 const driver_id = ref(null);
+const balance = ref(null);
+
+const updateedB = ref(5000);
 
 const user_data = ref({
   photo: null,
 });
+
+const phoneFormat = (phone) => {
+  const cleaned = ('' + phone).replace(/\D/g, '');
+
+  if (cleaned.length === 12 && cleaned.startsWith('998')) {
+    const match = cleaned.match(/^(\d{3})(\d{2})(\d{3})(\d{2})(\d{2})$/);
+    if (match) {
+      return `+${match[1]} ${match[2]} ${match[3]} ${match[4]} ${match[5]}`;
+    }
+  }  
+  return phone;
+}
 
 const activeButton = ref("activeBtn3"); // Default active button
 
@@ -170,6 +207,26 @@ const getValue = (event) => {
 };
 
 driver_id.value = localStorage.getItem("driver_id");
+console.log(driver_id.value);
+
+const reponseBalance = ref(null)
+const updateBalance = async () => {
+  try {
+    const today = new Date();
+    const isoString = today.toISOString();
+    reponseBalance.value = await axios.patch(
+      `http://95.130.227.176:3015/api/balance/${balance.value.id}`,
+      {
+        amount: updateedB.value,
+        driverId: +driver_id.value,
+        date: isoString
+      }
+    );
+    console.log("responseBalance", reponseBalance.value.data);
+  } catch (error) {
+    error.value = "Something went wrong. Please try again.";
+  }
+};
 
 const response = ref(null);
 const GetDriver = async () => {
@@ -233,15 +290,15 @@ const getDriverById = async () => {
   }
 };
 
-watch(() => isEditModal.value || responseImg?.value?.data, getDriverById, {
+watch(() => isEditModal.value || responseImg?.value?.data || reponseBalance?.value?.data, getDriverById, {
   immediate: true,
 });
 
 const filterBalance = () => {
-  const balance = dataBalance.value.find(
+  balance.value = dataBalance.value.find(
     (item) => item.driverId == driver_id.value
   );
-  return balance ? balance.amount : "0";
+  return balance.value ? balance.value.amount : "0";
 };
 
 onMounted(() => {
@@ -249,4 +306,8 @@ onMounted(() => {
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+input {
+  outline: none;
+}
+</style>

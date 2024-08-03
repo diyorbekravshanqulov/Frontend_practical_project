@@ -138,6 +138,8 @@ console.log("pinia", store.driver_data);
 
 const handleSubmit = async () => {
   if (digits.value.join("") == "1111") {
+    const today = new Date();
+    const isoString = today.toISOString();
     try {
       const response = await axios.post(
         "http://95.130.227.176:3015/api/driver/signup",
@@ -148,6 +150,11 @@ const handleSubmit = async () => {
           },
         }
       );
+      await axios.post("http://95.130.227.176:3015/api/balance", {
+        amount: 0.1,
+        driverId: response.data.newDriver.id,
+        date: isoString,
+      });
       console.log("Registration successful:", response.data);
       localStorage.setItem("access_token", response.data.access_token);
       localStorage.setItem("refresh_token", response.data.refresh_token);
