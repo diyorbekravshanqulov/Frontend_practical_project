@@ -21,7 +21,7 @@
             <input
               v-model="user_data[item.key]"
               class="block mt-1 w-full md:w-[406px] p-[10px] text-sm duration-300 placeholder:text-[#666] placeholder:font-normal rounded-md border-2 border-primary focus:border-primary outline-none focus:ring-0"
-              :type="getInputType(item.key, item.type)"
+              :type="getInputType(item.key)"
               :placeholder="item.input"
               :id="item.key"
               :class="[
@@ -33,7 +33,7 @@
             <Icon
               @click.stop="toggleVisibility(item.key)"
               :icon="getIconType(item.key)"
-              v-if="item.type == 'password'"
+              v-if="item.type === 'password'"
               class="absolute z-10 top-1/2 right-0 -translate-x-3 cursor-pointer text-2xl text-black"
             />
           </label>
@@ -56,7 +56,6 @@
     </div>
   </div>
 </template>
-
 <script setup>
 import axios from "axios";
 import { ref } from "vue";
@@ -65,11 +64,7 @@ import { useRouter } from "vue-router";
 import { useStore } from "../../store";
 
 const store = useStore();
-
 const router = useRouter();
-
-const passwordVisible = ref(false);
-const confirmPasswordVisible = ref(false);
 
 const isScaling = ref({
   name: false,
@@ -83,6 +78,11 @@ const user_data = ref({
   phone: "",
   password: "",
   confirm_password: "",
+});
+
+const visibility = ref({
+  password: false,
+  confirm_password: false,
 });
 
 const registerDriver = async () => {
@@ -128,38 +128,25 @@ const data = ref([
 ]);
 
 const toggleVisibility = (key) => {
-  toggleSwitchPass();
-  if (key === "password") {
-    passwordVisible.value = !passwordVisible.value;
-  } else if (key === "confirm_password") {
-    confirmPasswordVisible.value = !confirmPasswordVisible.value;
+  if (key === "password" || key === "confirm_password") {
+    visibility.value[key] = !visibility.value[key];
   }
 };
 
-const getInputType = (key, type) => {
-  if (type !== "password") return type;
-  if (key === "password") return passwordVisible.value ? "text" : "password";
-  if (key === "confirm_password")
-    return confirmPasswordVisible.value ? "text" : "password";
+const getInputType = (key) => {
+  if (key === "password" || key === "confirm_password") {
+    return visibility.value[key] ? "text" : "password";
+  }
+  return "text"; // Default type
 };
 
 const getIconType = (key) => {
-  if (key === "password")
-    return passwordVisible.value
+  if (key === "password" || key === "confirm_password") {
+    return visibility.value[key]
       ? "fluent:eye-24-regular"
       : "fluent:eye-off-24-regular";
-  if (key === "confirm_password")
-    return confirmPasswordVisible.value
-      ? "fluent:eye-24-regular"
-      : "fluent:eye-off-24-regular";
-};
-
-const toggleSwitchPass = () => {
-  isScaling.value.password = true;
-  setTimeout(() => {
-    isScaling.value.password = false;
-  }, 300);
-  switchPass.value = !switchPass.value;
+  }
+  return "";
 };
 
 const handleInputChange = (key) => {
@@ -169,6 +156,7 @@ const handleInputChange = (key) => {
   }, 300);
 };
 </script>
+
 <style scoped>
 .scale-up {
   transform: scale(1.05);
