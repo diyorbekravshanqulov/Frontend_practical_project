@@ -20,12 +20,7 @@
         class="w-full h-full"
       />
     </YandexMap>
-    <div class="py-5 flex justify-center items-center">
-      <p class="px-5 py-2 border border-primary text-primary rounded-md">
-        {{ info }}
-      </p>
-      <p></p>
-    </div>
+
   </div>
 </template>
 
@@ -38,10 +33,8 @@ const store = useStore();
 
 const coordinates = ref([55, 33]);
 
-const onClick = (e) => {
-  coordinates.value = e.get("coords");
-  console.log(coordinates.value);
-};
+const lat = ref(0);
+const lng = ref(0);
 
 const info = computed(() => {
   return `Latitude: ${coordinates.value[0].toFixed(
@@ -49,21 +42,26 @@ const info = computed(() => {
   )}, Longitude: ${coordinates.value[1].toFixed(2)}`;
 });
 
-const lat = ref(0);
-const lng = ref(0);
-
 const getLocation = () => {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
       lat.value = position.coords.latitude;
       lng.value = position.coords.longitude;
-      console.log(lat.value, lng.value);
       coordinates.value[0] = lat.value;
       coordinates.value[1] = lng.value;
     });
   }
 };
 getLocation();
+
+const onClick = (e) => {
+  coordinates.value = e.get("coords");
+  console.log(coordinates.value[0]);
+  localStorage.setItem("location", `${coordinates.value[0]},${coordinates.value[1]}`)
+};
+
+
+
 
 const handleKeyPress = (event) => {
   if (event.key === "Escape") {

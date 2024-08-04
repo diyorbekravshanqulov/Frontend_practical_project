@@ -98,6 +98,17 @@
         >
           Faol buyurtmalar
         </button>
+         <button
+          class="font-medium border text-2xl border-l-transparent border-r-transparent border-t-transparent duration-300"
+          :class="{
+            ' border-b-2 border-gray-600': activeButton === 'activeBtn4',
+            'text-gray-500  border-b-2 border-transparent hover:text-gray-900':
+              activeButton !== 'activeBtn4',
+          }"
+          @click="setActive('activeBtn4')"
+        >
+          Mening buyurtmalarim
+        </button>
         <button
           class="font-medium border text-2xl border-l-transparent border-r-transparent border-t-transparent duration-300"
           :class="{
@@ -107,8 +118,9 @@
           }"
           @click="setActive('activeBtn1')"
         >
-          Mening buyurtmalarim
+          Buyurtmalar tarixi
         </button>
+        
         <button
           class="font-medium border text-2xl border-l-transparent border-r-transparent border-t-transparent duration-300"
           :class="{
@@ -131,6 +143,7 @@
 
     <DirectionAll v-if="activeButton == 'activeBtn3'" />
     <History v-if="activeButton == 'activeBtn1'" />
+    <MyOrders v-if="activeButton == 'activeBtn4'" />
     <Cars v-if="activeButton == 'activeBtn2'" />
   </div>
   <!--  -->
@@ -151,6 +164,7 @@ import { Icon } from "@iconify/vue";
 import { ref, onMounted, watch } from "vue";
 import DirectionAll from "../components/DirectionAll.vue";
 import History from "../components/History.vue";
+import MyOrders from "../components/MyOrders.vue";
 import Cars from "../components/Cars.vue";
 import DriverUpdate from "../components/Driver_Update.vue";
 import Back from "../components/back.vue";

@@ -80,11 +80,7 @@ const isScaling = ref({
 });
 // console.log("props", props.user_data);
 
-const handleKeyPress = (event) => {
-  if (event.key === "Escape") {
-    emit("clicked");
-  }
-};
+
 
 const user_data = ref({
   first_name: props?.user_data?.first_name,
@@ -141,13 +137,6 @@ const handleInputChange = (key) => {
   }, 300);
 };
 
-onMounted(() => {
-  window.addEventListener("keydown", handleKeyPress);
-});
-
-onUnmounted(() => {
-  window.removeEventListener("keydown", handleKeyPress);
-});
 </script>
 <style scoped>
 .scale-up {
