@@ -93,7 +93,8 @@ const u_data = ref({
   from_district: localStorage.getItem("from"),
   to_district: localStorage.getItem("to"),
   date: localStorage.getItem("date").split(".").join("-"),
-  capacity: null,
+  location: localStorage.getItem("location"),
+  capacity: 0,
   description: "",
 });
 
