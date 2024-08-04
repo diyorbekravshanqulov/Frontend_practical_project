@@ -8,20 +8,25 @@
     >
       <p class="text-4xl text-gray-500 my-10">Mashina qo'shilmagan</p>
     </div>
-    <div v-else>
-      <div class="w-full max-md:w-[650px] gap-x-5 grid grid-cols-6 items-center">
-          <p
-            v-for="(item, index) in option_name"
-            :key="index"
-            class="text-[20px] text-center w-full"
-          >
-            {{ item }}
-          </p>
-        </div>
+    <div
+      v-else
+      class="grid grid-cols-4 w-full max-md:-mr-4 gap-y-3 max-md:overflow-scroll scrollable-element"
+    >
+      <div
+        class="col-span-4 w-full max-md:w-[1000px] gap-x-5 grid grid-cols-6 items-center"
+      >
+        <p
+          v-for="(item, index) in option_name"
+          :key="index"
+          class="text-[20px] text-center w-full"
+        >
+          {{ item }}
+        </p>
+      </div>
       <div
         v-for="(item, index) in data.driver_car"
         :key="index"
-        class="cursor-pointer my-6 w-full max-md:w-[650px] gap-x-5 grid grid-cols-6 items-center p-3 rounded-md bg-white"
+        class="col-span-4 cursor-pointer my-6 w-full max-md:w-[1000px] gap-x-5 grid grid-cols-6 items-center p-3 rounded-md bg-white"
         style="box-shadow: 0 0 5px 0 gray"
       >
         <img

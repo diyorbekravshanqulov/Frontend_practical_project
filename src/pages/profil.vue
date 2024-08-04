@@ -60,7 +60,7 @@
           </div>
           <form
             @submit.prevent="updateBalance"
-            class="absolute bottom-0 left-0"
+            class="md:absolute bottom-0 left-0"
           >
             <label
               class="text-white flex flex-col gap-5 items-start justify-center text-lg"
@@ -73,7 +73,7 @@
               <input
                 type="submit"
                 value="Qo'shish"
-                class="rounded-md px-6 py-2 bg-white/30 cursor-pointer hover:bg-white/15 duration-300"
+                class="rounded-md max-md:w-full px-6 py-2 bg-white/30 cursor-pointer hover:bg-white/15 duration-300"
               />
             </label>
           </form>
@@ -85,10 +85,10 @@
   <div class="container pb-20 pt-10">
     <div v-if="loading" class="text-white">Loading...</div>
     <div v-if="error" class="text-white">{{ error }}</div>
-    <div v-else class="flex w-full justify-between items-center my-10">
-      <div class="flex gap-10 items-center">
+    <div v-else class="flex w-full max-md:flex-col justify-between items-center md:my-10 ">
+      <div class="flex mdgap-10 gap-5 max-md:shrink-0 max-md:flex-col  items-center">
         <button
-          class="font-medium border text-2xl border-l-transparent border-r-transparent border-t-transparent duration-300"
+          class="font-medium border md:text-2xl text-lg border-l-transparent border-r-transparent border-t-transparent duration-300"
           :class="{
             ' border-b-2 border-gray-600': activeButton === 'activeBtn3',
             'text-gray-500  border-b-2 border-transparent hover:text-gray-900':
@@ -99,7 +99,7 @@
           Faol buyurtmalar
         </button>
          <button
-          class="font-medium border text-2xl border-l-transparent border-r-transparent border-t-transparent duration-300"
+          class="font-medium border md:text-2xl text-lg border-l-transparent border-r-transparent border-t-transparent duration-300"
           :class="{
             ' border-b-2 border-gray-600': activeButton === 'activeBtn4',
             'text-gray-500  border-b-2 border-transparent hover:text-gray-900':
@@ -110,7 +110,7 @@
           Mening buyurtmalarim
         </button>
         <button
-          class="font-medium border text-2xl border-l-transparent border-r-transparent border-t-transparent duration-300"
+          class="font-medium border md:text-2xl text-lg border-l-transparent border-r-transparent border-t-transparent duration-300"
           :class="{
             ' border-b-2 border-gray-600': activeButton === 'activeBtn1',
             'text-gray-500  border-b-2 border-transparent hover:text-gray-900':
@@ -122,7 +122,7 @@
         </button>
         
         <button
-          class="font-medium border text-2xl border-l-transparent border-r-transparent border-t-transparent duration-300"
+          class="font-medium border md:text-2xl text-lg border-l-transparent border-r-transparent border-t-transparent duration-300"
           :class="{
             ' border-b-2 border-gray-600': activeButton === 'activeBtn2',
             'text-gray-500  border-b-2 border-transparent hover:text-gray-900':
@@ -135,7 +135,7 @@
       </div>
       <button
         @click="router.push('/create-car')"
-        class="border px-4 py-1.5 border-gray-500 rounded-md text-lg duration-300 hover:bg-gray-500 hover:text-white"
+        class="border px-4 py-1.5 max-md:my-10 border-gray-500 rounded-md text-lg duration-300 hover:bg-gray-500 hover:text-white"
       >
         Mashina qo'shish
       </button>

@@ -2,10 +2,10 @@ w
 <template>
   <div class="py-5">
     <div class="container relative">
-      <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <div class="fixed top-1/2 left-1/2 max-md:w-full -translate-x-1/2 -translate-y-1/2">
         <form
           @submit.prevent="createCar"
-          class="bg-gray-800 rounded-[10px] w-[600px] max-md:w-full md:px-[42px] md:py-11 px-[11px] py-[15px]"
+          class="bg-gray-800 md:rounded-[10px] w-[600px] max-md:w-full md:px-[42px] md:py-11 px-[11px] py-[15px]"
         >
           <!-- Input fields -->
           <div class="grid md:grid-cols-2 gap-x-5">
