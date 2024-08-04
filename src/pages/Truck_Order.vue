@@ -92,7 +92,7 @@ const u_data = ref({
   recipient_phone: "",
   from_district: localStorage.getItem("from"),
   to_district: localStorage.getItem("to"),
-  date: localStorage.getItem("date").split(".").join("-"),
+  date: localStorage.getItem("date"),
   location: localStorage.getItem("location"),
   capacity: 0,
   description: "",
