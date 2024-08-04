@@ -54,6 +54,7 @@ const getLocation = () => {
 };
 getLocation();
 
+localStorage.setItem("location", `${coordinates.value[0]},${coordinates.value[1]}`)
 const onClick = (e) => {
   coordinates.value = e.get("coords");
   console.log(coordinates.value[0]);
