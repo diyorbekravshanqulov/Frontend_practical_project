@@ -68,7 +68,7 @@
               >{{ item.distance ? calc(item.distance) : "0" }} so'm</span
             >
           </p>
-          <div class="col-span-4 flex justify-between max-md:w-[650px] mt-3">
+          <div class="col-span-4 grid grid-cols-5 justify-center items-center max-md:w-[650px] mt-3">
             <p
               v-for="(item, index) in option_name2"
               :key="index"
@@ -108,7 +108,7 @@
                 type="button"
                 class="border font-medium text-primary border-primary rounded-md px-8 py-[11px]"
               >
-                {{ item.status == "onroad" ?'Tugatish' : "Yo'lga chiqish"}}
+                {{ item.status == "onroad" ? "Tugatish" : "Yo'lga chiqish" }}
               </button>
             </div>
           </div>
@@ -174,7 +174,10 @@ const returnStatus = (status) => {
 // Computed property to filter out 'finished' statuses
 const filteredOptions = computed(() =>
   options_all_data.value.filter(
-    (item) => item.status !== "finished" && item.status !== "new"
+    (item) =>
+      item.status !== "finished" &&
+      item.status !== "new" &&
+      item.driverId == +localStorage.getItem("driver_id")
   )
 );
 

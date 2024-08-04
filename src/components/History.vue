@@ -156,7 +156,11 @@ const GetAllOrder = async () => {
 };
 
 const filteredData = computed(() => {
-  return options_all_data.value.filter((item) => item.status === "finished");
+  return options_all_data.value.filter(
+    (item) =>
+      item.status === "finished" &&
+      item.driverId == +localStorage.getItem("driver_id")
+  );
 });
 
 const updateStatus = async (id) => {

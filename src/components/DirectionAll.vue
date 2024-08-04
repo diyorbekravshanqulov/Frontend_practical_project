@@ -64,6 +64,15 @@
               {{ item?.distance ? calc(item?.distance) : "0" }} so'm
             </span>
           </p>
+          <div class="col-span-4 grid grid-cols-5 justify-center items-center max-md:w-[650px] mt-3">
+            <p
+              v-for="(item, index) in option_name2"
+              :key="index"
+              class="text-[20px] border-b pb-3 text-center w-full"
+            >
+              {{ item }}
+            </p>
+          </div>
           <div
             class="col-span-4 w-full max-md:w-[650px] grid grid-cols-5 justify-center mt-5 items-center rounded-md bg-white"
           >
@@ -87,7 +96,7 @@
             </div>
             <locationDr :data="item?.location" />
             <p class="text-center text-xl text-wrap max-md:text-lg font-medium">
-              {{ item?.description ? item?.description  :  "no comment"  }}
+              {{ item?.description ? item?.description : "no comment" }}
             </p>
             <div class="max-md:w-full mx-auto items-center max-md:flex">
               <button
@@ -122,6 +131,9 @@ const option_name = ref([
   "Yo‘nalish nomi",
   "Xizmat uchun to‘lov",
 ]);
+
+const option_name2 = ref(["Telefon raqam", "Mijoz ismi", "Joylashuvi", "Izoh"]);
+
 const options_all_data = ref([]);
 
 const calc = (dis) => {
@@ -157,11 +169,13 @@ const GetAllOrder = async () => {
     loading.value = false;
   }
 };
-const option_data = ref(null)
+const option_data = ref(null);
 
 const filteredData = computed(() => {
-  option_data.value =  options_all_data.value.filter((item) => item.status === "new");
-  return option_data.value
+  option_data.value = options_all_data.value.filter(
+    (item) => item.status === "new"
+  );
+  return option_data.value;
 });
 
 const updateStatus = async (id) => {
@@ -169,6 +183,10 @@ const updateStatus = async (id) => {
     await axios.patch(
       `http://95.130.227.176:3015/api/order-taxi/update-status/${id}`,
       { status: "waiting" }
+    );
+    await axios.patch(
+      `http://95.130.227.176:3015/api/order-taxi/${id}`,
+      { driverId: +localStorage.getItem("driver_id") }
     );
     // Optionally, refresh the list after update
     await GetAllOrder();
