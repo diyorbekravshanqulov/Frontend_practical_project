@@ -1,6 +1,6 @@
 <template>
   <div class="bg-slate-50 md:h-full py-10 max-md:pb-[220px] max-md:pt-[100px]">
-    <div class="md:container pb-40">
+    <div class="md:container pb-44">
       <div
         class="flex max-md:flex-col px-4 max-md:gap-[8px] items-center md:justify-between"
       >
@@ -32,13 +32,13 @@
       </div>
 
       <form
-        class="w-full max-md:mt-10 max-md:gap-y-4 gap-y-10 gap-x-10 rounded-[50px] grid md:grid-cols-3 border border-primary bg-white mt-[50px] p-20 max-md:py-6 max-md:px-4 max-md:rounded-md"
+        class="w-full max-md:mt-10 max-md:gap-y-4 gap-y-10 gap-x-10 rounded-[50px] md:grid grid-cols-3 max-md:flex max-md:flex-col border border-primary bg-white mt-[50px] p-20 max-md:py-6 max-md:px-4 max-md:rounded-md"
         action=""
       >
         <label
           v-for="(item, index) in data"
           :key="index"
-          class="text-sm font-medium"
+          class="text-sm font-medium w-full block"
         >
           {{ item.label }}
           <input
@@ -52,7 +52,6 @@
           name=""
           v-model="u_data.description"
           rows="3"
-          cols="1"
           class="col-span-3 focus:border-primary focus:ring-0 p-2 mt-[5px] font-normal border border-primary rounded-md"
         ></textarea>
         <div class="max-md:w-full justify-between items-center max-md:flex">
