@@ -29,7 +29,7 @@
           </div>
         </div>
         <div
-          class="flex items-center md:gap-5 gap-1 max-md:w-full max-md:justify-between"
+          class="flex items-center md:gap-x-5  gap-1 max-md:w-full max-md:justify-between"
         >
           <p class="text-[20px] max-md:text-[22px]">Yo‘lovchi soni</p>
           <div class="grid grid-cols-4 items-center h-[50px] w-[176px]">
@@ -56,7 +56,7 @@
       </div>
 
       <form
-        class="w-full max-md:mt-10 max-md:gap-y-4 rounded-[50px] grid md:grid-cols-3 border border-primary bg-white mt-[50px] p-20 max-md:py-6 max-md:px-4 max-md:rounded-md"
+        class="w-full max-md:mt-10 max-md:gap-y-4 md:gap-y-10 rounded-[50px] grid md:grid-cols-3 border border-primary bg-white mt-[50px] p-20 max-md:py-6 max-md:px-4 max-md:rounded-md"
         action=""
       >
         <label
@@ -68,13 +68,20 @@
           {{ item.label }}
           <input
             type="text"
-            class="p-2 block mt-[5px] md:w-[270px] w-full font-normal border border-primary rounded-md"
+            class="p-2 block focus:border-primary focus:ring-0 mt-[5px] md:w-[270px] w-full font-normal border border-primary rounded-md"
             name=""
             :placeholder="item.input"
           />
         </label>
+        <textarea
+          name=""
+          v-model="u_data.description"
+          rows="3"
+          cols="1"
+          class="col-span-3 focus:border-primary focus:ring-0 p-2 font-normal border border-primary rounded-md"
+        ></textarea>
         <div class="max-md:w-full justify-between items-center max-md:flex">
-          <p class="font-medium text-sm md:mt-20">
+          <p class="font-medium text-sm md:mt-5">
             Olib ketish manzilini belgilang
           </p>
           <button
@@ -110,7 +117,7 @@ const u_data = ref({
   from_district: localStorage.getItem("from"),
   to_district: localStorage.getItem("to"),
   date: localStorage.getItem("date").split(".").join("-"),
-  description: "Need a ride to the airport",
+  description: "",
 });
 
 const router = useRouter();

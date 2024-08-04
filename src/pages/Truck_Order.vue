@@ -44,16 +44,16 @@
           <input
             :type="item.type"
             v-model="u_data[item.key]"
-            class="p-2 block mt-[5px] w-full font-normal border border-primary rounded-md"
+            class="p-2 block focus:border-primary focus:ring-0 mt-[5px] md:w-[270px] w-full font-normal border border-primary rounded-md"
             :placeholder="item.input"
           />
         </label>
         <textarea
           name=""
           v-model="u_data.description"
-          rows="2"
+          rows="3"
           cols="1"
-          class="col-span-3 p-2 mt-[5px] font-normal border border-primary rounded-md"
+          class="col-span-3 focus:border-primary focus:ring-0 p-2 mt-[5px] font-normal border border-primary rounded-md"
         ></textarea>
         <div class="max-md:w-full justify-between items-center max-md:flex">
           <p class="font-medium text-sm">Olib ketish manzilini belgilang</p>
