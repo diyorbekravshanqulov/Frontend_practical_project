@@ -94,6 +94,7 @@ const registerDriver = async () => {
       `http://95.130.227.176:3015/api/driver/${localStorage.getItem(
         "driver_id"
       )}`,
+      
       user_data.value
     );
 
