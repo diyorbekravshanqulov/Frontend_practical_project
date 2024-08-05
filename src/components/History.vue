@@ -142,11 +142,16 @@ const formatHours = (dateString) => {
 
 const GetAllOrder = async () => {
   try {
-    const [responseTaxi, responseTruck] = await Promise.all([
-      axios.get("http://95.130.227.176:3015/api/order-taxi"),
-      axios.get("http://95.130.227.176:3015/api/order-truck"),
-    ]);
-    options_all_data.value = [...responseTaxi.data, ...responseTruck.data];
+    // const [responseTaxi, responseTruck] = await Promise.all([
+    //   axios.get("http://95.130.227.176:3015/api/order-taxi"),
+    //   axios.get("http://95.130.227.176:3015/api/order-truck"),
+    // ]);
+    const responseTaxi = await axios.get(
+      "http://95.130.227.176:3015/api/order-taxi"
+    );
+
+    // options_all_data.value = [...responseTaxi.data, ...responseTruck.data];
+    options_all_data.value = [...responseTaxi.data];
   } catch (err) {
     console.error("Error:", err);
     error.value = "Something went wrong. Please try again.";

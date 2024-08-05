@@ -64,7 +64,9 @@
               {{ item?.distance ? calc(item?.distance) : "0" }} so'm
             </span>
           </p>
-          <div class="col-span-4 grid grid-cols-5 justify-center items-center max-md:w-[650px] mt-3">
+          <div
+            class="col-span-4 grid grid-cols-5 justify-center items-center max-md:w-[650px] mt-3"
+          >
             <p
               v-for="(item, index) in option_name2"
               :key="index"
@@ -157,11 +159,16 @@ const formatHours = (dateString) => {
 
 const GetAllOrder = async () => {
   try {
-    const [responseTaxi, responseTruck] = await Promise.all([
-      axios.get("http://95.130.227.176:3015/api/order-taxi"),
-      axios.get("http://95.130.227.176:3015/api/order-truck"),
-    ]);
-    options_all_data.value = [...responseTaxi.data, ...responseTruck.data];
+    // const [responseTaxi, responseTruck] = await Promise.all([
+    //   axios.get("http://95.130.227.176:3015/api/order-taxi"),
+    //   axios.get("http://95.130.227.176:3015/api/order-truck"),
+    // ]);
+    const responseTaxi = await axios.get(
+      "http://95.130.227.176:3015/api/order-taxi"
+    );
+
+    // options_all_data.value = [...responseTaxi.data, ...responseTruck.data];
+    options_all_data.value = [...responseTaxi.data];
   } catch (err) {
     console.error("Error:", err);
     error.value = "Something went wrong. Please try again.";
@@ -184,10 +191,9 @@ const updateStatus = async (id) => {
       `http://95.130.227.176:3015/api/order-taxi/update-status/${id}`,
       { status: "waiting" }
     );
-    await axios.patch(
-      `http://95.130.227.176:3015/api/order-taxi/${id}`,
-      { driverId: +localStorage.getItem("driver_id") }
-    );
+    await axios.patch(`http://95.130.227.176:3015/api/order-taxi/${id}`, {
+      driverId: +localStorage.getItem("driver_id"),
+    });
     // Optionally, refresh the list after update
     await GetAllOrder();
   } catch (err) {

@@ -50,8 +50,11 @@
             >
               {{ data?.first_name }} {{ data?.last_name }}
             </p>
-            <p :class="data?.phone? '': 'hidden'" class="text-[#E7E4E4] mt-2 text-center text-xl max-md:text-sm">
-              {{ data ? phoneFormat(data?.phone): "" }}
+            <p
+              :class="data?.phone ? '' : 'hidden'"
+              class="text-[#E7E4E4] mt-2 text-center text-xl max-md:text-sm"
+            >
+              {{ data ? phoneFormat(data?.phone) : "" }}
             </p>
 
             <p class="text-[#E7E4E4] mt-2 text-center text-xl max-md:text-sm">
@@ -85,8 +88,13 @@
   <div class="container pb-20 pt-10">
     <div v-if="loading" class="text-white">Loading...</div>
     <div v-if="error" class="text-white">{{ error }}</div>
-    <div v-else class="flex w-full max-md:flex-col justify-between items-center md:my-10 ">
-      <div class="flex mdgap-10 gap-5 max-md:shrink-0 max-md:flex-col  items-center">
+    <div
+      v-else
+      class="flex w-full max-md:flex-col justify-between items-center md:my-10"
+    >
+      <div
+        class="flex mdgap-10 gap-5 max-md:shrink-0 max-md:flex-col items-center"
+      >
         <button
           class="font-medium border md:text-2xl text-lg border-l-transparent border-r-transparent border-t-transparent duration-300"
           :class="{
@@ -98,7 +106,7 @@
         >
           Faol buyurtmalar
         </button>
-         <button
+        <button
           class="font-medium border md:text-2xl text-lg border-l-transparent border-r-transparent border-t-transparent duration-300"
           :class="{
             ' border-b-2 border-gray-600': activeButton === 'activeBtn4',
@@ -120,7 +128,7 @@
         >
           Buyurtmalar tarixi
         </button>
-        
+
         <button
           class="font-medium border md:text-2xl text-lg border-l-transparent border-r-transparent border-t-transparent duration-300"
           :class="{
@@ -185,6 +193,7 @@ const isEditModal = ref(false);
 
 const driver_id = ref(null);
 const balance = ref(null);
+const allBalance = ref(null);
 
 const updateedB = ref(5000);
 
@@ -193,16 +202,16 @@ const user_data = ref({
 });
 
 const phoneFormat = (phone) => {
-  const cleaned = ('' + phone).replace(/\D/g, '');
+  const cleaned = ("" + phone).replace(/\D/g, "");
 
-  if (cleaned.length === 12 && cleaned.startsWith('998')) {
+  if (cleaned.length === 12 && cleaned.startsWith("998")) {
     const match = cleaned.match(/^(\d{3})(\d{2})(\d{3})(\d{2})(\d{2})$/);
     if (match) {
       return `+${match[1]} ${match[2]} ${match[3]} ${match[4]} ${match[5]}`;
     }
-  }  
+  }
   return phone;
-}
+};
 
 const activeButton = ref("activeBtn3"); // Default active button
 
@@ -223,17 +232,18 @@ const getValue = (event) => {
 driver_id.value = localStorage.getItem("driver_id");
 console.log(driver_id.value);
 
-const reponseBalance = ref(null)
+const reponseBalance = ref(null);
 const updateBalance = async () => {
   try {
     const today = new Date();
     const isoString = today.toISOString();
+    console.log("balance", allBalance.value);
     reponseBalance.value = await axios.patch(
       `http://95.130.227.176:3015/api/balance/${balance.value.id}`,
       {
-        amount: updateedB.value,
+        amount: updateedB.value + +allBalance.value,
         driverId: +driver_id.value,
-        date: isoString
+        date: isoString,
       }
     );
     console.log("responseBalance", reponseBalance.value.data);
@@ -304,14 +314,22 @@ const getDriverById = async () => {
   }
 };
 
-watch(() => isEditModal.value || responseImg?.value?.data || reponseBalance?.value?.data, getDriverById, {
-  immediate: true,
-});
+watch(
+  () =>
+    isEditModal.value ||
+    responseImg?.value?.data ||
+    reponseBalance?.value?.data,
+  getDriverById,
+  {
+    immediate: true,
+  }
+);
 
 const filterBalance = () => {
   balance.value = dataBalance.value.find(
     (item) => item.driverId == driver_id.value
   );
+  allBalance.value = balance.value ? balance.value.amount : "0";
   return balance.value ? balance.value.amount : "0";
 };
 
