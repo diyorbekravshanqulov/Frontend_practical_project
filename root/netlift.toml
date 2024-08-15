@@ -3,4 +3,3 @@ from = "/api/*"
 to = "http://backend-server.com/:splat"
 status = 200
 force = true
- 
